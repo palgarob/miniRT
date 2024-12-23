@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/23 17:35:51 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/12/23 19:00:51 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef enum e_comp_result
 	A_GREAT_B
 }	t_comp;
 
-typedef struct s_tuple
+typedef struct s_tpl
 {
 	double	x;
 	double	y;
@@ -29,24 +29,24 @@ typedef struct s_tuple
 	double	w;
 } t_pnt, t_vec;
 
-t_pnt	vec(double x, double y, double z);
-t_pnt	point(double x, double y, double z);
-t_comp	fpn_compare(double a, double b);
-bool	equal_tuple(struct s_tuple a, struct s_tuple b);
-t_pnt	point_translate(t_pnt point, t_vec vector);
-t_vec	vec_add(t_vec point, t_vec vector);
+t_comp			fpn_compare(double a, double b);
+
+bool			tpl_equal(struct s_tpl a, struct s_tpl b);
+struct s_tpl	tpl_negate(struct s_tpl tpl);
+struct s_tpl	tpl_add(struct s_tpl a, struct s_tpl b);
+struct s_tpl	tpl_sub(struct s_tpl a, struct s_tpl b);
+
+t_pnt			pnt(double x, double y, double z);
+t_pnt			pnt_add(t_pnt point, t_vec vector);
+t_pnt			pnt_sub(t_pnt point, t_vec vector);
+
+t_pnt			vec(double x, double y, double z);
+t_vec			vec_add(t_vec a, t_vec b);
+t_vec			vec_sub(t_vec a, t_vec b);
+t_vec			vec_from_to(t_pnt from, t_pnt to);
+
 
 //code
-
-bool	tuple_equal(struct s_tuple a, struct s_tuple b)
-{
-	if (
-		fpn_compare(a.x, b.x) || fpn_compare(a.y, b.y)
-		|| fpn_compare(a.z, b.z) || fpn_compare(a.w, b.w)
-	)
-		return (false);
-	return (true);
-}
 
 /*
  * @brief Compares two floating-point numbers.
@@ -72,13 +72,57 @@ t_comp	fpn_compare(double a, double b)
 		return (A_GREAT_B);
 }
 
-t_pnt	point_translate(t_pnt point, t_vec vector)
+bool	tpl_equal(struct s_tpl a, struct s_tpl b)
 {
-	point.x += vector.x;
-	point.y += vector.y;
-	point.z += vector.z;
-	point.w += vector.w;
+	if (
+		fpn_compare(a.x, b.x) || fpn_compare(a.y, b.y)
+		|| fpn_compare(a.z, b.z) || fpn_compare(a.w, b.w)
+	)
+		return (false);
+	return (true);
+}
+
+struct s_tpl	tpl_negate(struct s_tpl tpl)
+{
+	tpl.x = -tpl.x;
+	tpl.y = -tpl.y;
+	tpl.z = -tpl.z;
+	tpl.w = -tpl.w;
+	return (tpl);
+}
+
+struct s_tpl	tpl_add(struct s_tpl a, struct s_tpl b)
+{
+	a.x += b.x;
+	a.y += b.y;
+	a.z += b.z;
+	a.w += b.w;
+	return (a);
+}
+
+struct s_tpl	tpl_sub(struct s_tpl a, struct s_tpl b)
+{
+	return (tpl_add(a, tpl_negate(b)));
+}
+
+t_pnt	pnt(double x, double y, double z)
+{
+	t_pnt	point;
+	point.x = x;
+	point.y = y;
+	point.z = z;
+	point.w = 1.0;
 	return (point);
+}
+
+t_pnt	pnt_add(t_pnt point, t_vec vector)
+{
+	return (tpl_add(point, vector));
+}
+
+t_pnt	pnt_sub(t_pnt point, t_vec vector)
+{
+	return (pnt_add(point, tpl_negate(vector)));
 }
 
 t_vec	vec_add(t_vec a, t_vec b)
@@ -100,12 +144,15 @@ t_vec	vec(double x, double y, double z)
 	return (vector);
 }
 
-t_pnt	point(double x, double y, double z)
+t_vec	vec_sub(t_vec a, t_vec b)
 {
-	t_pnt	point;
-	point.x = x;
-	point.y = y;
-	point.z = z;
-	point.w = 1.0;
-	return (point);
+	return (tpl_sub(a, b));
+}
+
+/*
+ * @return vector from one point to another
+ */
+t_vec	vec_from_to(t_pnt from, t_pnt to)
+{
+	return (tpl_sub(to, from));
 }
