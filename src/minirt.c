@@ -1,0 +1,194 @@
+#include <inc/minirt.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/23 20:07:07 by pepaloma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*
+ * @brief Compares two floating-point numbers.
+ *
+ * This function compares two floating-point numbers, `a` and `b`, and returns
+ * an enumeration value indicating whether `a` is equal to, less than, or greater than `b`.
+ * The comparison takes into account a small epsilon value to handle floating-point precision issues.
+ *
+ * @param a The first floating-point number to compare.
+ * @param b The second floating-point number to compare.
+ * @return A t_comp enumeration value:
+ *         - EQUAL if the numbers are approximately equal (difference is less than EPSILON).
+ *         - A_LESST_B if `a` is less than `b`.
+ *         - A_GREAT_B if `a` is greater than `b`.
+ */
+t_comp	fpn_compare(double a, double b)
+{
+	if (a - b < EPSILON)
+		return (EQUAL);
+	if (a - b < 0)
+		return (A_LESST_B);
+	else
+		return (A_GREAT_B);
+}
+
+bool	tpl_equal(struct s_tpl a, struct s_tpl b)
+{
+	if (
+		fpn_compare(a.x, b.x) || fpn_compare(a.y, b.y)
+		|| fpn_compare(a.z, b.z) || fpn_compare(a.w, b.w)
+	)
+		return (false);
+	return (true);
+}
+
+struct s_tpl	tpl_negate(struct s_tpl tpl)
+{
+	tpl.x = -tpl.x;
+	tpl.y = -tpl.y;
+	tpl.z = -tpl.z;
+	tpl.w = -tpl.w;
+	return (tpl);
+}
+
+struct s_tpl	tpl_add(struct s_tpl a, struct s_tpl b)
+{
+	a.x += b.x;
+	a.y += b.y;
+	a.z += b.z;
+	a.w += b.w;
+	return (a);
+}
+
+struct s_tpl	tpl_sub(struct s_tpl a, struct s_tpl b)
+{
+	return (tpl_add(a, tpl_negate(b)));
+}
+
+struct s_tpl	tpl_multiply(struct s_tpl tuple, double scalar)
+{
+	tuple.x *= scalar;
+	tuple.y *= scalar;
+	tuple.z *= scalar;
+	tuple.w *= scalar;
+	return (tuple);
+}
+
+struct s_tpl	tpl_divide(struct s_tpl tuple, double scalar)
+{
+	tuple.x /= scalar;
+	tuple.y /= scalar;
+	tuple.z /= scalar;
+	tuple.w /= scalar;
+	return (tuple);
+}
+
+t_pnt	pnt(double x, double y, double z)
+{
+	t_pnt	point;
+	point.x = x;
+	point.y = y;
+	point.z = z;
+	point.w = 1.0;
+	return (point);
+}
+
+t_pnt	pnt_add(t_pnt point, t_vec vector)
+{
+	return (tpl_add(point, vector));
+}
+
+t_pnt	pnt_sub(t_pnt point, t_vec vector)
+{
+	return (pnt_add(point, tpl_negate(vector)));
+}
+
+t_vec	vec(double x, double y, double z)
+{
+	t_pnt	vector;
+	vector.x = x;
+	vector.y = y;
+	vector.z = z;
+	vector.w = 0.0;
+	return (vector);
+}
+
+t_vec	vec_add(t_vec a, t_vec b)
+{
+	a.x += b.x;
+	a.y += b.y;
+	a.z += b.z;
+	a.w += b.w;
+	return (a);
+}
+
+t_vec	vec_sub(t_vec a, t_vec b)
+{
+	return (tpl_sub(a, b));
+}
+
+/*
+ * @return vector from one point to another
+ */
+t_vec	vec_from_to(t_pnt from, t_pnt to)
+{
+	return (tpl_sub(to, from));
+}
+
+double	vec_len(t_vec vector)
+{
+	return (
+		sqrt(
+			pow(vector.x, 2)
+			+ pow(vector.y, 2)
+			+ pow(vector.z, 2)
+			+ pow(vector.w, 2)
+		)
+	);
+}
+
+t_vec	vec_normalize(t_vec vector)
+{
+	double	len;
+
+	len = vec_len(vector);
+	vector.x /= len;
+	vector.y /= len;
+	vector.z /= len;
+	vector.w /= len;
+	return (vector);
+}
+
+double	vec_dot(t_vec a, t_vec b)
+{
+	return (a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w);
+}
+t_vec	vec_cross(t_vec a, t_vec b)
+{
+	return (vec(
+		a.y * b.z - a.z * b.y,
+		a.z * b.x - a.x * b.z,
+		a.x * b.y - a.y * b.x
+	));
+}
+
+t_color	color(double r, double g, double b)
+{
+	t_color color;
+
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	return (color);
+}
+
+t_color	color_blend(t_color a, t_color b)
+{
+	a.r *= b.r;
+	a.g *= b.g;
+	a.b *= b.b;
+	return (a);
+}
