@@ -6,11 +6,12 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/23 19:00:51 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/12/23 19:31:36 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
+#include <math.h>
 
 #define EPSILON 0.00001
 
@@ -35,6 +36,8 @@ bool			tpl_equal(struct s_tpl a, struct s_tpl b);
 struct s_tpl	tpl_negate(struct s_tpl tpl);
 struct s_tpl	tpl_add(struct s_tpl a, struct s_tpl b);
 struct s_tpl	tpl_sub(struct s_tpl a, struct s_tpl b);
+struct s_tpl	tpl_multiply(struct s_tpl, double scalar);
+struct s_tpl	tpl_divide(struct s_tpl, double scalar);
 
 t_pnt			pnt(double x, double y, double z);
 t_pnt			pnt_add(t_pnt point, t_vec vector);
@@ -44,6 +47,8 @@ t_pnt			vec(double x, double y, double z);
 t_vec			vec_add(t_vec a, t_vec b);
 t_vec			vec_sub(t_vec a, t_vec b);
 t_vec			vec_from_to(t_pnt from, t_pnt to);
+double			vec_len(t_vec vector);
+t_vec			vec_normalize(t_vec vector);
 
 
 //code
@@ -105,6 +110,24 @@ struct s_tpl	tpl_sub(struct s_tpl a, struct s_tpl b)
 	return (tpl_add(a, tpl_negate(b)));
 }
 
+struct s_tpl	tpl_multiply(struct s_tpl tuple, double scalar)
+{
+	tuple.x *= scalar;
+	tuple.y *= scalar;
+	tuple.z *= scalar;
+	tuple.w *= scalar;
+	return (tuple);
+}
+
+struct s_tpl	tpl_divide(struct s_tpl tuple, double scalar)
+{
+	tuple.x /= scalar;
+	tuple.y /= scalar;
+	tuple.z /= scalar;
+	tuple.w /= scalar;
+	return (tuple);
+}
+
 t_pnt	pnt(double x, double y, double z)
 {
 	t_pnt	point;
@@ -125,15 +148,6 @@ t_pnt	pnt_sub(t_pnt point, t_vec vector)
 	return (pnt_add(point, tpl_negate(vector)));
 }
 
-t_vec	vec_add(t_vec a, t_vec b)
-{
-	a.x += b.x;
-	a.y += b.y;
-	a.z += b.z;
-	a.w += b.w;
-	return (a);
-}
-
 t_vec	vec(double x, double y, double z)
 {
 	t_pnt	vector;
@@ -142,6 +156,15 @@ t_vec	vec(double x, double y, double z)
 	vector.z = z;
 	vector.w = 0.0;
 	return (vector);
+}
+
+t_vec	vec_add(t_vec a, t_vec b)
+{
+	a.x += b.x;
+	a.y += b.y;
+	a.z += b.z;
+	a.w += b.w;
+	return (a);
 }
 
 t_vec	vec_sub(t_vec a, t_vec b)
@@ -155,4 +178,28 @@ t_vec	vec_sub(t_vec a, t_vec b)
 t_vec	vec_from_to(t_pnt from, t_pnt to)
 {
 	return (tpl_sub(to, from));
+}
+
+double	vec_len(t_vec vector)
+{
+	return (
+		sqrt(
+			pow(vector.x, 2)
+			+ pow(vector.y, 2)
+			+ pow(vector.z, 2)
+			+ pow(vector.w, 2)
+		)
+	);
+}
+
+t_vec	vec_normalize(t_vec vector)
+{
+	double	len;
+
+	len = vec_len(vector);
+	vector.x /= len;
+	vector.y /= len;
+	vector.z /= len;
+	vector.w /= len;
+	return (vector);
 }
