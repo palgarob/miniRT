@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/23 22:39:34 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/12/24 00:34:39 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include <stdbool.h> // bool
 # include <math.h> // sqrt pow
 # include <stdlib.h> // free malloc
-# include <unistd.h> //STDERR_FILENO
+# include <unistd.h> // STDERR_FILENO
+# include <stdio.h> // printf
 
 # include "MLX42.h"
 
@@ -26,8 +27,10 @@
 # define FOCAL_LENGTH 1.0
 
 // Error messages
-# define WRONG_PARAM "Error\nPass only one *.rt file as parameter"
-# define BAD_MLX_INIT "Error\nThe mlx_init returned NULL"
+# define WRONG_PARAM "Error\nPass only one *.rt file as parameter\n"
+# define BAD_MLX_INIT "Error\nThe mlx_init returned NULL\n"
+# define INVALID_MATRIX_SIZE "Error \nDon't compare matrixes other than \
+2x2, 3x3, 4x4\n"
 
 typedef enum e_comp_result
 {
@@ -53,6 +56,7 @@ struct s_tpl	tpl_add(struct s_tpl a, struct s_tpl b);
 struct s_tpl	tpl_sub(struct s_tpl a, struct s_tpl b);
 struct s_tpl	tpl_multiply(struct s_tpl, double scalar);
 struct s_tpl	tpl_divide(struct s_tpl, double scalar);
+struct s_tpl	tpl(double x, double y, double z, double w);
 
 // points and vectors
 typedef struct s_tpl t_pnt, t_vec;
@@ -78,5 +82,9 @@ typedef struct s_color
 
 t_color	color(double r, double g, double b);
 t_color	color_blend(t_color a, t_color b);
+
+// matrix
+bool	matrix_is_equal(double **a, double **b, size_t size);
+void	matrix_multiply(double **a, double **b, size_t size);
 
 #endif
