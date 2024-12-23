@@ -6,21 +6,21 @@
 #    By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 20:02:41 by pepaloma          #+#    #+#              #
-#    Updated: 2024/12/23 20:56:58 by pepaloma         ###   ########.fr        #
+#    Updated: 2024/12/23 21:54:25 by pepaloma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= miniRT
 
-# FT_DIR	= libft
+FT_DIR	= libft
 MLX_DIR	= MLX42
 SRC_DIR	= src
 INC_DIR	= inc
 
 CFLAGS	:= -Wextra -Wall -Werror -g
 
-HEADERS	:= -I$(INC_DIR) -I$(MLX_DIR)/include/MLX42 # -I$(FT_DIR)/inc 
-LDFLAGS	:= -L$(MLX_DIR)/build -L/opt/homebrew/opt/glfw/lib # -L$(FT_DIR)
+HEADERS	:= -I$(INC_DIR) -I$(MLX_DIR)/include/MLX42 -I$(FT_DIR)/inc 
+LDFLAGS	:= -L$(MLX_DIR)/build -L/opt/homebrew/opt/glfw/lib -L$(FT_DIR)
 # ¿¿¿??? cuando utilizo glfw en apple silicon así es como hago la referencia y funciona, pero aparece esto en la terminal cuando lo ejecutas:
 
 # UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
@@ -29,8 +29,8 @@ LDFLAGS	:= -L$(MLX_DIR)/build -L/opt/homebrew/opt/glfw/lib # -L$(FT_DIR)
 
 LDLIBS	:= -lmlx42 -lft -ldl -lglfw -pthread -lm
 
-SRC		= $(basename $(notdir $(wildcard src/*.c)))
-OBJ		= $(addsuffix .o,$(basename $(SRC)))
+SRC		= $(wildcard src/*.c)
+OBJ		= $(SRC:.c=.o)
 
 all: $(NAME)
 
@@ -43,8 +43,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
-#libft:
-#	$(MAKE) -C $(FT_DIR);
+libft:
+	$(MAKE) -C $(FT_DIR);
 
 clean:
 	$(MAKE) -C $(FT_DIR) fclean
