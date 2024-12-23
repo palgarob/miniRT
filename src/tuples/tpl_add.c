@@ -1,20 +1,22 @@
-#include <inc/minirt.h>
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   plt_add.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/23 20:07:07 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/12/23 21:02:52 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/23 21:03:11 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+struct s_tpl	tpl_add(struct s_tpl a, struct s_tpl b)
 {
-	
-	return (0);
+	a.x += b.x;
+	a.y += b.y;
+	a.z += b.z;
+	a.w += b.w;
+	return (a);
 }

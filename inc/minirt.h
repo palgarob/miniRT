@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/23 20:27:36 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/12/23 21:06:27 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_pnt			pnt(double x, double y, double z);
 t_pnt			pnt_add(t_pnt point, t_vec vector);
 t_pnt			pnt_sub(t_pnt point, t_vec vector);
 
-t_pnt			vec(double x, double y, double z);
+t_vec			vec(double x, double y, double z);
 t_vec			vec_add(t_vec a, t_vec b);
 t_vec			vec_sub(t_vec a, t_vec b);
 t_vec			vec_from_to(t_pnt from, t_pnt to);

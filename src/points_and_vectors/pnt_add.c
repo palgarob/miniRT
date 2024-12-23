@@ -1,20 +1,18 @@
-#include <inc/minirt.h>
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   pnt_add.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/23 20:07:07 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/12/23 21:07:44 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/23 21:07:59 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+t_pnt	pnt_add(t_pnt point, t_vec vector)
 {
-	
-	return (0);
+	return (tpl_add(point, vector));
 }

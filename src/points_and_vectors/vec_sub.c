@@ -1,20 +1,18 @@
-#include <inc/minirt.h>
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   vec_sub.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/23 20:07:07 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/12/23 21:10:05 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/23 21:10:15 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+t_vec	vec_sub(t_vec a, t_vec b)
 {
-	
-	return (0);
+	return (tpl_sub(a, b));
 }

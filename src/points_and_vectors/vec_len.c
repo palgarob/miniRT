@@ -1,20 +1,25 @@
-#include <inc/minirt.h>
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   vec_len.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/23 20:07:07 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/12/23 21:11:05 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/23 21:11:15 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+double	vec_len(t_vec vector)
 {
-	
-	return (0);
+	return (
+		sqrt(
+			pow(vector.x, 2)
+			+ pow(vector.y, 2)
+			+ pow(vector.z, 2)
+			+ pow(vector.w, 2)
+		)
+	);
 }

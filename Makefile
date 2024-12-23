@@ -6,7 +6,7 @@
 #    By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 20:02:41 by pepaloma          #+#    #+#              #
-#    Updated: 2024/12/23 20:12:33 by pepaloma         ###   ########.fr        #
+#    Updated: 2024/12/23 20:56:58 by pepaloma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ NAME	:= miniRT
 # FT_DIR	= libft
 MLX_DIR	= MLX42
 SRC_DIR	= src
-OBJ_DIR	= $(SRC_DIR)/obj
 INC_DIR	= inc
 
 CFLAGS	:= -Wextra -Wall -Werror -g
@@ -30,9 +29,8 @@ LDFLAGS	:= -L$(MLX_DIR)/build -L/opt/homebrew/opt/glfw/lib # -L$(FT_DIR)
 
 LDLIBS	:= -lmlx42 -lft -ldl -lglfw -pthread -lm
 
-FILES	= $(basename $(notdir $(wildcard src/*.c)))
-SRC		= $(addsuffix .c,$(addprefix $(SRC_DIR)/,$(FILES)))
-OBJ		= $(addsuffix .o,$(addprefix $(OBJ_DIR)/,$(FILES)))
+SRC		= $(basename $(notdir $(wildcard src/*.c)))
+OBJ		= $(addsuffix .o,$(basename $(SRC)))
 
 all: $(NAME)
 

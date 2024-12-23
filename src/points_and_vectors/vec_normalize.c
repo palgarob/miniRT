@@ -1,20 +1,25 @@
-#include <inc/minirt.h>
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   vec_normalize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/23 20:07:07 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/12/23 21:11:30 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/23 21:11:38 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+t_vec	vec_normalize(t_vec vector)
 {
-	
-	return (0);
+	double	len;
+
+	len = vec_len(vector);
+	vector.x /= len;
+	vector.y /= len;
+	vector.z /= len;
+	vector.w /= len;
+	return (vector);
 }
