@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/23 19:31:36 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/12/23 19:48:41 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ t_vec			vec_sub(t_vec a, t_vec b);
 t_vec			vec_from_to(t_pnt from, t_pnt to);
 double			vec_len(t_vec vector);
 t_vec			vec_normalize(t_vec vector);
+double			vec_dot(t_vec a, t_vec b);
+t_vec			vec_cross(t_vec a, t_vec b);
 
 
 //code
@@ -202,4 +204,17 @@ t_vec	vec_normalize(t_vec vector)
 	vector.z /= len;
 	vector.w /= len;
 	return (vector);
+}
+
+double	vec_dot(t_vec a, t_vec b)
+{
+	return (a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w);
+}
+t_vec	vec_cross(t_vec a, t_vec b)
+{
+	return (vec(
+		a.y * b.z - a.z * b.y,
+		a.z * b.x - a.x * b.z,
+		a.x * b.y - a.y * b.x
+	))
 }
