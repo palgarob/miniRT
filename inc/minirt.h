@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 01:48:33 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/12/24 08:45:55 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,8 @@ void	matrix_transpose(double **mat);
 void	matrix_cpy(double **src, double **cpy);
 double	matrix2_det(double **mat2);
 void	submatrix4(double **mat4, double **mat3, int row, int column);
+void	submatrix3(double **mat3, double **mat2, int row, int column);
+double	matrix3_minor(double **mat3, int row, int column);
+double	matrix3_cofactor(double **mat3, int row, int column);
 
 #endif
