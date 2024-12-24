@@ -1,34 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_multiply.c                                  :+:      :+:    :+:   */
+/*   submatrix4.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 23:53:58 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 00:58:21 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/12/24 01:21:54 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/24 01:47:10 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	matrix_multiply(double **a, double **b, double **result)
+void	add_row(double **mat4, double **mat3, int column, int *jk)
 {
 	int	i;
-	int	j;
-
-	j = 0;
-	while (j < 4)
+	int	l;
+	
+	l = 0;
+	i = 0;
+	while (l < 3)
 	{
-		i = 0;
-		while (i < 4)
+		if (i != column)
 		{
-			result[i][j] = a[i][0] * b[0][j]
-				+ a[i][1] * b[1][j]
-				+ a[i][2] * b[2][j]
-				+ a[i][3] * b[3][j];
-			i++;
+			mat3[jk[1]][l] = mat4[jk[0]][i];
+			l++;
 		}
-		j++;
+		i++;
+	}
+}
+
+void	submatrix4(double **mat4, double **mat3, int row, int column)
+{
+	int	jk[2];
+
+	jk[0] = 0;
+	jk[1]= 0;
+	while (jk[1] < 3)
+	{
+		if (jk[0] != row)
+		{
+			add_row(mat4, mat3, column, jk);
+			jk[1]++;
+		}
+		jk[0]++;
 	}
 }

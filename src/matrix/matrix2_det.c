@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_multiply.c                                  :+:      :+:    :+:   */
+/*   matrix2_det.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 23:53:58 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 00:58:21 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/12/24 01:12:01 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/24 01:16:56 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	matrix_multiply(double **a, double **b, double **result)
+double	matrix2_det(double **mat2)
 {
-	int	i;
-	int	j;
-
-	j = 0;
-	while (j < 4)
-	{
-		i = 0;
-		while (i < 4)
-		{
-			result[i][j] = a[i][0] * b[0][j]
-				+ a[i][1] * b[1][j]
-				+ a[i][2] * b[2][j]
-				+ a[i][3] * b[3][j];
-			i++;
-		}
-		j++;
-	}
+	return (mat2[0][0] * mat2[1][1] - mat2[0][1] * mat2[1][0]);
 }

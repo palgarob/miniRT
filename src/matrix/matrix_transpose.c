@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_multiply.c                                  :+:      :+:    :+:   */
+/*   matrix_transpose.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 23:53:58 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 00:58:21 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/12/24 00:59:54 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/24 01:09:46 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	matrix_multiply(double **a, double **b, double **result)
+void	matrix_transpose(double **mat)
 {
-	int	i;
-	int	j;
+	double	cpy[4][4];
+	int		i;
+	int		j;
 
+	matrix_cpy(mat, cpy);
 	j = 0;
 	while (j < 4)
 	{
 		i = 0;
 		while (i < 4)
-		{
-			result[i][j] = a[i][0] * b[0][j]
-				+ a[i][1] * b[1][j]
-				+ a[i][2] * b[2][j]
-				+ a[i][3] * b[3][j];
-			i++;
-		}
+			mat[i][j] = cpy[j][i];
 		j++;
 	}
 }

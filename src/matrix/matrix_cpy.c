@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_multiply.c                                  :+:      :+:    :+:   */
+/*   matrix_cpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 23:53:58 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 00:58:21 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/12/24 01:03:23 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/24 01:06:16 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	matrix_multiply(double **a, double **b, double **result)
+void	matrix_cpy(double **src, double **cpy)
 {
-	int	i;
-	int	j;
-
-	j = 0;
-	while (j < 4)
-	{
-		i = 0;
-		while (i < 4)
-		{
-			result[i][j] = a[i][0] * b[0][j]
-				+ a[i][1] * b[1][j]
-				+ a[i][2] * b[2][j]
-				+ a[i][3] * b[3][j];
-			i++;
-		}
-		j++;
-	}
+	cpy[0][0] = src[0][0];
+	cpy[0][1] = src[0][1];
+	cpy[0][2] = src[0][2];
+	cpy[0][3] = src[0][3];
+	cpy[1][0] = src[1][0];
+	cpy[1][1] = src[1][1];
+	cpy[1][2] = src[1][2];
+	cpy[1][3] = src[1][3];
+	cpy[2][0] = src[2][0];
+	cpy[2][1] = src[2][1];
+	cpy[2][2] = src[2][2];
+	cpy[2][3] = src[2][3];
+	cpy[3][0] = src[3][0];
+	cpy[3][1] = src[3][1];
+	cpy[3][2] = src[3][2];
+	cpy[3][3] = src[3][3];
 }

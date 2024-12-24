@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 00:34:39 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/12/24 01:48:33 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,9 @@ t_color	color_blend(t_color a, t_color b);
 // matrix
 bool	matrix_is_equal(double **a, double **b, size_t size);
 void	matrix_multiply(double **a, double **b, size_t size);
+void	matrix_transpose(double **mat);
+void	matrix_cpy(double **src, double **cpy);
+double	matrix2_det(double **mat2);
+void	submatrix4(double **mat4, double **mat3, int row, int column);
 
 #endif
