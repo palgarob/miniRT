@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix3_cofactor.c                                 :+:      :+:    :+:   */
+/*   matrix4_cofactor.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/24 08:46:56 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 13:31:14 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/12/24 10:42:14 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/24 13:29:51 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	matrix3_cofactor(double mat3[3][3], int row, int column)
+double	matrix4_cofactor(double mat4[4][4], int row, int column)
 {
 	if ((row + column) % 2)
-		return (-matrix3_minor(mat3, row, column));
-	return (matrix3_minor(mat3, row, column));
+		return (-matrix4_minor(mat4, row, column));
+	return (matrix4_minor(mat4, row, column));
 }

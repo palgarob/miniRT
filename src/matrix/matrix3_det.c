@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_transpose.c                                 :+:      :+:    :+:   */
+/*   matrix3_det.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/24 00:59:54 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 01:09:46 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/12/24 10:35:20 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/24 13:31:14 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	matrix_transpose(double **mat)
+double	matrix3_det(double mat3[3][3])
 {
-	double	cpy[4][4];
-	int		i;
-	int		j;
-
-	matrix_cpy(mat, cpy);
-	j = 0;
-	while (j < 4)
-	{
-		i = 0;
-		while (i < 4)
-			mat[i][j] = cpy[j][i];
-		j++;
-	}
+	return (
+		mat3[0][0] * matrix3_cofactor(mat3, 0, 0)
+		+ mat3[0][1] * matrix3_cofactor(mat3, 0, 1)
+		+ mat3[0][2] * matrix3_cofactor(mat3, 0, 2)
+	);
 }

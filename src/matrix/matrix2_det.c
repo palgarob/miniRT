@@ -6,13 +6,13 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 01:12:01 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 01:16:56 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/12/24 13:32:52 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	matrix2_det(double **mat2)
+double	matrix2_det(double mat2[2][2])
 {
 	return (mat2[0][0] * mat2[1][1] - mat2[0][1] * mat2[1][0]);
 }

@@ -1,20 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix3_cofactor.c                                 :+:      :+:    :+:   */
+/*   matrix_inverse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/24 08:46:56 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 13:31:14 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/12/24 11:04:35 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/24 14:09:34 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	matrix3_cofactor(double mat3[3][3], int row, int column)
+bool	matrix_inverse(double mat4[4][4], double inv[4][4])
 {
-	if ((row + column) % 2)
-		return (-matrix3_minor(mat3, row, column));
-	return (matrix3_minor(mat3, row, column));
+	double	determinant;
+	int		i;
+	int		j;
+
+	determinant = matrix4_det(mat4);
+	if (determinant == 0)
+		return (false);
+	j = 0;
+	while (j < 4)
+	{
+		i = 0;
+		while (i < 4)
+		{
+			inv[i][j] = matrix4_cofactor(mat4, j, i) / determinant;
+			i++;
+		}
+		j++;
+	}
+	return (true);
 }

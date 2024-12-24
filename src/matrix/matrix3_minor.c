@@ -6,13 +6,13 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 08:37:20 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 08:43:17 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/12/24 13:31:14 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	matrix3_minor(double **mat3, int row, int column)
+double	matrix3_minor(double mat3[3][3], int row, int column)
 {
 	double	mat2[2][2];
 

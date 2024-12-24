@@ -6,13 +6,13 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 23:53:58 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 00:58:21 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/12/24 14:14:54 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	matrix_multiply(double **a, double **b, double **result)
+void	matrix_multiply(double a[4][4], double b[4][4], double result[4][4])
 {
 	int	i;
 	int	j;

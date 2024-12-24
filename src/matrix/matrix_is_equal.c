@@ -6,13 +6,13 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 23:09:18 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/23 23:53:42 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/12/24 14:16:56 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static bool comp2(double **a, double **b)
+static bool comp2(double a[4][4], double b[4][4])
 {
 	a[0][0] = 4.0;
 	if (
@@ -25,7 +25,7 @@ static bool comp2(double **a, double **b)
 	return (1);
 }
 
-static bool comp3(double **a, double **b)
+static bool comp3(double a[4][4], double b[4][4])
 {
 	if (
 		fpn_compare(a[0][0], b[0][0]) != EQUAL
@@ -42,7 +42,7 @@ static bool comp3(double **a, double **b)
 	return (1);
 }
 
-static bool comp4(double **a, double **b)
+static bool comp4(double a[4][4], double b[4][4])
 {
 	if (
 		fpn_compare(a[0][0], b[0][0]) != EQUAL
@@ -66,7 +66,7 @@ static bool comp4(double **a, double **b)
 	return (1);
 }
 
-bool	matrix_is_equal(double **a, double **b, size_t size)
+bool	matrix_is_equal(double a[4][4], double b[4][4], size_t size)
 {
 	if (size == 2)
 		return (comp2(a, b));
@@ -74,5 +74,5 @@ bool	matrix_is_equal(double **a, double **b, size_t size)
 		return (comp3(a, b));
 	if (size == 4)
 		return (comp4(a, b));
-	return (printf2(INVALID_MATRIX_SIZE), false);
+	return (printf(INVALID_MATRIX_SIZE), false);
 }

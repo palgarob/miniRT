@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix3_cofactor.c                                 :+:      :+:    :+:   */
+/*   matrix4_print.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/24 08:46:56 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 13:31:14 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/12/24 11:17:56 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/12/24 13:33:13 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include <stdio.h>
 
-double	matrix3_cofactor(double mat3[3][3], int row, int column)
+void	matrix4_print(double mat4[4][4])
 {
-	if ((row + column) % 2)
-		return (-matrix3_minor(mat3, row, column));
-	return (matrix3_minor(mat3, row, column));
+	int i = 0;
+	while (i < 4)
+	{
+		printf("| ");
+		int j = 0;
+		while (j < 4)
+		{
+			printf("%g\t", mat4[i][j]);
+			j++;
+		}
+		printf("|\n");
+		i++;
+	}
 }

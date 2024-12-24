@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 08:45:55 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/12/24 14:17:25 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef enum e_comp_result
 t_comp			fpn_compare(double a, double b);
 
 // tuples
-typedef struct s_tpl
+struct s_tpl
 {
 	double	x;
 	double	y;
@@ -84,14 +84,27 @@ t_color	color(double r, double g, double b);
 t_color	color_blend(t_color a, t_color b);
 
 // matrix
-bool	matrix_is_equal(double **a, double **b, size_t size);
-void	matrix_multiply(double **a, double **b, size_t size);
+bool	matrix_is_equal(double a[4][4], double b[4][4], size_t size);
+void	matrix_multiply(double a[4][4], double b[4][4], double result[4][4]);
 void	matrix_transpose(double **mat);
-void	matrix_cpy(double **src, double **cpy);
-double	matrix2_det(double **mat2);
-void	submatrix4(double **mat4, double **mat3, int row, int column);
-void	submatrix3(double **mat3, double **mat2, int row, int column);
-double	matrix3_minor(double **mat3, int row, int column);
-double	matrix3_cofactor(double **mat3, int row, int column);
+void	matrix_cpy(double src[4][4], double cpy[4][4]);
+double	matrix2_det(double mat2[2][2]);
+void	submatrix4(double mat4[4][4], double mat3[3][3], int row, int column);
+void	submatrix3(double mat3[3][3], double mat2[2][2], int row, int column);
+double	matrix3_minor(double mat3[3][3], int row, int column);
+double	matrix4_minor(double mat4[4][4], int row, int column);
+double	matrix3_cofactor(double mat3[3][3], int row, int column);
+double	matrix4_cofactor(double mat4[4][4], int row, int column);
+double	matrix3_det(double mat3[3][3]);
+double	matrix4_det(double mat4[4][4]);
+bool	matrix_inverse(double mat4[4][4], double inv[4][4]);
+void	matrix4_print(double mat4[4][4]);
+
+// Main part
+typedef struct s_data
+{
+	mlx_image_t	*img_ptr;
+	mlx_t		*mlx_ptr;
+}	t_data;
 
 #endif

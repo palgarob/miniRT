@@ -6,13 +6,13 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 08:40:15 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 08:41:50 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/12/24 13:55:47 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	add_row(double **mat3, double **mat2, int column, int *jk)
+static void	add_row(double mat3[3][3], double mat2[2][2], int column, int *jk)
 {
 	int	i;
 	int	l;
@@ -30,7 +30,7 @@ void	add_row(double **mat3, double **mat2, int column, int *jk)
 	}
 }
 
-void	submatrix3(double **mat3, double **mat2, int row, int column)
+void	submatrix3(double mat3[3][3], double mat2[2][2], int row, int column)
 {
 	int	jk[2];
 

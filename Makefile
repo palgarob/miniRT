@@ -6,7 +6,7 @@
 #    By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 20:02:41 by pepaloma          #+#    #+#              #
-#    Updated: 2024/12/23 21:54:25 by pepaloma         ###   ########.fr        #
+#    Updated: 2024/12/24 13:24:46 by pepaloma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,11 @@ FT_DIR	= libft
 MLX_DIR	= MLX42
 SRC_DIR	= src
 INC_DIR	= inc
+OBJ_DIR	= obj
 
 CFLAGS	:= -Wextra -Wall -Werror -g
 
-HEADERS	:= -I$(INC_DIR) -I$(MLX_DIR)/include/MLX42 -I$(FT_DIR)/inc 
+HEADERS	:= -I$(INC_DIR) -I$(MLX_DIR)/include/MLX42 -I$(FT_DIR)/inc
 LDFLAGS	:= -L$(MLX_DIR)/build -L/opt/homebrew/opt/glfw/lib -L$(FT_DIR)
 # ¿¿¿??? cuando utilizo glfw en apple silicon así es como hago la referencia y funciona, pero aparece esto en la terminal cuando lo ejecutas:
 
@@ -29,9 +30,8 @@ LDFLAGS	:= -L$(MLX_DIR)/build -L/opt/homebrew/opt/glfw/lib -L$(FT_DIR)
 
 LDLIBS	:= -lmlx42 -lft -ldl -lglfw -pthread -lm
 
-SRC		= $(wildcard src/*.c)
+SRC		= $(wildcard src/*/*.c src/*.c)
 OBJ		= $(SRC:.c=.o)
-
 all: $(NAME)
 
 $(NAME): libft $(OBJ)
@@ -39,9 +39,9 @@ $(NAME): libft $(OBJ)
 	cmake --build $(MLX_DIR)/build -j4
 	$(CC) $(OBJ) $(LDFLAGS) $(LDLIBS) $(HEADERS) -o $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+%.o: %.c
 	mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
+	$(CC) $(HEADERS) $(CFLAGS) -c $< -o $@
 
 libft:
 	$(MAKE) -C $(FT_DIR);
