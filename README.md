@@ -7,3 +7,4 @@ ISBN-13: 978-1-68050-271-8
 - Poner todos los pixels a cero con ft_bzero antes de pasar la imagen
 - Meter mensajes de error en printfd
 - Arreglar carpeta de objs
+

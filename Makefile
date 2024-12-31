@@ -6,7 +6,7 @@
 #    By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 20:02:41 by pepaloma          #+#    #+#              #
-#    Updated: 2024/12/24 13:24:46 by pepaloma         ###   ########.fr        #
+#    Updated: 2024/12/26 02:33:39 by pepaloma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ libft:
 
 clean:
 	$(MAKE) -C $(FT_DIR) fclean
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ)
 	rm -rf $(MLX_DIR)/build
 
 fclean: clean
