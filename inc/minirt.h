@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/31 21:22:41 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/07 08:31:50 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h> // printf
 
 # include "MLX42.h"
+# include "libft.h"
 
 /* PREPROCESSOR PARAMETERS                                                    */
 # define EPSILON 0.00001
@@ -112,6 +113,7 @@ void	rotation_y(double mat[4][4], double degrees);
 void	rotation_z(double mat[4][4], double degrees);
 t_pnt	transform(double mat[4][4], t_pnt point);
 t_pnt	transform_inv(double mat[4][4], t_pnt point);
+void	transform_ray(t_ray *ray, double mat[4][4], t_ray *new_ray);
 
 /* RAY                                                                        */
 typedef struct s_ray
@@ -131,12 +133,9 @@ typedef struct s_intersection
 t_ray	ray(t_pnt origin, t_vec direction);
 t_pnt	ray_position(t_ray *ray, double t);
 bool	ray_intersect(t_ray *r, t_object *o, t_intersection *x);
-
-/* ORDENAR                                                                    */
-
 void	find_sp_intersection(t_ray *r, t_object *o, t_intersection *h);
-void	transform_ray(t_ray *ray, double mat[4][4], t_ray *new_ray);
-void	set_transformation(double mat[4][4], t_object *o);
+
+/* MAIN PART                                                                  */
 
 typedef struct s_frame
 {
@@ -174,7 +173,6 @@ typedef enum e_obj_type
 
 typedef struct s_object
 {
-	double		transformation[4][4];
 	t_obj_type		type;
 	t_pnt			location;
 	t_vec			orientation;
@@ -183,16 +181,14 @@ typedef struct s_object
 	double			height;
 }	t_object;
 
-t_object	*sphere(t_pnt *location,
-					t_vec *orientation,
-					t_color *color,
-					double diameter);
-
-// Main part
 typedef struct s_data
 {
 	mlx_image_t	*img_ptr;
 	mlx_t		*mlx_ptr;
+	t_list		*objects;
+	t_camera	camera;
 }	t_data;
+
+void	parse(t_data *data, char *filename);
 
 #endif

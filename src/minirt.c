@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 14:20:15 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/07 08:13:32 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_hook(void *param)
 		mlx_close_window(mlx);
 }
 
-/* static void	check_parameters(int argc, char **argv)
+static void	check_parameters(int argc, char **argv)
 {
 	if (argc != 2
 		|| ft_strlen(argv[1]) < 4
@@ -31,7 +31,7 @@ static void	ft_hook(void *param)
 		ft_dprintf(STDERR_FILENO, WRONG_PARAM);
 		exit(1);
 	}
-} */
+}
 
 /* static void	setup_frame(t_data *data)
 {
@@ -78,10 +78,12 @@ int	main(int __attribute__((__unused__)) argc, char __attribute__((__unused__)) 
 {
 	t_data		data;
 
-//	check_parameters(argc, argv);
+	check_parameters(argc, argv);
 //	parse(&data, argv[1]);
 //	setup_frame(&data);
-	double	a[4][4] = {
+
+// Matrices tests
+	/* double	a[4][4] = {
 		{8, -5, 9, 2},
 		{7, 5, 6, 1},
 		{-6, 0, 9, 6},
@@ -105,7 +107,9 @@ int	main(int __attribute__((__unused__)) argc, char __attribute__((__unused__)) 
 	matrix4_print(a);
 	setup_mlx(&data);
 	mlx_loop(data.mlx_ptr);
-	mlx_terminate(data.mlx_ptr);
+	mlx_terminate(data.mlx_ptr); */
+
+	
 //	render(&data);
 //	if (data.objects)
 //		ft_lstclear(&data.objects, free);
