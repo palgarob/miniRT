@@ -6,11 +6,40 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:19:48 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/07 08:31:09 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:13:15 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	assign_rgb(t_color *dst, char *org)
+{
+	char	**split;
+
+	split = ft_split(org, ',');
+	if (!split)
+		return (ft_printf("Split error\n"), 0);
+	if (!is_rgb(split))
+		return (free_split(split), 0);
+	*dst = color(ft_atoi(split[0]), ft_atoi(split[1]),
+			ft_atoi(split[2]));
+	return (free_split(split), 1);
+}
+
+assign_coords(t_vec *dst, char *org)
+{
+	char **split;
+
+	split = splitstr(org, ',');
+	if (!split)
+		return (ft_printf("Split error\n"), 0);
+	if (!is_coord(split))
+		return (splitfree(split), 0);
+	dst->x = to_double(split[0]);
+	dst->y = to_double(split[1]);
+	dst->z = to_double(split[2]);
+	return (splitfree(split), 1);
+}
 
 int	init_sphere(char **split, t_data *data)
 {
@@ -77,9 +106,9 @@ Set the camera light and ambiens to -1 to know if they've been previously set
 static void	set_start_values(t_data *scene)
 {
 	/* scene->ambient.ratio = -1.0;
-	scene->camera.fov = -1;
 	scene->light.brightness = -1.0; */
 	scene->objects = NULL;
+	scene->camera.fov = -1;
 }
 
 static char	**get_buffer(char *file)

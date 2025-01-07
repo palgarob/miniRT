@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/07 08:13:32 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/07 11:29:12 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,28 @@ static void	check_parameters(int argc, char **argv)
 	}
 }
 
-/* static void	setup_frame(t_data *data)
+static void	setup_frame(t_data *data)
 {
+	int		image_height;
 	double	frame_width;
 	double	frame_height;
-	t_vec3	upper_left_corner;
+	t_vec	upper_left_corner;
 
+	image_height = IMAGE_WIDTH / ASPECT_RATIO;
 	frame_width = tan(data->camera.fov / 2 / DEG2RAD) * 2;
 	frame_height = frame_width / ASPECT_RATIO;
 	data->frame.ipix_width = frame_width / IMAGE_WIDTH;
-	data->frame.ipix_height = frame_height / IMAGE_HEIGHT;
+	data->frame.ipix_height = frame_height / image_height;
 	upper_left_corner = vec_add(vec(0, 0, FOCAL_LENGTH),
 			vec_add(vec(-frame_width / 2, 0, 0), vec(0, frame_height / 2, 0)));
 	data->frame.offset_pixel = vec_add(
 			upper_left_corner,
-			vec_scale_d(
+			tpl_multiply(
 				vec_add(
 					vec(data->frame.ipix_width, 0, 0),
 					vec(0, -data->frame.ipix_height, 0)),
 				2));
-	data->orient_mat.k = data->camera.orientation;
-	data->orient_mat.i = vec_cross(data->orient_mat.k, vec(0, 1, 0));
-	data->orient_mat.j = vec_cross(data->orient_mat.i, data->orient_mat.k);
-} */
+}
 
 static void	setup_mlx(t_data *data)
 {
@@ -66,8 +65,8 @@ static void	setup_mlx(t_data *data)
 	if (!data->mlx_ptr)
 	{
 		printf(WRONG_PARAM);
-//		if (data->objects)
-//			ft_lstclear(&data->objects, free);
+		if (data->objects)
+			ft_lstclear(&data->objects, free);
 		exit(1);
 	}
 	data->img_ptr = mlx_new_image(data->mlx_ptr, IMAGE_WIDTH, image_height);
@@ -79,8 +78,9 @@ int	main(int __attribute__((__unused__)) argc, char __attribute__((__unused__)) 
 	t_data		data;
 
 	check_parameters(argc, argv);
-//	parse(&data, argv[1]);
-//	setup_frame(&data);
+	parse(&data, argv[1]);
+	setup_frame(&data);
+//	render(&data);
 
 // Matrices tests
 	/* double	a[4][4] = {
@@ -110,7 +110,6 @@ int	main(int __attribute__((__unused__)) argc, char __attribute__((__unused__)) 
 	mlx_terminate(data.mlx_ptr); */
 
 	
-//	render(&data);
 //	if (data.objects)
 //		ft_lstclear(&data.objects, free);
 }
