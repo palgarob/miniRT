@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/07 11:29:12 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:05:52 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,36 +80,8 @@ int	main(int __attribute__((__unused__)) argc, char __attribute__((__unused__)) 
 	check_parameters(argc, argv);
 	parse(&data, argv[1]);
 	setup_frame(&data);
-//	render(&data);
-
-// Matrices tests
-	/* double	a[4][4] = {
-		{8, -5, 9, 2},
-		{7, 5, 6, 1},
-		{-6, 0, 9, 6},
-		{-3, 0, -9, -4}
-	};
-	double	b[4][4] = {
-		{9, 3, 0, 9},
-		{-5, -2, -6, -3},
-		{-4, 9, 6, 4},
-		{-7, 6, 6, 2}
-	};
-	double	ainv[4][4];
-	double	binv[4][4];
-	if (matrix_inverse(a, ainv))
-		matrix4_print(ainv);
-	printf("\n");
-	if (matrix_inverse(b, binv))
-		matrix4_print(binv);
-	matrix_multiply(a, b, ainv);
-	matrix_multiply(ainv, binv, a);
-	matrix4_print(a);
 	setup_mlx(&data);
-	mlx_loop(data.mlx_ptr);
-	mlx_terminate(data.mlx_ptr); */
-
-	
-//	if (data.objects)
-//		ft_lstclear(&data.objects, free);
+	render(&data);
+	if (data.objects)
+		ft_lstclear(&data.objects, free);
 }

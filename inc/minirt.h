@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/07 11:37:21 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/09 13:34:38 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ double	matrix3_det(double mat3[3][3]);
 double	matrix4_det(double mat4[4][4]);
 bool	matrix_inverse(double mat4[4][4], double inv[4][4]);
 void	matrix4_print(double mat4[4][4]);
+void	matrix_get_identity(double mat[4][4]);
 
 /* TRANSFORMATIONS                                                            */
 void	translation(double mat[4][4], double x, double y, double z);
@@ -127,12 +128,12 @@ typedef struct s_intersection
 	t_object	*object;
 	double	t1;
 	double	t2;
-} t_intersection;
+} t_intsect;
 
 t_ray	ray(t_pnt origin, t_vec direction);
 t_pnt	ray_position(t_ray *ray, double t);
-bool	ray_intersect(t_ray *r, t_object *o, t_intersection *x);
-void	find_sp_intersection(t_ray *r, t_object *o, t_intersection *h);
+bool	ray_intersect_object(t_ray *r, t_object *o, t_intsect *x);
+void	find_sp_intersection(t_ray *r, t_object *o, t_intsect *h);
 void	transform_ray(t_ray *ray, double mat[4][4], t_ray *new_ray);
 
 /* MAIN PART                                                                  */
@@ -191,5 +192,7 @@ typedef struct s_data
 }	t_data;
 
 void	parse(t_data *data, char *filename);
+void	render(t_data *data);
+t_color	get_color(t_data *data, t_ray *ray, t_intsect *intsect);
 
 #endif

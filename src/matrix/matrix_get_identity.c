@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_sp_intersection.c                             :+:      :+:    :+:   */
+/*   matrix_get_identity.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/30 15:22:22 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/09 12:13:36 by pepaloma         ###   ########.fr       */
+/*   Created: 2025/01/08 10:12:14 by pepaloma          #+#    #+#             */
+/*   Updated: 2025/01/08 10:16:33 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	find_sp_intersection(t_ray *r, t_object *o, t_intsect *h)
+void	matrix_get_identity(double mat[4][4])
 {
-	double	a;
-	double	b;
-	double	c;
-	double	d;
-	t_vec	from_to;
+	int	i;
+	int	j;
 
-	from_to = vec_from_to(o->location, r->origin);
-	a = vec_dot(r->direction, r->direction);
-	b = 2 * vec_dot(r->direction, from_to);
-	c = vec_dot(from_to, from_to);
-	d = pow(b, 2) - 4 * a * c;
-	if (d < 0.0)
-		return ;
-	h->t1 = (-b - sqrt(d)) / (2 * a);
-	h->t2 = (-b + sqrt(d)) / (2 * a);
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			if (i == j)
+				mat[i][j] = 1.0;
+			else
+				mat[i][j] = 0.0;
+			j++;
+		}
+		i++;
+	}
 }

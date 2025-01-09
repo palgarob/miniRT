@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:19:48 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/07 12:13:15 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/09 13:42:13 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ int	assign_rgb(t_color *dst, char *org)
 {
 	char	**split;
 
-	split = ft_split(org, ',');
+	split = splitstr(org, ',');
 	if (!split)
 		return (ft_printf("Split error\n"), 0);
 	if (!is_rgb(split))
-		return (free_split(split), 0);
+		return (splitfree(split), 0);
 	*dst = color(ft_atoi(split[0]), ft_atoi(split[1]),
 			ft_atoi(split[2]));
-	return (free_split(split), 1);
+	return (splitfree(split), 1);
 }
 
-assign_coords(t_vec *dst, char *org)
+int	assign_coords(t_vec *dst, char *org)
 {
 	char **split;
 
@@ -122,7 +122,7 @@ static char	**get_buffer(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (close(fd),
-			ft_dprintf(2, "Error opening file: %s\n", strerror(errno)), NULL);
+			ft_dprintf(2, "Error opening file"), NULL);
 	rbytes = read(fd, buffer, 777777);
 	if (rbytes == -1)
 		return (close(fd),
