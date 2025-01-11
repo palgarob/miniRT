@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 13:38:37 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/09 10:14:08 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/11 08:45:35 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	get_scale(t_object *o, double trans[4][4])
 {
 	if (o->type == PLANE)
 		matrix_get_identity(trans);
-	matrix_get_identity(trans);
+	scaling(trans, o->diameter, o->diameter, o->diameter);
 }
 
 static void	get_translation(t_object *o, double trans[4][4])
@@ -42,7 +42,7 @@ static void	get_transformation(t_object *o, double transformation[4][4])
 	get_translation(o, translation);
 	matrix_multiply(rotation, scale, transformation);
 	matrix_multiply(transformation, translation, rotation);
-	matrix_cpy(rotation, transformation);
+	matrix_inverse(rotation, transformation);
 }
 
 bool	ray_intersect_object(t_ray *r, t_object *o, t_intsect *x)
@@ -55,8 +55,11 @@ bool	ray_intersect_object(t_ray *r, t_object *o, t_intsect *x)
 	x->t1 = -1;
 	x->t2 = -1;
 	if (o->type == SPHERE)
-		find_sp_intersection(r, o, x);
+		find_sp_intersection(&new_ray, o, x);
 	if (x->t1 > 0 || x->t2 > 0)
+	{
+		x->object = o;
 		return (true);
+	}
 	return (false);
 }

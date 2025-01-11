@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/09 13:34:38 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/10 20:33:37 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h> // free malloc
 # include <unistd.h> // STDERR_FILENO
 # include <stdio.h> // printf
+# include <string.h> // memset
 
 # include "MLX42.h"
 # include "libft.h"
@@ -27,6 +28,7 @@
 # define ASPECT_RATIO (16.0 / 9.0)
 # define IMAGE_WIDTH 960
 # define FOCAL_LENGTH 1.0
+# define BPP sizeof(int32_t) // for memset
 
 /* ERROR MESSAGES                                                             */
 # define WRONG_PARAM "Error\nPass only one *.rt file as parameter\n"
