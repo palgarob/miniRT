@@ -6,13 +6,13 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 15:22:22 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/09 12:13:36 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/11 14:49:59 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	find_sp_intersection(t_ray *r, t_object *o, t_intsect *h)
+void	find_sp_intersection(t_ray *r, __attribute__((unused)) t_object *o, t_intsect *h)
 {
 	double	a;
 	double	b;
@@ -20,10 +20,10 @@ void	find_sp_intersection(t_ray *r, t_object *o, t_intsect *h)
 	double	d;
 	t_vec	from_to;
 
-	from_to = vec_from_to(o->location, r->origin);
+	from_to = vec_from_to(pnt(0, 0, 0), r->origin);
 	a = vec_dot(r->direction, r->direction);
 	b = 2 * vec_dot(r->direction, from_to);
-	c = vec_dot(from_to, from_to);
+	c = vec_dot(from_to, from_to) - 1;
 	d = pow(b, 2) - 4 * a * c;
 	if (d < 0.0)
 		return ;

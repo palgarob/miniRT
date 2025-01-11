@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:51:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/09 13:36:45 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/11 19:35:22 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 	return (0);
 }
 
-t_color	cast_shadow_ray(t_vec3 intersection, t_data *scene, t_hit *h)
+t_color	cast_shadow_ray(t_vec intersection, t_data *scene, t_hit *h)
 {
-	t_vec3	shadow_direction;
+	t_vec	shadow_direction;
 	t_ray	shadow_ray;
 	double	light_distance;
 	t_color	combined;
@@ -43,5 +43,6 @@ t_color	cast_shadow_ray(t_vec3 intersection, t_data *scene, t_hit *h)
 
 t_color	get_color(__attribute__((__unused__)) t_data *data, __attribute__((__unused__)) t_ray *ray, __attribute__((__unused__)) t_intsect *intsect)
 {
-	return (color(1, 1, 1));
+	t_color c = color(intsect->object->color.r / 255, intsect->object->color.g / 255, intsect->object->color.b / 255);
+	return (c);
 }

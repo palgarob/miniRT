@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/10 20:33:22 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:48:12 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,16 @@ static void	setup_frame(t_data *data)
 	int		image_height;
 	double	frame_width;
 	double	frame_height;
-	t_vec	upper_left_corner;
 
 	image_height = IMAGE_WIDTH / ASPECT_RATIO;
 	frame_width = tan(data->camera.fov / 2 / DEG2RAD) * 2;
 	frame_height = frame_width / ASPECT_RATIO;
 	data->frame.ipix_width = frame_width / IMAGE_WIDTH;
 	data->frame.ipix_height = frame_height / image_height;
-	upper_left_corner = vec_add(vec(0, 0, FOCAL_LENGTH),
-			vec_add(vec(-frame_width / 2, 0, 0), vec(0, frame_height / 2, 0)));
-	data->frame.offset_pixel = vec_add(
-			upper_left_corner,
-			tpl_multiply(
-				vec_add(
-					vec(data->frame.ipix_width, 0, 0),
-					vec(0, -data->frame.ipix_height, 0)),
-				2));
+	data->frame.offset_pixel = pnt(
+		-frame_width / 2 + data->frame.ipix_width / 2,
+		frame_height / 2 - data->frame.ipix_height / 2,
+		FOCAL_LENGTH);
 }
 
 static void	setup_mlx(t_data *data)

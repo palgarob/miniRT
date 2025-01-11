@@ -6,13 +6,13 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 18:54:40 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/29 18:59:02 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/11 13:48:39 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	scaling(double mat[4][4], double x, double y, double z)
+void		scaling(double mat[4][4], double x, double y, double z)
 {
 	mat[0][0] = x;
 	mat[0][1] = 0;

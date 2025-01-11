@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:32:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/10 20:44:58 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/11 19:33:01 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,22 @@ static bool	intsect_is_found(t_data *data, t_ray *r, t_intsect *aux)
 
 static t_color	trace_ray(t_data *data, int i, int j)
 {
-	t_vec		pixel_center;
-	t_ray		cam_ray;
+	t_pnt		pixel_center;
+	t_ray		r;
 	t_intsect	intsect;
 
-	pixel_center = tpl_add(
+	pixel_center = pnt_add(
 		data->frame.offset_pixel,
-		tpl_add(
+		vec_add(
 			tpl_multiply(vec(data->frame.ipix_width, 0, 0), i),
 			tpl_multiply(vec(0, -data->frame.ipix_height, 0), j)
 		)
 	);
-	cam_ray = ray(data->camera.location, vec_normalize(pixel_center));
-	if (intsect_is_found(data, &cam_ray, &intsect))
+	r = ray(pnt(data->camera.location.x, data->camera.location.y, data->camera.location.z), vec(pixel_center.x, pixel_center.y, pixel_center.z));
+	if (intsect_is_found(data, &r, &intsect))
 	{
-		return (color(1, 1, 1));
+		return(get_color(data, &r, &intsect));
 	}
-//		return(get_color(data, &cam_ray, &intsect));
 	return (color(0, 0, 0));
 }
 
