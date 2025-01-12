@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/10 20:33:37 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/12 08:49:26 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	rotation_y(double mat[4][4], double degrees);
 void	rotation_z(double mat[4][4], double degrees);
 t_pnt	transform(double mat[4][4], t_pnt point);
 t_pnt	transform_inv(double mat[4][4], t_pnt point);
+void	rotation(double mat[4][4], t_vec *v);
 
 /* RAY                                                                        */
 typedef struct s_ray

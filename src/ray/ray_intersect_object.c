@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 13:38:37 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/11 17:36:10 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/12 09:00:09 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ static void	get_rotation(t_object *o, double trans[4][4])
 {
 	if (o->type == SPHERE)
 		matrix_get_identity(trans);
-	matrix_get_identity(trans);
+	else
+		rotation(trans, &o->orientation);
 }
 
 static void	get_scale(t_object *o, double trans[4][4])
 {
 	if (o->type == PLANE)
 		matrix_get_identity(trans);
-	scaling(trans, o->diameter / 2, o->diameter / 2, o->diameter / 2);
+	else
+		scaling(trans, o->diameter / 2, o->diameter / 2, o->diameter / 2);
 }
 
 static void	get_translation(t_object *o, double trans[4][4])

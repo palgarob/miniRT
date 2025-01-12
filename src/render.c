@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:32:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/11 19:33:01 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/12 08:49:03 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static t_color	trace_ray(t_data *data, int i, int j)
 	t_pnt		pixel_center;
 	t_ray		r;
 	t_intsect	intsect;
+	double		rotat[4][4];
 
 	pixel_center = pnt_add(
 		data->frame.offset_pixel,
@@ -63,7 +64,11 @@ static t_color	trace_ray(t_data *data, int i, int j)
 			tpl_multiply(vec(0, -data->frame.ipix_height, 0), j)
 		)
 	);
-	r = ray(pnt(data->camera.location.x, data->camera.location.y, data->camera.location.z), vec(pixel_center.x, pixel_center.y, pixel_center.z));
+	rotation(rotat, &data->camera.orientation);
+	r = ray(
+		pnt(data->camera.location.x, data->camera.location.y, data->camera.location.z),
+		tpl_multiply_matrix(rotat, vec_from_to(pnt(0, 0, 0), pixel_center))
+	);
 	if (intsect_is_found(data, &r, &intsect))
 	{
 		return(get_color(data, &r, &intsect));
