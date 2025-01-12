@@ -8,3 +8,5 @@ ISBN-13: 978-1-68050-271-8
 - Meter mensajes de error en printfd
 - Arreglar carpeta de objs
 - controlar los grados de apertura límites
+- Arreglar las cosas mirando hacia arriba o hacia abajo
+- arreglar que puedan faltar luz, cámara y ambient
