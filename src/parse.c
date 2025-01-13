@@ -6,40 +6,11 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:19:48 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/12 21:48:25 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/13 22:24:02 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-int	assign_rgb(t_color *dst, char *org)
-{
-	char	**split;
-
-	split = splitstr(org, ',');
-	if (!split)
-		return (ft_printf("Split error\n"), 0);
-	if (!is_rgb(split))
-		return (splitfree(split), 0);
-	*dst = color(ft_atoi(split[0]), ft_atoi(split[1]),
-			ft_atoi(split[2]));
-	return (splitfree(split), 1);
-}
-
-int	assign_coords(t_vec *dst, char *org)
-{
-	char **split;
-
-	split = splitstr(org, ',');
-	if (!split)
-		return (ft_printf("Split error\n"), 0);
-	if (!is_coord(split))
-		return (splitfree(split), 0);
-	dst->x = to_double(split[0]);
-	dst->y = to_double(split[1]);
-	dst->z = to_double(split[2]);
-	return (splitfree(split), 1);
-}
 
 int	init_sphere(char **split, t_data *data)
 {
@@ -79,95 +50,163 @@ int	init_camera(char **split, t_data *data)
 	return (1);
 }
 
-static int	create_object(char **split, t_data *scene)
+static void	setup_frame(t_data *data, double fov)
 {
-	if (!split)
-		return (ft_dprintf(2, "Split error\n"), 0);
-	if (!split[0])
+	int		image_height;
+	double	frame_width;
+	double	frame_height;
+
+	image_height = IMAGE_WIDTH / ASPECT_RATIO;
+	frame_width = tan(fov / 2 / DEG2RAD) * 2;
+	frame_height = frame_width / ASPECT_RATIO;
+	data->camera->ipix_width = frame_width / IMAGE_WIDTH;
+	data->camera->ipix_height = frame_height / image_height;
+	data->camera->offset_pixel = pnt(
+		-frame_width / 2 + data->camera->ipix_width / 2,
+		frame_height / 2 - data->camera->ipix_height / 2,
+		FOCAL_LENGTH);
+}
+
+void	transformation(double mat[4][4], t_transformation *t, t_obj_type type)
+{
+	double	rotat_mat[4][4];
+	double	trans_mat[4][4];
+	double	scale_mat[4][4];
+	t_vec	aux;
+
+	aux = t->location;
+	translation(trans_mat, &aux);
+	if (type == LIGHT || type == PLANE || type == CAMERA)
+		matrix_get_identity(scale_mat);
+	else
+	{
+		if (type == SPHERE)
+		{
+			aux = vec(t->diameter / 2, t->diameter / 2, t->diameter / 2);
+			scaling(scale_mat, &aux);
+		}
+		else if (type == CYLINDER)
+		{
+			aux = vec(t->height, t->diameter / 2, t->diameter / 2);
+			scaling(scale_mat, &aux);
+		}
+	}
+	if (type == SPHERE)
+		matrix_get_identity(rotat_mat);
+	else
+	{
+		aux = t->orientation;
+		rotation(rotat_mat, &aux);
+	}
+	matrix_multiply(trans_mat, rotat_mat, mat);
+	matrix_multiply(mat, scale_mat, trans_mat);
+	matrix_inverse(trans_mat, mat);
+}
+
+int	create_camera(t_data *data, char **info_array)
+{
+	t_transformation	t;
+	double				fov;
+
+	if (
+		ft_strcmp(info_array[0], "C")
+		|| !is_coord(&t.location, info_array[1])
+		|| !is_coord(&t.orientation, info_array[2])
+		|| !a2double(&fov, info_array[3])
+	)
 		return (1);
-	/* if (ft_strcmp(split[0], "A") == 0)
-		return (init_ambient(split, scene)); */
-	if (ft_strcmp(split[0], "C") == 0)
-		return (init_camera(split, scene));
-	/* if (ft_strcmp(split[0], "L") == 0)
-		return (init_light(split, scene)); */
-	if (ft_strcmp(split[0], "sp") == 0)
-		return (init_sphere(split, scene));
-	/* if (ft_strcmp(split[0], "pl") == 0)
-		return (init_plane(split, scene));
-	if (ft_strcmp(split[0], "cy") == 0)
-		return (init_cylinder(split, scene)); */
-	return (ft_dprintf(2, "%s is not supported in the scene!\n", split[0]), 0);
+	
+	data->camera = (t_camera *)malloc(sizeof(t_camera));
+	transformation(data->camera->mat, &t, CAMERA);
+	setup_frame(data, fov);
 }
 
-/* 
-Set the camera light and ambiens to -1 to know if they've been previously set 
-*/
-static void	set_start_values(t_data *scene)
+int	create_light(t_data *data, char **info_array)
 {
-	/* scene->ambient.ratio = -1.0;
-	scene->light.brightness = -1.0; */
-	scene->objects = NULL;
-	scene->camera.fov = -1;
+	t_transformation	t;
+	double				fov;
+
+	if (
+		ft_strcmp(info_array[0], "L")
+		|| !is_coord(&t.location, info_array[1])
+		|| !a2double(&fov, info_array[3])
+	)
+		return (1);
+	data->camera = (t_camera *)malloc(sizeof(t_camera));
+	translation(data->light->mat, &t.location);
+	setup_frame(data, fov);
+	return (0);
 }
 
-static char	**get_buffer(char *file)
+int	create_ambient(t_data *data, char **info_array)
 {
-	int		fd;
-	int		rbytes;
-	char	buffer[777777];
-	char	**split;
+	t_color	c;
+	double	ratio;
 
-	ft_bzero(buffer, 777777);
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (close(fd),
-			ft_dprintf(2, "Error opening file"), NULL);
-	rbytes = read(fd, buffer, 777777);
-	if (rbytes == -1)
-		return (close(fd),
-			ft_dprintf(2, "Error reading file\n"),
-			ft_bzero(buffer, 777777), NULL);
-	split = splitstr(buffer, '\n');
-	if (!split)
-		return (close(fd), ft_dprintf(2, "Split error\n"), NULL);
-	return (close(fd), split);
+	if (
+		ft_strcmp(info_array[0], "A")
+		|| !is_rgb(&data->ambient->color, info_array[1])
+		|| !a2double(&data->ambient->ratio, info_array[2])
+	)
+		return (1);
 }
 
-static int	read_file(char *file, t_data *scene)
-{
-	char	**lines;
-	char	**split;
-	int		i;
-
-	set_start_values(scene);
-	lines = get_buffer(file);
-	if (lines == NULL)
-		return (0);
-	i = -1;
-	while (lines[++i])
-	{
-		split = splitstr(lines[i], ' ');
-		if (!create_object(split, scene))
-			return (splitfree(lines), splitfree(split), 0);
-		splitfree(split);
-	}
-	splitfree(lines);
-	return (1);
-}
-
-void	parse(t_data *data, char *filename)
-{
-	if (!read_file(filename, data))
-	{
-		if (data->objects)
-			ft_lstclear(&data->objects, free);
-		exit(1);
-	}
-}
-
-void	parse(t_data *data, char *filename)
+int	create_object(t_data *data, char **info_array, t_obj_type type)
 {
 	
+}
+
+int	parse_line(t_data *data, char *line)
+{
+	char	**info_array;
+
+	info_array = splitstr(line, ' ');
+	if (
+		create_ambient(data, info_array)
+		|| create_camera(data, info_array)
+		|| create_light(data, info_array)
+		|| create_object(data, info_array, SPHERE)
+		|| create_object(data, info_array, PLANE)
+		|| create_object(data, info_array, CYLINDER)
+	)
+	{
+		splitfree(info_array);
+		return (0);
+	}
+	else
+	{
+		printfd(STDERR_FILENO, BAD_ELEM_FORMAT);
+		splitfree(info_array);
+		return (1);
+	}
+}
+
+void	parse(t_data *data, char *filename)
+{
+	int		fd;
+	char	*line;
+
+	data->img_ptr = NULL;
+	data->mlx_ptr = NULL;
+	data->objects = NULL;
+	data->camera = NULL;
+	data->light = NULL;
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		printfd(STDERR_FILENO, BAD_OPEN);
+		exit(1);
+	}
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (parse_line(data, line))
+		{
+			free_data(data);
+			free(line);
+			exit(1);
+		}
+		line = get_next_line(fd);
+	}
 }
 

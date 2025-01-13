@@ -6,13 +6,13 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 04:23:23 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/26 04:35:43 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:23:07 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	translation(double mat[4][4], double x, double y, double z)
+void	translation(double mat[4][4], t_vec *v)
 {
 	mat[0][0] = 1;
 	mat[0][1] = 0;

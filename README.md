@@ -10,3 +10,4 @@ ISBN-13: 978-1-68050-271-8
 - controlar los grados de apertura límites
 - Arreglar las cosas mirando hacia arriba o hacia abajo
 - arreglar que puedan faltar luz, cámara y ambient
+- check if printfd is compiled differently on linux
