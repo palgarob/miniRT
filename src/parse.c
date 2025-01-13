@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:19:48 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/09 13:42:13 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/12 21:48:25 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,5 +164,10 @@ void	parse(t_data *data, char *filename)
 			ft_lstclear(&data->objects, free);
 		exit(1);
 	}
+}
+
+void	parse(t_data *data, char *filename)
+{
+	
 }
 

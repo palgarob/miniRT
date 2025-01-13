@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/12 08:49:26 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/12 21:54:38 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include <stdbool.h> // bool
 # include <math.h> // sqrt pow
 # include <stdlib.h> // free malloc
-# include <unistd.h> // STDERR_FILENO
+# include <unistd.h> // STDERR_FILENO close read write
 # include <stdio.h> // printf
-# include <string.h> // memset
+# include <fcntl.h> // open
 
 # include "MLX42.h"
 # include "libft.h"
