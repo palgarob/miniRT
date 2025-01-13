@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:32:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/12 08:49:03 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/13 23:53:01 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,21 @@ static t_color	trace_ray(t_data *data, int i, int j)
 {
 	t_pnt		pixel_center;
 	t_ray		r;
+	t_ray		new_ray;
 	t_intsect	intsect;
-	double		rotat[4][4];
 
 	pixel_center = pnt_add(
-		data->frame.offset_pixel,
+		data->camera->offset_pixel,
 		vec_add(
-			tpl_multiply(vec(data->frame.ipix_width, 0, 0), i),
-			tpl_multiply(vec(0, -data->frame.ipix_height, 0), j)
+			tpl_multiply(vec(data->camera->ipix_width, 0, 0), i),
+			tpl_multiply(vec(0, -data->camera->ipix_height, 0), j)
 		)
 	);
-	rotation(rotat, &data->camera.orientation);
-	r = ray(
-		pnt(data->camera.location.x, data->camera.location.y, data->camera.location.z),
-		tpl_multiply_matrix(rotat, vec_from_to(pnt(0, 0, 0), pixel_center))
-	);
-	if (intsect_is_found(data, &r, &intsect))
+	r = ray(pnt(0, 0, 0), vec_from_to(pnt(0, 0, 0), pixel_center));
+	transform_ray(&r, data->camera->mat, &new_ray);
+	if (intsect_is_found(data, &new_ray, &intsect))
 	{
-		return(get_color(data, &r, &intsect));
+		return(get_color(data, &new_ray, &intsect));
 	}
 	return (color(0, 0, 0));
 }
