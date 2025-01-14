@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/14 14:12:07 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/14 21:22:56 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,11 @@
 # define FOCAL_LENGTH 1.0
 # define BPP sizeof(int32_t)
 
-/* ERROR MESSAGES                                                             */
 # define BAD_OPEN "Error\nError when opening file\n"
 # define WRONG_PARAM "Error\nPass only one *.rt file as parameter\n"
 # define BAD_MLX_INIT "Error\nThe mlx_init returned NULL\n"
-# define INVALID_MATRIX_SIZE "Error \nDon't compare matrixes other than \
-2x2, 3x3, 4x4\n"
 # define BAD_ELEM_FORMAT "Error\nAn element of the scene doesn't have the \
 right format\n"
-
-/* UTILS                                                                      */
-typedef enum e_comp_result
-{
-	EQUAL,
-	A_LESST_B,
-	A_GREAT_B
-}	t_comp;
-
-t_comp			fpn_compare(double a, double b);
-double			deg2rad(double deg);
 
 /* RAY                                                                        */
 typedef struct s_ray
@@ -64,6 +50,7 @@ typedef struct s_intersection
 	t_object	*object;
 	double	t1;
 	double	t2;
+	t_vec	normal;
 } t_intsect;
 
 t_ray	ray(t_pnt origin, t_vec direction);
@@ -127,5 +114,6 @@ t_color	get_color(t_data *data, t_ray *ray, t_intsect *intsect);
 void	free_data(t_data *data);
 void	setup_frame(t_data *data, double fov);
 int	create_object(t_data *data, char **info_array, t_obj_type type);
+void	transformation(double mat[4][4], t_transformation *t, t_obj_type type);
 
 #endif

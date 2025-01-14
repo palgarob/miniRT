@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:08:04 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/14 14:08:25 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/14 21:52:07 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	init_sphere(t_transformation *t, t_object *obj, char **info_array)
 	return (0);
 }
 
-static int	init_cyl(t_transformation *t, t_object *obj, char **info_array)
+static int	init_cylinder(t_transformation *t, t_object *obj, char **info_array)
 {
 	if (!is_coord(&t->orientation, info_array[2]))
 		return (free(obj), 1);
@@ -57,7 +57,7 @@ int	create_object(t_data *data, char **info_array, t_obj_type type)
 	if (type == SPHERE)
 		return (init_sphere(&t, obj, info_array));
 	if (type == CYLINDER)
-		return (init_cyl(&t, obj, info_array));
+		return (init_cylinder(&t, obj, info_array));
 	if (type == PLANE)
 		return (init_plane(&t, obj, info_array));
 	transformation(obj->mat, &t, obj->type);
