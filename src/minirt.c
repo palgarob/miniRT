@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/13 23:53:49 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:50:36 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ int	main(int __attribute__((__unused__)) argc, char __attribute__((__unused__)) 
 {
 	t_data		data;
 
+	data.img_ptr = NULL;
+	data.mlx_ptr = NULL;
+	data.objects = NULL;
+	data.camera = NULL;
+	data.light = NULL;
 	check_parameters(argc, argv);
 	parse(&data, argv[1]);
 	setup_mlx(&data);

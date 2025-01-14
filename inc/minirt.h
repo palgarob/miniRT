@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/13 22:17:35 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/14 14:12:07 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 # define BAD_MLX_INIT "Error\nThe mlx_init returned NULL\n"
 # define INVALID_MATRIX_SIZE "Error \nDon't compare matrixes other than \
 2x2, 3x3, 4x4\n"
-# define BAD_ELEM_FORMAT "Error\nAn element of the scene doesn't have the\
-right format"
+# define BAD_ELEM_FORMAT "Error\nAn element of the scene doesn't have the \
+right format\n"
 
 /* UTILS                                                                      */
 typedef enum e_comp_result
@@ -50,53 +50,6 @@ typedef enum e_comp_result
 
 t_comp			fpn_compare(double a, double b);
 double			deg2rad(double deg);
-
-/* MATRIX                                                                     */
-bool	matrix_is_equal(double a[4][4], double b[4][4], size_t size);
-void	matrix_multiply(double a[4][4], double b[4][4], double result[4][4]);
-void	matrix_transpose(double **mat);
-void	matrix_cpy(double src[4][4], double cpy[4][4]);
-double	matrix2_det(double mat2[2][2]);
-void	submatrix4(double mat4[4][4], double mat3[3][3], int row, int column);
-void	submatrix3(double mat3[3][3], double mat2[2][2], int row, int column);
-double	matrix3_minor(double mat3[3][3], int row, int column);
-double	matrix4_minor(double mat4[4][4], int row, int column);
-double	matrix3_cofactor(double mat3[3][3], int row, int column);
-double	matrix4_cofactor(double mat4[4][4], int row, int column);
-double	matrix3_det(double mat3[3][3]);
-double	matrix4_det(double mat4[4][4]);
-bool	matrix_inverse(double mat4[4][4], double inv[4][4]);
-void	matrix4_print(double mat4[4][4]);
-void	matrix_get_identity(double mat[4][4]);
-
-/* TRANSFORMATIONS                                                            */
-typedef struct s_transformation
-{
-
-	double	diameter;
-	double	height;
-	t_vec	orientation;
-	t_pnt	location;
-}	t_transformation;
-
-typedef enum e_obj_type
-{
-	SPHERE,
-	PLANE,
-	CYLINDER,
-	CAMERA,
-	LIGHT
-}	t_obj_type;
-
-void	translation(double mat[4][4], t_vec *v);
-void	scaling(double mat[4][4], t_vec *values);
-void	rotation_x(double mat[4][4], double degrees);
-void	rotation_y(double mat[4][4], double degrees);
-void	rotation_z(double mat[4][4], double degrees);
-t_pnt	transform(double mat[4][4], t_pnt point);
-t_pnt	transform_inv(double mat[4][4], t_pnt point);
-void	rotation(double mat[4][4], t_vec *v);
-void	transformation(double mat[4][4], t_transformation *t, t_obj_type type);
 
 /* RAY                                                                        */
 typedef struct s_ray
@@ -120,6 +73,15 @@ void	find_sp_intersection(t_ray *r, t_object *o, t_intsect *h);
 void	transform_ray(t_ray *ray, double mat[4][4], t_ray *new_ray);
 
 /* MAIN PART                                                                  */
+
+typedef enum e_obj_type
+{
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	CAMERA,
+	LIGHT
+}	t_obj_type;
 
 typedef struct s_camera
 {
@@ -163,5 +125,7 @@ void	parse(t_data *data, char *filename);
 void	render(t_data *data);
 t_color	get_color(t_data *data, t_ray *ray, t_intsect *intsect);
 void	free_data(t_data *data);
+void	setup_frame(t_data *data, double fov);
+int	create_object(t_data *data, char **info_array, t_obj_type type);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 20:02:41 by pepaloma          #+#    #+#              #
-#    Updated: 2024/12/26 02:33:39 by pepaloma         ###   ########.fr        #
+#    Updated: 2025/01/14 13:23:51 by pepaloma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,6 @@ $(NAME): libft $(OBJ)
 	$(CC) $(OBJ) $(LDFLAGS) $(LDLIBS) $(HEADERS) -o $(NAME)
 
 %.o: %.c
-	mkdir -p $(OBJ_DIR)
 	$(CC) $(HEADERS) $(CFLAGS) -c $< -o $@
 
 libft:
