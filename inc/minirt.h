@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/15 01:21:18 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/15 02:34:45 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,12 @@ void	parse(t_data *data, char *filename);
 void	render(t_data *data);
 t_color	get_color(t_data *data, t_ray *ray, t_intsect *intsect);
 void	free_data(t_data *data);
-void	setup_frame(t_data *data, double fov);
-int	create_object(t_data *data, char **info_array, t_obj_type type);
 void	transformation(double mat[4][4], t_transformation *t, t_obj_type type);
+int		create_sphere(t_data *data, char **info_array);
+int		create_cylinder(t_data *data, char **info_array);
+int		create_plane(t_data *data, char **info_array);
+int		create_light(t_data *data, char **line_split);
+int		create_ambient(t_data *data, char **line_split);
+int	create_camera(t_data *data, char **line_split);
 
 #endif

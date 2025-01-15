@@ -6,54 +6,11 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:19:48 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/15 01:45:22 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/15 02:32:37 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-int	create_camera(t_data *data, char **line_split)
-{
-	t_transformation	t;
-	double				fov;
-
-	if (
-		!is_coord(&t.location, line_split[1])
-		|| !is_coord(&t.orientation, line_split[2])
-		|| a2double(&fov, line_split[3])
-	)
-		return (1);
-	data->camera = (t_camera *)malloc(sizeof(t_camera));
-	transformation(data->camera->mat, &t, CAMERA);
-	setup_frame(data, fov);
-	return (0);
-}
-
-int	create_light(t_data *data, char **line_split)
-{
-	t_vec	location;
-
-	data->light = (t_light *)malloc(sizeof(t_light));
-	if (
-		!is_coord(&location, line_split[1])
-		|| a2double(&data->light->brightness, line_split[2])
-		|| !is_rgb(&data->light->color, line_split[3])
-	)
-		return (free(data->light), 1);
-	translation(data->light->mat, &location);
-	return (0);
-}
-
-int	create_ambient(t_data *data, char **line_split)
-{
-	data->ambient = (t_ambient *)malloc(sizeof(t_ambient));
-	if (
-		a2double(&data->ambient->ratio, line_split[1])
-		|| !is_rgb(&data->ambient->color, line_split[2])
-	)
-		return (free(data->ambient), 1);
-	return (0);
-}
 
 int	parse_line(t_data *data, char *line)
 {
@@ -70,13 +27,13 @@ int	parse_line(t_data *data, char *line)
 		&& !create_light(data, line_split))
 		return (splitfree(line_split), 0);
 	else if (!ft_strcmp(line_split[0], "sp") && splitlen(line_split) == 4
-		&& !create_object(data, line_split, SPHERE))
+		&& !create_sphere(data, line_split))
 		return (splitfree(line_split), 0);
 	else if (!ft_strcmp(line_split[0], "cy") && splitlen(line_split) == 6
-		&& !create_object(data, line_split, CYLINDER))
+		&& !create_cylinder(data, line_split))
 		return (splitfree(line_split), 0);
 	else if (!ft_strcmp(line_split[0], "pl") && splitlen(line_split) == 4
-		&& !create_object(data, line_split, PLANE))
+		&& !create_plane(data, line_split))
 		return (splitfree(line_split), 0);
 	else
 		return (splitfree(line_split),
