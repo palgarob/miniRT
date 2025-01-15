@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/14 21:22:56 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/15 01:21:18 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@
 # include "libft.h"
 
 /* PREPROCESSOR PARAMETERS                                                    */
-# define EPSILON 0.00001
 # define ASPECT_RATIO (16.0 / 9.0)
 # define IMAGE_WIDTH 960
 # define FOCAL_LENGTH 1.0
 # define BPP sizeof(int32_t)
 
+/* ERROR MESSAGES                                                             */
 # define BAD_OPEN "Error\nError when opening file\n"
 # define WRONG_PARAM "Error\nPass only one *.rt file as parameter\n"
 # define BAD_MLX_INIT "Error\nThe mlx_init returned NULL\n"

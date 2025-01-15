@@ -6,21 +6,21 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:19:48 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/14 14:08:57 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/15 01:45:22 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	create_camera(t_data *data, char **info_array)
+int	create_camera(t_data *data, char **line_split)
 {
 	t_transformation	t;
 	double				fov;
 
 	if (
-		!is_coord(&t.location, info_array[1])
-		|| !is_coord(&t.orientation, info_array[2])
-		|| a2double(&fov, info_array[3])
+		!is_coord(&t.location, line_split[1])
+		|| !is_coord(&t.orientation, line_split[2])
+		|| a2double(&fov, line_split[3])
 	)
 		return (1);
 	data->camera = (t_camera *)malloc(sizeof(t_camera));
@@ -29,27 +29,27 @@ int	create_camera(t_data *data, char **info_array)
 	return (0);
 }
 
-int	create_light(t_data *data, char **info_array)
+int	create_light(t_data *data, char **line_split)
 {
-	t_vec	v;
+	t_vec	location;
 
 	data->light = (t_light *)malloc(sizeof(t_light));
 	if (
-		!is_coord(&v, info_array[1])
-		|| a2double(&data->light->brightness, info_array[2])
-		|| !is_rgb(&data->light->color, info_array[3])
+		!is_coord(&location, line_split[1])
+		|| a2double(&data->light->brightness, line_split[2])
+		|| !is_rgb(&data->light->color, line_split[3])
 	)
 		return (free(data->light), 1);
-	translation(data->light->mat, &v);
+	translation(data->light->mat, &location);
 	return (0);
 }
 
-int	create_ambient(t_data *data, char **info_array)
+int	create_ambient(t_data *data, char **line_split)
 {
 	data->ambient = (t_ambient *)malloc(sizeof(t_ambient));
 	if (
-		a2double(&data->ambient->ratio, info_array[1])
-		|| !is_rgb(&data->ambient->color, info_array[2])
+		a2double(&data->ambient->ratio, line_split[1])
+		|| !is_rgb(&data->ambient->color, line_split[2])
 	)
 		return (free(data->ambient), 1);
 	return (0);
@@ -57,29 +57,29 @@ int	create_ambient(t_data *data, char **info_array)
 
 int	parse_line(t_data *data, char *line)
 {
-	char	**info_array;
+	char	**line_split;
 
-	info_array = splitstr(line, ' ');
-	if (!ft_strcmp(info_array[0], "A") && splitlen(info_array) == 3
-		&& !create_ambient(data, info_array))
-		return (splitfree(info_array), 0);
-	else if (!ft_strcmp(info_array[0], "C") && splitlen(info_array) == 4
-		&& !create_camera(data, info_array))
-		return (splitfree(info_array), 0);
-	else if (!ft_strcmp(info_array[0], "L") && splitlen(info_array) == 4
-		&& !create_light(data, info_array))
-		return (splitfree(info_array), 0);
-	else if (!ft_strcmp(info_array[0], "sp") && splitlen(info_array) == 4
-		&& !create_object(data, info_array, SPHERE))
-		return (splitfree(info_array), 0);
-	else if (!ft_strcmp(info_array[0], "cy") && splitlen(info_array) == 6
-		&& !create_object(data, info_array, CYLINDER))
-		return (splitfree(info_array), 0);
-	else if (!ft_strcmp(info_array[0], "pl") && splitlen(info_array) == 4
-		&& !create_object(data, info_array, PLANE))
-		return (splitfree(info_array), 0);
+	line_split = splitstr(line, ' ');
+	if (!ft_strcmp(line_split[0], "A") && splitlen(line_split) == 3
+		&& !create_ambient(data, line_split))
+		return (splitfree(line_split), 0);
+	else if (!ft_strcmp(line_split[0], "C") && splitlen(line_split) == 4
+		&& !create_camera(data, line_split))
+		return (splitfree(line_split), 0);
+	else if (!ft_strcmp(line_split[0], "L") && splitlen(line_split) == 4
+		&& !create_light(data, line_split))
+		return (splitfree(line_split), 0);
+	else if (!ft_strcmp(line_split[0], "sp") && splitlen(line_split) == 4
+		&& !create_object(data, line_split, SPHERE))
+		return (splitfree(line_split), 0);
+	else if (!ft_strcmp(line_split[0], "cy") && splitlen(line_split) == 6
+		&& !create_object(data, line_split, CYLINDER))
+		return (splitfree(line_split), 0);
+	else if (!ft_strcmp(line_split[0], "pl") && splitlen(line_split) == 4
+		&& !create_object(data, line_split, PLANE))
+		return (splitfree(line_split), 0);
 	else
-		return (splitfree(info_array),
+		return (splitfree(line_split),
 			printfd(STDERR_FILENO, BAD_ELEM_FORMAT), 1);
 }
 
