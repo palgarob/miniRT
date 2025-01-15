@@ -12,3 +12,4 @@ ISBN-13: 978-1-68050-271-8
 - arreglar que puedan faltar luz, cámara y ambient
 - check if printfd is compiled differently on linux
 - controlar líneas vacías en el archivo
+- comparar bien los fpn con epsilon

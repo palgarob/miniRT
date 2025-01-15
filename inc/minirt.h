@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/15 12:12:47 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:06:47 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,7 @@ int		create_plane(t_data *data, char **line_split);
 int		create_light(t_data *data, char **line_split);
 int		create_ambient(t_data *data, char **line_split);
 int	create_camera(t_data *data, char **line_split);
+t_vec	reflect(t_vec normal, t_vec in);
+bool	intsect_is_found(t_data *data, t_ray *r, t_intsect *aux);
 
 #endif
