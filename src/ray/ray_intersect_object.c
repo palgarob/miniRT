@@ -6,31 +6,58 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 13:38:37 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/14 21:55:53 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/15 12:16:00 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+static t_vec	normal_at(t_object *o, t_pnt world_point)
+{
+	t_pnt	object_point;
+	t_vec	object_normal;
+	t_vec	world_normal;
+	double	inv[4][4];
+
+	matrix_inverse(o->mat, inv);
+	object_point = tpl_multiply_matrix(inv, world_point);
+	object_normal = vec_from_to(pnt(0, 0, 0), object_point);
+	matrix4_transpose(inv);
+	world_normal = tpl_multiply_matrix(inv, object_normal);
+	world_normal.w = 0;
+	return(vec_normalize(world_normal));
+}
+
+static bool	intersection_is_ahead(t_ray *new_ray, t_object *o, double t[2], t_intsect *x)
+{
+	if (t[0] > 0)
+	{
+		x->t = t[0];
+		x->normal = normal_at(o, ray_position(new_ray, x->t));
+		return (true);
+	}
+	else if (t[1] > 0)
+	{
+		x->t = t[1];
+		x->normal = tpl_negate(normal_at(o, ray_position(new_ray, x->t)));
+		return (true);
+	}
+	else
+		return (false);
+}
+
 bool	ray_intersect_object(t_ray *r, t_object *o, t_intsect *x)
 {
 	t_ray	new_ray;
 	double	inv[4][4];
+	double	t[2];
 
 	matrix_inverse(o->mat, inv);
 	transform_ray(r, inv, &new_ray);
-	x->t1 = -1;
-	x->t2 = -1;
-	if (o->type == SPHERE)
-		find_sp_intersection(&new_ray, o, x);
-	/* else if (o->type == PLANE)
-		find_pl_intersection(&new_ray, o, x);
-	else if (o->type == CYLINDER)
-		find_cy_intersection(&new_ray, o, x); */
-	if (x->t1 > 0 || x->t2 > 0)
-	{
-		x->object = o;
-		return (true);
-	}
-	return (false);
+	if ((o->type == SPHERE && sp_is_intersected(&new_ray, t))
+		/* || (o->type == PLANE && pl_is_intersected(&new_ray, o, t))
+		|| (o->type == CYLINDER && cy_is_intersected(&new_ray, o, t)) */)
+		return (intersection_is_ahead(&new_ray, o, t, x));
+	else
+		return (false);
 }

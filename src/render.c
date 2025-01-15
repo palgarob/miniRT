@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:32:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/14 09:50:59 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/15 12:13:51 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,14 @@ static bool	intsect_is_found(t_data *data, t_ray *r, t_intsect *aux)
 	t_intsect	min;
 
 	min.object = NULL;
-	min.t1 = INFINITY;
-	min.t2 = INFINITY;
-	aux->t1 = -1;
-	aux->t2 = -1;
+	min.t = INFINITY;
+	aux->t = -1;
 	object_list = data->objects;
 	while(object_list)
 	{
 		if (ray_intersect_object(r, object_list->content, aux))
 		{
-			if (aux->t1 < min.t1)
+			if (aux->t < min.t)
 			{
 				min = *aux;
 			}

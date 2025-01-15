@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:28:58 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/15 02:29:15 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/15 03:04:13 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 
 int	create_plane(t_data *data, char **info_array)
 {
-	t_transformation	t;
+	t_vec	orientation;
+	t_pnt	location;
 	t_object			*obj;
+	double	trans_mat[4][4];
+	double	rotat_mat[4][4];
 
 	obj = (t_object *)malloc(sizeof(t_object));
 	if (!obj)
 		return (1);
 	obj->type = PLANE;
-	if (!is_coord(&t.location, info_array[1]))
-		return (1);
-	if (!is_coord(&t.orientation, info_array[2]))
+	if (!is_coord(&location, info_array[1])
+		|| !is_coord(&orientation, info_array[2])
+		|| !is_rgb(&obj->color, info_array[3]))
 		return (free(obj), 1);
-	if (!is_rgb(&obj->color, info_array[3]))
-		return (free(obj), 1);
-	transformation(obj->mat, &t, obj->type);
+	translation(trans_mat, &location);
+	rotation(rotat_mat, &orientation);
+	matrix_multiply(trans_mat, rotat_mat, obj->mat);
 	ft_lstadd_back((t_list **)&data->objects, ft_lstnew(obj));
 	return (0);
 }

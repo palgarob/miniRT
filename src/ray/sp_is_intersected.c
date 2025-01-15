@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_sp_intersection.c                             :+:      :+:    :+:   */
+/*   sp_is_intersected.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 15:22:22 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/11 14:49:59 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/15 12:12:35 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	find_sp_intersection(t_ray *r, __attribute__((unused)) t_object *o, t_intsect *h)
+bool	sp_is_intersected(t_ray *r, double t[2])
 {
 	double	a;
 	double	b;
@@ -26,7 +26,14 @@ void	find_sp_intersection(t_ray *r, __attribute__((unused)) t_object *o, t_intse
 	c = vec_dot(from_to, from_to) - 1;
 	d = pow(b, 2) - 4 * a * c;
 	if (d < 0.0)
-		return ;
-	h->t1 = (-b - sqrt(d)) / (2 * a);
-	h->t2 = (-b + sqrt(d)) / (2 * a);
+		return (false);
+	t[0] = (-b - sqrt(d)) / (2 * a);
+	t[1] = (-b + sqrt(d)) / (2 * a);
+	if (t[0] > t[1])
+	{
+		a = t[1];
+		t[1] = t[0];
+		t[0] = a;
+	}
+	return (true);
 }

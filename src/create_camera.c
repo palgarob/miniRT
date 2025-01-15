@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:31:26 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/15 02:32:05 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/15 03:01:00 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,22 @@ static void	setup_frame(t_data *data, double fov)
 
 int	create_camera(t_data *data, char **line_split)
 {
-	t_transformation	t;
-	double				fov;
+	t_vec	orientation;
+	t_pnt	location;
+	double	fov;
+	double	trans_mat[4][4];
+	double	rotat_mat[4][4];
 
+	data->camera = (t_camera *)malloc(sizeof(t_camera));
 	if (
-		!is_coord(&t.location, line_split[1])
-		|| !is_coord(&t.orientation, line_split[2])
+		!is_coord(&location, line_split[1])
+		|| !is_coord(&orientation, line_split[2])
 		|| a2double(&fov, line_split[3])
 	)
-		return (1);
-	data->camera = (t_camera *)malloc(sizeof(t_camera));
-	transformation(data->camera->mat, &t, CAMERA);
+		return (free(data->camera), 1);
+	translation(trans_mat, &location);
+	rotation(rotat_mat, &orientation);
+	matrix_multiply(trans_mat, rotat_mat, data->camera->mat);
 	setup_frame(data, fov);
 	return (0);
 }

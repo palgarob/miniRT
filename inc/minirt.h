@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/15 02:34:45 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/15 12:12:47 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,14 @@ typedef struct s_object t_object;
 typedef struct s_intersection
 {
 	t_object	*object;
-	double	t1;
-	double	t2;
+	double	t;
 	t_vec	normal;
 } t_intsect;
 
 t_ray	ray(t_pnt origin, t_vec direction);
 t_pnt	ray_position(t_ray *ray, double t);
 bool	ray_intersect_object(t_ray *r, t_object *o, t_intsect *x);
-void	find_sp_intersection(t_ray *r, t_object *o, t_intsect *h);
+bool	sp_is_intersected(t_ray *r, double t[2]);
 void	transform_ray(t_ray *ray, double mat[4][4], t_ray *new_ray);
 
 /* MAIN PART                                                                  */
@@ -112,10 +111,9 @@ void	parse(t_data *data, char *filename);
 void	render(t_data *data);
 t_color	get_color(t_data *data, t_ray *ray, t_intsect *intsect);
 void	free_data(t_data *data);
-void	transformation(double mat[4][4], t_transformation *t, t_obj_type type);
-int		create_sphere(t_data *data, char **info_array);
-int		create_cylinder(t_data *data, char **info_array);
-int		create_plane(t_data *data, char **info_array);
+int		create_sphere(t_data *data, char **line_split);
+int		create_cylinder(t_data *data, char **line_split);
+int		create_plane(t_data *data, char **line_split);
 int		create_light(t_data *data, char **line_split);
 int		create_ambient(t_data *data, char **line_split);
 int	create_camera(t_data *data, char **line_split);
