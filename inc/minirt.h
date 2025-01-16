@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/15 19:06:47 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:46:35 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef struct s_ambient
 
 typedef struct s_light
 {
-	double	mat[4][4];
+	t_pnt	location;
 	double	brightness;
 	t_color	color;
 }	t_light;
@@ -109,15 +109,16 @@ typedef struct s_data
 
 void	parse(t_data *data, char *filename);
 void	render(t_data *data);
-t_color	get_color(t_data *data, t_ray *ray, t_intsect *intsect);
+t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect);
 void	free_data(t_data *data);
 int		create_sphere(t_data *data, char **line_split);
 int		create_cylinder(t_data *data, char **line_split);
 int		create_plane(t_data *data, char **line_split);
 int		create_light(t_data *data, char **line_split);
 int		create_ambient(t_data *data, char **line_split);
-int	create_camera(t_data *data, char **line_split);
+int		create_camera(t_data *data, char **line_split);
 t_vec	reflect(t_vec normal, t_vec in);
 bool	intsect_is_found(t_data *data, t_ray *r, t_intsect *aux);
+t_color	lighting(t_data *data, t_ray *r, t_intsect *intsect);
 
 #endif
