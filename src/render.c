@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:32:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/16 11:45:51 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/16 22:51:30 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	write_pixel(t_color color, uint8_t *pixel)
 	ft_memset(pixel + 2, color.b * 255, 1);
 	ft_memset(pixel + 3, 255, 1);
 }
+
 bool	intsect_is_found(t_data *data, t_ray *r, t_intsect *aux)
 {
 	t_list		*object_list;
