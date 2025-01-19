@@ -13,3 +13,4 @@ ISBN-13: 978-1-68050-271-8
 - check if printfd is compiled differently on linux
 - controlar líneas vacías en el archivo
 - comparar bien los fpn con epsilon
+- Escenas en las que falten cosas concretas

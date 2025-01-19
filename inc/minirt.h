@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/16 22:48:14 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:04:37 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 /* PREPROCESSOR PARAMETERS                                                    */
 # define ASPECT_RATIO (16.0 / 9.0)
-# define IMAGE_WIDTH 960
+# define IMAGE_WIDTH 480
 # define FOCAL_LENGTH 1.0
 # define BPP sizeof(int32_t)
 
@@ -90,11 +90,21 @@ typedef struct s_light
 	t_color	color;
 }	t_light;
 
+typedef struct s_material
+{
+	double	ambient;
+	double	diffuse;
+	double	specular;
+	double	shininess;
+	t_color	color;
+}	t_material;
+
 typedef struct s_object
 {
 	t_obj_type	type;
 	t_color		color;
 	double		mat[4][4];
+	t_material	teri;
 }	t_object;
 
 typedef struct s_data
@@ -120,5 +130,6 @@ int		create_camera(t_data *data, char **line_split);
 t_vec	reflect(t_vec normal, t_vec in);
 bool	intsect_is_found(t_data *data, t_ray *r, t_intsect *aux);
 t_color	lighting(t_data *data, t_ray *r, t_intsect *intsect);
+t_material	material(t_color c, double diffuse, double ambient, double shininess, double specular);
 
 #endif

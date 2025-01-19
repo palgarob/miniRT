@@ -6,16 +6,16 @@
 #    By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 20:02:41 by pepaloma          #+#    #+#              #
-#    Updated: 2025/01/14 13:23:51 by pepaloma         ###   ########.fr        #
+#    Updated: 2025/01/19 21:06:03 by pepaloma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= miniRT
 
-FT_DIR	= libft
-MLX_DIR	= MLX42
-SRC_DIR	= src
-INC_DIR	= inc
+FT_DIR	:= libft
+MLX_DIR	:= MLX42
+SRC_DIR	:= src
+INC_DIR	:= inc
 OBJ_DIR	= obj
 
 CFLAGS	:= -Wextra -Wall -Werror -g

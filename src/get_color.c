@@ -6,13 +6,13 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:51:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/16 22:53:20 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:13:03 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_color apply_diffuse(t_data *scene, t_ray shadow, t_intsect *h, t_color color)
+/* t_color apply_diffuse(t_data *scene, t_ray shadow, t_intsect *h, t_color color)
 {
 	double	diffuse_factor;
 	t_color final;
@@ -72,9 +72,14 @@ t_color	cast_shadow_ray(t_vec intersection, t_data *scene, t_intsect *h)
 			apply_diffuse(scene, shadow_ray, h, h->object->color),
 			apply_ambient(scene, h->object->color));
 	return (combined);
-}
+} */
 
 t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)
 {
-	return (cast_shadow_ray(ray_position(r, intsect->t), data, intsect));
+	(void)data;
+	(void)r;
+	(void)intsect;
+	intsect->object->teri = material(color(1,0,1), 0.9, 0.1, 200.0, 0.9);
+	return (lighting(data, r, intsect));
+	// return (cast_shadow_ray(ray_position(r, intsect->t), data, intsect));
 }
