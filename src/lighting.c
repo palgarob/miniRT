@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:25:38 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/19 21:05:21 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/20 09:27:03 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 t_color	lighting(t_data *data, t_ray *r, t_intsect *intsect)
 {
+	t_pnt	hit_point;
+	
+	hit_point = ray_position(r, intsect->t);
+	
+	/*
 	t_color	effective_color = color_mul(intsect->object->teri.color, data->light->brightness);
 	t_vec	lightv = vec_normalize(vec_sub(data->light->location, ray_position(r, intsect->t)));
 	t_color	ambient = color_mul(effective_color, intsect->object->teri.ambient);
@@ -25,12 +30,12 @@ t_color	lighting(t_data *data, t_ray *r, t_intsect *intsect)
 	double	factor;
 	if (light_dot_normal < 0)
 	{
+		printfd(1, "hola");
 		diffuse = color(0, 0, 0);
 		specular = color(0, 0, 0);
 	}
 	else
 	{
-		printfd(1, "hola");
 		diffuse = color_mul(effective_color, intsect->object->teri.diffuse * light_dot_normal);
 		reflectv = reflect(intsect->normal, tpl_negate(lightv));
 		reflect_dot_eye = vec_dot(reflectv, vec_normalize(vec_from_to(ray_position(r, intsect->t), tpl_multiply_matrix(intsect->object->mat, pnt(0, 0, 0)))));
@@ -50,6 +55,7 @@ t_color	lighting(t_data *data, t_ray *r, t_intsect *intsect)
 			)
 		);
 	return (effective_color);
+	*/
 	
 /*
 
