@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:25:38 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/01 12:09:03 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/01 12:24:02 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n)
 	else
 	{
 		diffuse = color_mul(effective_color, material->diffuse * light_dot_normal);
-		reflectv = reflect(tpl_negate(lightv), n);
+		reflectv = reflect(n, tpl_negate(lightv));
 		reflect_dot_eye = vec_dot(reflectv, e);
 		if (reflect_dot_eye <= 0)
 			specular = color(0, 0, 0);
