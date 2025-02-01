@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/19 17:04:37 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:55:41 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 /* PREPROCESSOR PARAMETERS                                                    */
 # define ASPECT_RATIO (16.0 / 9.0)
 # define IMAGE_WIDTH 480
-# define FOCAL_LENGTH 1.0
+# define FOCAL_LENGTH 10.0
 # define BPP sizeof(int32_t)
 
 /* ERROR MESSAGES                                                             */
@@ -58,20 +58,19 @@ bool	ray_intersect_object(t_ray *r, t_object *o, t_intsect *x);
 bool	sp_is_intersected(t_ray *r, double t[2]);
 void	transform_ray(t_ray *ray, double mat[4][4], t_ray *new_ray);
 
-/* MAIN PART                                                                  */
-
+/* CREATE ELEMENTS                                                            */
+typedef struct s_data t_data;
 typedef enum e_obj_type
 {
 	SPHERE,
 	PLANE,
 	CYLINDER,
-	CAMERA,
-	LIGHT
 }	t_obj_type;
 
 typedef struct s_camera
 {
 	double	mat[4][4];
+	t_pnt	location;
 	double	ipix_width;
 	double	ipix_height;
 	t_pnt	offset_pixel;
@@ -92,11 +91,11 @@ typedef struct s_light
 
 typedef struct s_material
 {
+	t_color	c;
 	double	ambient;
 	double	diffuse;
 	double	specular;
 	double	shininess;
-	t_color	color;
 }	t_material;
 
 typedef struct s_object
@@ -106,6 +105,23 @@ typedef struct s_object
 	double		mat[4][4];
 	t_material	teri;
 }	t_object;
+
+int		create_sphere(t_data *data, char **line_split);
+int		create_cylinder(t_data *data, char **line_split);
+int		create_plane(t_data *data, char **line_split);
+int		create_light(t_data *data, char **line_split);
+int		create_ambient(t_data *data, char **line_split);
+int		create_camera(t_data *data, char **line_split);
+t_material	material(t_color c, double diffuse, double \
+ambient, double shininess, double specular);
+
+/* RENDER                                                                     */
+void	render(t_data *data);
+t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect);
+t_vec	reflect(t_vec normal, t_vec in);
+t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n);
+
+/* DATA STRUCTURE                                                             */
 
 typedef struct s_data
 {
@@ -118,18 +134,7 @@ typedef struct s_data
 }	t_data;
 
 void	parse(t_data *data, char *filename);
-void	render(t_data *data);
-t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect);
 void	free_data(t_data *data);
-int		create_sphere(t_data *data, char **line_split);
-int		create_cylinder(t_data *data, char **line_split);
-int		create_plane(t_data *data, char **line_split);
-int		create_light(t_data *data, char **line_split);
-int		create_ambient(t_data *data, char **line_split);
-int		create_camera(t_data *data, char **line_split);
-t_vec	reflect(t_vec normal, t_vec in);
-bool	intsect_is_found(t_data *data, t_ray *r, t_intsect *aux);
-t_color	lighting(t_data *data, t_ray *r, t_intsect *intsect);
-t_material	material(t_color c, double diffuse, double ambient, double shininess, double specular);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:51:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/19 17:13:03 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/01 12:09:37 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ t_color	cast_shadow_ray(t_vec intersection, t_data *scene, t_intsect *h)
 
 t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)
 {
-	(void)data;
-	(void)r;
-	(void)intsect;
-	intsect->object->teri = material(color(1,0,1), 0.9, 0.1, 200.0, 0.9);
-	return (lighting(data, r, intsect));
+	t_material	m;
+	t_pnt		p;
+
+	m = material(intsect->object->color, 0.9, data->ambient->ratio, 200.0, 0.9);
+	p = ray_position(r, intsect->t);
+	return (lighting(&m, p, data->light, vec_from_to(p, data->camera->location), intsect->normal));
 	// return (cast_shadow_ray(ray_position(r, intsect->t), data, intsect));
 }

@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 13:38:37 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/19 20:42:52 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:09:25 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static t_vec	normal_at(t_object *o, t_pnt world_point)
 	matrix_inverse(o->mat, inv);
 	object_point = tpl_multiply_matrix(inv, world_point);
 	object_normal = vec_from_to(pnt(0, 0, 0), object_point);
+	matrix_cpy(o->mat, inv);
 	matrix4_transpose(inv);
 	world_normal = tpl_multiply_matrix(inv, object_normal);
 	world_normal.w = 0;

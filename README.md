@@ -14,3 +14,4 @@ ISBN-13: 978-1-68050-271-8
 - controlar líneas vacías en el archivo
 - comparar bien los fpn con epsilon
 - Escenas en las que falten cosas concretas
+- argumento de los vectores de dirección revisar requisitos
