@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:32:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/19 17:00:02 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/02 11:38:38 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static t_color	trace_ray(t_data *data, int i, int j)
 			tpl_multiply(vec(0, -data->camera->ipix_height, 0), j)
 		)
 	);
-	r = ray(pnt(0, 0, 0), vec_from_to(pnt(0, 0, 0), pixel_center));
+	r = ray(pnt(0, 0, 0), vec_normalize(vec_from_to(pnt(0, 0, 0), pixel_center)));
 	transform_ray(&r, data->camera->mat, &new_ray);
 	if (intsect_is_found(data, &new_ray, &intsect))
 	{
