@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:25:38 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/01 12:24:02 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/03 07:17:02 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n)
 	double	light_dot_normal;
 	t_color	diffuse;
 	t_color	specular;
-	t_vec	reflectv;
-	double	reflect_dot_eye;
-	double	factor;
+//	t_vec	reflectv;
+//	double	reflect_dot_eye;
+//	double	factor;
+	(void)e;
 
 	effective_color = color_mul(material->c, l->brightness);
 	lightv = vec_normalize(vec_from_to(p, l->location));
 	ambient = color_mul(effective_color, material->ambient);
-	light_dot_normal = vec_dot(lightv, n);
+	light_dot_normal = fmax(0.0, vec_dot(lightv, n));
+//	print_tpl(n);
 	if (light_dot_normal < 0.0)
 	{
 		diffuse = color(0,0,0);
@@ -36,15 +38,9 @@ t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n)
 	else
 	{
 		diffuse = color_mul(effective_color, material->diffuse * light_dot_normal);
-		reflectv = reflect(n, tpl_negate(lightv));
-		reflect_dot_eye = vec_dot(reflectv, e);
-		if (reflect_dot_eye <= 0)
+//		reflectv = reflect(n, tpl_negate(lightv));
+//		reflect_dot_eye = vec_dot(reflectv, e);
 			specular = color(0, 0, 0);
-		else
-		{
-			factor = pow(reflect_dot_eye, material->shininess);
-			specular = color_mul(color(l->brightness, l->brightness, l->brightness), material->specular * factor);
-		}
 	}
 	return (color_add(ambient, color_add(diffuse, specular)));
 }

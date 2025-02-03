@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 13:38:37 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/30 12:09:25 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/03 08:18:17 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static t_vec	normal_at(t_object *o, t_pnt world_point)
 	matrix_inverse(o->mat, inv);
 	object_point = tpl_multiply_matrix(inv, world_point);
 	object_normal = vec_from_to(pnt(0, 0, 0), object_point);
-	matrix_cpy(o->mat, inv);
 	matrix4_transpose(inv);
 	world_normal = tpl_multiply_matrix(inv, object_normal);
 	world_normal.w = 0;
@@ -47,6 +46,10 @@ static bool	intersection_is_ahead(t_ray *new_ray, t_object *o, double t[2], t_in
 	}
 	else
 		return (false);
+	/* x->object = o;
+	x->t = t[0];
+	x->normal = normal_at(o, ray_position(new_ray, x->t));
+	return (true); */
 }
 
 bool	ray_intersect_object(t_ray *r, t_object *o, t_intsect *x)

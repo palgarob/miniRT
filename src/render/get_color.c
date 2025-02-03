@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:51:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/02 11:41:32 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/02 21:11:26 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)
 	t_material	m;
 	t_pnt		p;
 
-	m = material(intsect->object->color, 0.9, data->ambient->ratio, 15.0, 0.9);
+	m = material(intsect->object->color, 0.9, data->ambient->ratio, 100.0, 0.9);
 	p = ray_position(r, intsect->t);
 	return (lighting(&m, p, data->light, vec_normalize(vec_from_to(p, data->camera->location)), intsect->normal));
 	// return (cast_shadow_ray(ray_position(r, intsect->t), data, intsect));

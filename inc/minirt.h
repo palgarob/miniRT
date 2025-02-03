@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/01 11:55:41 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/02 22:36:57 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 /* PREPROCESSOR PARAMETERS                                                    */
 # define ASPECT_RATIO (16.0 / 9.0)
-# define IMAGE_WIDTH 480
-# define FOCAL_LENGTH 10.0
+# define IMAGE_WIDTH 600
+# define FOCAL_LENGTH 1.0
 # define BPP sizeof(int32_t)
 
 /* ERROR MESSAGES                                                             */
@@ -135,6 +135,7 @@ typedef struct s_data
 
 void	parse(t_data *data, char *filename);
 void	free_data(t_data *data);
+void	print_tpl(struct s_tpl t);
 
 
 #endif
