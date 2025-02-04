@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/04 01:17:26 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:24:47 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_ray	ray(t_pnt origin, t_vec direction);
 t_pnt	ray_position(t_ray *ray, double t);
 bool	ray_intersect_object(t_ray *r, t_object *o, t_intsect *x);
 bool	sp_is_intersected(t_ray *r, double t[2]);
+bool	pl_is_intersected(t_ray *r, double t[2]);
 void	transform_ray(t_ray *ray, double mat[4][4], t_ray *new_ray);
 
 /* CREATE ELEMENTS                                                            */
