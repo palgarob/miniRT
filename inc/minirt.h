@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/02 22:36:57 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/04 01:17:26 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ typedef struct s_light
 typedef struct s_material
 {
 	t_color	c;
-	double	ambient;
+	double	a_ratio;
+	t_color	a_color;
 	double	diffuse;
 	double	specular;
 	double	shininess;
@@ -112,8 +113,7 @@ int		create_plane(t_data *data, char **line_split);
 int		create_light(t_data *data, char **line_split);
 int		create_ambient(t_data *data, char **line_split);
 int		create_camera(t_data *data, char **line_split);
-t_material	material(t_color c, double diffuse, double \
-ambient, double shininess, double specular);
+t_material	material(t_color c, double diffuse, t_ambient *ambient, double shininess, double specular);
 
 /* RENDER                                                                     */
 void	render(t_data *data);

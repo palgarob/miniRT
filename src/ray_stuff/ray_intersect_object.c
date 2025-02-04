@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 13:38:37 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/03 08:18:17 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/04 00:54:05 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ bool	ray_intersect_object(t_ray *r, t_object *o, t_intsect *x)
 	transform_ray(r, inv, &new_ray);
 	if ((o->type == SPHERE && sp_is_intersected(&new_ray, t)))
 	{
-		return (intersection_is_ahead(&new_ray, o, t, x));
+		return (intersection_is_ahead(r, o, t, x));
 	}
 	else
 		return (false);
