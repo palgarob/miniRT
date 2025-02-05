@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/05 15:41:56 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:04:11 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_object
 {
 	t_obj_type	type;
 	t_color		color;
+	t_vec		orientation;
 	double		mat[4][4];
 	t_material	teri;
 }	t_object;
