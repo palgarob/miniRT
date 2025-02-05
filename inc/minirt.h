@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/05 16:04:11 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:40:15 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ typedef struct s_data
 
 void	parse(t_data *data, char *filename);
 void	free_data(t_data *data);
-void	print_tpl(struct s_tpl t);
 
 
 #endif
