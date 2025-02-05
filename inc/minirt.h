@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/05 16:40:15 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:33:21 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 /* PREPROCESSOR PARAMETERS                                                    */
 # define ASPECT_RATIO (16.0 / 9.0)
-# define IMAGE_WIDTH 240
+# define IMAGE_WIDTH 1920
 # define FOCAL_LENGTH 1.0
 # define BPP sizeof(int32_t)
 
