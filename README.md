@@ -15,3 +15,4 @@ ISBN-13: 978-1-68050-271-8
 - comparar bien los fpn con epsilon
 - Escenas en las que falten cosas concretas
 - argumento de los vectores de dirección revisar requisitos
+- que la ventana aparezca después de renderizar
