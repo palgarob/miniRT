@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:28:12 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/15 03:17:23 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:04:47 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int	create_cylinder(t_data *data, char **line_split)
 	if (!is_rgb(&obj->color, line_split[5]))
 		return (free(obj), 1);
 	translation(trans_mat, &location);
+	orientation = vec_normalize(orientation);
 	rotation(rotat_mat, &orientation);
-	values = vec(diameter / 2, height / 2, diameter / 2);
+	values = vec(diameter / 2, 1, diameter / 2);
 	scaling(scale_mat, &values);
 	matrix_multiply(trans_mat, rotat_mat, aux);
 	matrix_multiply(aux, scale_mat, obj->mat);

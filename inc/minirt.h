@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/05 18:33:21 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/06 19:44:41 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 /* PREPROCESSOR PARAMETERS                                                    */
 # define ASPECT_RATIO (16.0 / 9.0)
-# define IMAGE_WIDTH 1920
+# define IMAGE_WIDTH 480
 # define FOCAL_LENGTH 1.0
 # define BPP sizeof(int32_t)
 
@@ -57,6 +57,7 @@ t_pnt	ray_position(t_ray *ray, double t);
 bool	ray_intersect_object(t_ray *r, t_object *o, t_intsect *x);
 bool	sp_is_intersected(t_ray *r, double t[2]);
 bool	pl_is_intersected(t_ray *r, double t[2]);
+bool	cy_is_intersected(t_ray *r, double t[2]);
 void	transform_ray(t_ray *ray, double mat[4][4], t_ray *new_ray);
 
 /* CREATE ELEMENTS                                                            */
