@@ -6,13 +6,40 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:51:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 13:58:03 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:13:48 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n)
+static bool	intsect_is_found(t_data *data, t_ray *r, t_intsect *aux)
+{
+	t_list		*object_list;
+	t_intsect	min;
+
+	min.object = NULL;
+	min.t = INFINITY;
+	aux->t = -1;
+	object_list = data->objects;
+	while(object_list)
+	{
+		if (ray_intersect_object(r, object_list->content, aux))
+		{
+			if (aux->t < min.t)
+			{
+				min = *aux;
+			}
+		}
+		object_list = object_list->next;
+	}
+	if (min.object == NULL)
+		return (false);
+	
+	*aux = min;
+	return (false);
+}
+
+t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n, bool is_in_shadow)
 {
 	t_color	effective_color;
 	t_vec	lightv;
@@ -25,6 +52,7 @@ t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n)
 	double	factor;
 	(void)e;
 
+	(void)is_in_shadow;
 	effective_color = color_blend(material->c, color_mul(l->color, l->brightness));
 	lightv = vec_normalize(vec_from_to(p, l->location));
 	ambient = color_mul(material->a_color, material->a_ratio);
@@ -50,6 +78,23 @@ t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n)
 	return (color_add(ambient, color_add(diffuse, specular)));
 }
 
+bool	is_shaded(t_pnt p, t_data *data)
+{
+	t_vec	v;
+	double	distance;
+	t_vec	direction;
+	t_ray	r;
+	t_intsect	aux;
+
+	v = vec_from_to(p, data->light->location);
+	distance = vec_len(v);
+	direction = vec_normalize(v);
+	r = ray(p, direction);
+	if (intsect_is_found(data, &r, &aux) && aux.t < distance)
+		return (true);
+	return (false);
+}
+
 t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)
 {
 	t_material	m;
@@ -58,5 +103,5 @@ t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)
 	
 	m = material(intsect->object->color, 0.9, data->ambient, 50.0, 0.9);
 	p = ray_position(r, intsect->t);
-	return (lighting(&m, p, data->light, vec_normalize(vec_from_to(p, data->camera->location)), intsect->normal));
+	return (lighting(&m, p, data->light, vec_normalize(vec_from_to(p, data->camera->location)), intsect->normal, is_shaded(p, data)));
 }

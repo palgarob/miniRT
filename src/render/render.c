@@ -6,12 +6,11 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:32:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/02 11:38:38 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:49:35 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 static void	write_pixel(t_color color, uint8_t *pixel)
 {
