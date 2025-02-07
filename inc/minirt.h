@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/06 19:44:41 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:58:46 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ t_material	material(t_color c, double diffuse, t_ambient *ambient, double shinin
 void	render(t_data *data);
 t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect);
 t_vec	reflect(t_vec normal, t_vec in);
-t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n);
 
 /* DATA STRUCTURE                                                             */
 
