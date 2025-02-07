@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:28:12 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 15:00:49 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:19:09 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	create_cylinder(t_data *data, char **line_split)
 	obj->orientation = vec_normalize(obj->orientation);
 	rotation(aux, &obj->orientation);
 	matrix_inverse(aux, rotat_mat);
-	values = vec(diameter / 2.0, diameter / 2.0, 1.0);
+	values = vec(diameter / 2.0, diameter / 2.0, height);
 	scaling(scale_mat, &values);
 	matrix_multiply(trans_mat, rotat_mat, aux);
 	matrix_multiply(aux, scale_mat, obj->mat);

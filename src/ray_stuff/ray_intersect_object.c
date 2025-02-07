@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 13:38:37 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 15:11:43 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:15:44 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ static t_vec	normal_at(t_object *o, t_pnt world_point)
 
 static bool	intersection_is_ahead(t_ray *new_ray, t_object *o, double t[2], t_intsect *x)
 {
+	x->object = o;
 	if (o->type == PLANE)
 	{
 		if (t[0] > 0)
 		{
-			x->object = o;
 			x->t = t[0];
 			x->normal = normal_at(o, ray_position(new_ray, x->t));
 			if (vec_dot(x->normal, new_ray->direction) > 0)
@@ -58,14 +58,12 @@ static bool	intersection_is_ahead(t_ray *new_ray, t_object *o, double t[2], t_in
 	{
 		if (t[0] > 0)
 		{
-			x->object = o;
 			x->t = t[0];
 			x->normal = normal_at(o, ray_position(new_ray, x->t));
 			return (true);
 		}
 		else if (t[1] > 0)
 		{
-			x->object = o;
 			x->t = t[1];
 			x->normal = tpl_negate(normal_at(o, ray_position(new_ray, x->t)));
 			return (true);

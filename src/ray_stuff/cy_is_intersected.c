@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:55:10 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/06 19:39:05 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:29:36 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,13 @@ bool	cy_is_intersected(t_ray *r, double t[2])
 		t[1] = t[0];
 		t[0] = a;
 	}
-	return (true);
+	if (ray_position(r, t[0]).z < 1 && ray_position(r, t[0]).z > 0)
+		return (true);
+	if (ray_position(r, t[1]).z < 1 && ray_position(r, t[1]).z > 0)
+	{
+		t[0] = -1;
+		return (true);
+	}
+	else
+		return (false);
 }
