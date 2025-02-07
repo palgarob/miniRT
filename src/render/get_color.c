@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:51:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 17:13:48 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:30:59 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static bool	intsect_is_found(t_data *data, t_ray *r, t_intsect *aux)
 		return (false);
 	
 	*aux = min;
-	return (false);
+	return (true);
 }
 
 t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n, bool is_in_shadow)
@@ -50,14 +50,12 @@ t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n, bo
 	t_vec	reflectv;
 	double	reflect_dot_eye;
 	double	factor;
-	(void)e;
 
-	(void)is_in_shadow;
 	effective_color = color_blend(material->c, color_mul(l->color, l->brightness));
 	lightv = vec_normalize(vec_from_to(p, l->location));
 	ambient = color_mul(material->a_color, material->a_ratio);
 	light_dot_normal = fmax(0.0, vec_dot(lightv, n));
-	if (light_dot_normal < 0.0)
+	if (light_dot_normal < 0.0 || is_in_shadow)
 	{
 		diffuse = color(0,0,0);
 		specular = color(0, 0, 0);
@@ -78,7 +76,7 @@ t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n, bo
 	return (color_add(ambient, color_add(diffuse, specular)));
 }
 
-bool	is_shaded(t_pnt p, t_data *data)
+bool	is_shaded(t_pnt p, t_data *data, t_object *o)
 {
 	t_vec	v;
 	double	distance;
@@ -90,7 +88,7 @@ bool	is_shaded(t_pnt p, t_data *data)
 	distance = vec_len(v);
 	direction = vec_normalize(v);
 	r = ray(p, direction);
-	if (intsect_is_found(data, &r, &aux) && aux.t < distance)
+	if (intsect_is_found(data, &r, &aux) && aux.object != o && aux.t < distance)
 		return (true);
 	return (false);
 }
@@ -103,5 +101,7 @@ t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)
 	
 	m = material(intsect->object->color, 0.9, data->ambient, 50.0, 0.9);
 	p = ray_position(r, intsect->t);
-	return (lighting(&m, p, data->light, vec_normalize(vec_from_to(p, data->camera->location)), intsect->normal, is_shaded(p, data)));
+	bool shadow = is_shaded(p, data, intsect->object);
+	p = pnt_add(p, tpl_multiply(intsect->normal, EPSILON));
+	return (lighting(&m, p, data->light, vec_normalize(vec_from_to(p, data->camera->location)), intsect->normal, shadow));
 }
