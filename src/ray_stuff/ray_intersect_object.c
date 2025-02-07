@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 13:38:37 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/06 19:42:17 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:11:43 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ bool	ray_intersect_object(t_ray *r, t_object *o, t_intsect *x)
 	double	inv[4][4];
 	double	t[2];
 
-	print_tpl(r->direction);
 	matrix_inverse(o->mat, inv);
 	transform_ray(r, inv, &new_ray);
 	if ((o->type == SPHERE && sp_is_intersected(&new_ray, t))

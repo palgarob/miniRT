@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:28:12 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/06 20:04:47 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:00:49 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	create_cylinder(t_data *data, char **line_split)
 {
 	t_pnt		location;
-	t_vec		orientation;
 	t_object	*obj;
 	double		trans_mat[4][4];
 	double		rotat_mat[4][4];
@@ -32,7 +31,7 @@ int	create_cylinder(t_data *data, char **line_split)
 	obj->type = CYLINDER;
 	if (!is_coord(&location, line_split[1]))
 		return (1);
-	if (!is_coord(&orientation, line_split[2]))
+	if (!is_coord(&obj->orientation, line_split[2]))
 		return (free(obj), 1);
 	if (a2double(&diameter, line_split[3]))
 		return (free(obj), 1);
@@ -41,9 +40,10 @@ int	create_cylinder(t_data *data, char **line_split)
 	if (!is_rgb(&obj->color, line_split[5]))
 		return (free(obj), 1);
 	translation(trans_mat, &location);
-	orientation = vec_normalize(orientation);
-	rotation(rotat_mat, &orientation);
-	values = vec(diameter / 2, 1, diameter / 2);
+	obj->orientation = vec_normalize(obj->orientation);
+	rotation(aux, &obj->orientation);
+	matrix_inverse(aux, rotat_mat);
+	values = vec(diameter / 2.0, diameter / 2.0, 1.0);
 	scaling(scale_mat, &values);
 	matrix_multiply(trans_mat, rotat_mat, aux);
 	matrix_multiply(aux, scale_mat, obj->mat);
