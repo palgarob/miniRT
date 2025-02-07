@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:51:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 18:30:59 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/07 22:18:54 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static bool	intsect_is_found(t_data *data, t_ray *r, t_intsect *aux)
 	}
 	if (min.object == NULL)
 		return (false);
-	
 	*aux = min;
 	return (true);
 }
@@ -76,7 +75,7 @@ t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n, bo
 	return (color_add(ambient, color_add(diffuse, specular)));
 }
 
-bool	is_shaded(t_pnt p, t_data *data, t_object *o)
+bool	is_shaded(t_pnt p, t_data *data, t_intsect *i)
 {
 	t_vec	v;
 	double	distance;
@@ -88,8 +87,10 @@ bool	is_shaded(t_pnt p, t_data *data, t_object *o)
 	distance = vec_len(v);
 	direction = vec_normalize(v);
 	r = ray(p, direction);
-	if (intsect_is_found(data, &r, &aux) && aux.object != o && aux.t < distance)
+	if (intsect_is_found(data, &r, &aux) && aux.object != i->object && aux.t < distance)
+	{
 		return (true);
+	}
 	return (false);
 }
 
@@ -101,7 +102,7 @@ t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)
 	
 	m = material(intsect->object->color, 0.9, data->ambient, 50.0, 0.9);
 	p = ray_position(r, intsect->t);
-	bool shadow = is_shaded(p, data, intsect->object);
 	p = pnt_add(p, tpl_multiply(intsect->normal, EPSILON));
+	bool shadow = is_shaded(p, data, intsect);
 	return (lighting(&m, p, data->light, vec_normalize(vec_from_to(p, data->camera->location)), intsect->normal, shadow));
 }

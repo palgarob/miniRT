@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:30:32 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/16 22:48:22 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/07 22:12:24 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int	create_light(t_data *data, char **line_split)
 		|| !is_rgb(&data->light->color, line_split[3])
 	)
 		return (free(data->light), 1);
+	data->light->location.w = 1;
 	return (0);
 }
