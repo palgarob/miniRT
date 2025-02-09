@@ -6,13 +6,13 @@
 #    By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 20:02:41 by pepaloma          #+#    #+#              #
-#    Updated: 2025/01/30 10:05:34 by pepaloma         ###   ########.fr        #
+#    Updated: 2025/02/09 15:00:08 by pepaloma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= miniRT
 
-FT_DIR	:= libft
+FT_DIR	:= libftl
 MLX_DIR	:= MLX42
 SRC_DIR	:= src
 INC_DIR	:= inc
