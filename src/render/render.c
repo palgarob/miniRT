@@ -88,12 +88,15 @@ static void	write_image(t_data *data)
 			write_pixel(pixel_color, data->img_ptr->pixels + n);
 			n += 4;
 		}
+		printfd(1, "\r%%%d", (int)j * 100 / (int)data->img_ptr->height);
 	}
 }
 
 void	render(t_data *data)
 {
+	printfd(1, "Rendering image...\n");
 	write_image(data); // ft_memset(data->img_ptr->pixels, 255, data->img_ptr->width * data->img_ptr->height * BPP);
+	printfd(1, "\nFinished!\n");
 	mlx_image_to_window(data->mlx_ptr, data->img_ptr, 0, 0);
 	mlx_loop(data->mlx_ptr);
 	mlx_terminate(data->mlx_ptr);

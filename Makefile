@@ -16,7 +16,9 @@ FT_DIR	:= libftl
 MLX_DIR	:= MLX42
 SRC_DIR	:= src
 INC_DIR	:= inc
-OBJ_DIR	= obj
+OBJ_DIR	:= obj
+MLX_LIB := $(MLX_DIR)/build/libmlx42.a
+FT_LIB := $(FT_DIR)/libft.a
 
 CFLAGS	:= -Wextra -Wall -Werror -g
 
@@ -32,23 +34,31 @@ LDLIBS	:= -lmlx42 -lft -ldl -lglfw -pthread -lm
 
 SRC_FILES := $(shell find $(SRC_DIR) -type f -name '*.c')
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
+
+
 all: $(NAME)
 
-$(NAME): libft $(OBJ_FILES)
-	mkdir -p $(MLX_DIR)/build && cmake -S $(MLX_DIR) -B $(MLX_DIR)/build
-	cmake --build $(MLX_DIR)/build -j4
+$(NAME): $(OBJ_FILES) $(FT_LIB) $(MLX_LIB)
 	$(CC) $(OBJ_FILES) $(LDFLAGS) $(LDLIBS) $(HEADERS) -o $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(dir $@)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(HEADERS) $(CFLAGS) -c $< -o $@
 
-libft:
-	$(MAKE) -C $(FT_DIR);
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+$(FT_LIB):
+	$(MAKE) -C $(FT_DIR)
+
+$(MLX_LIB):
+	@mkdir -p $(MLX_DIR)/build
+	@cmake -S $(MLX_DIR) -B $(MLX_DIR)/build
+	@cmake --build $(MLX_DIR)/build -j4
 
 clean:
 	$(MAKE) -C $(FT_DIR) fclean
-	rm -rf $(OBJ_FILES)
+	rm -rf $(OBJ_DIR)
 	rm -rf $(MLX_DIR)/build
 
 fclean: clean
@@ -56,4 +66,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re, libft
+.PHONY: all clean fclean re
