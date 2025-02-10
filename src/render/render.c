@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:32:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 16:49:35 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:36:02 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,27 @@ static void	write_image(t_data *data)
 		printfd(1, "\r%%%d", (int)j * 100 / (int)data->img_ptr->height);
 	}
 }
+
+/* static void	write_image(t_data *data)
+{
+	size_t				i;
+	size_t				j;
+	t_color			pixel_color;
+	static size_t	n = 0;
+
+	j = -1;
+	while (++j < data->img_ptr->height)
+	{
+		i = -1;
+		while (++i < data->img_ptr->width)
+		{
+			pixel_color = trace_ray(data, i, j);
+			write_pixel(pixel_color, data->img_ptr->pixels + n);
+			n += 4;
+		}
+		printfd(1, "\r%%%d", (int)j * 100 / (int)data->img_ptr->height);
+	}
+} */
 
 void	render(t_data *data)
 {
