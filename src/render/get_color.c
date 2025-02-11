@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:51:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 22:18:54 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:18:46 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n, bo
 	double	reflect_dot_eye;
 	double	factor;
 
-	effective_color = color_blend(material->c, color_mul(l->color, l->brightness));
+	effective_color = color_blend(material->c, l->color);
 	lightv = vec_normalize(vec_from_to(p, l->location));
-	ambient = color_mul(material->a_color, material->a_ratio);
+	ambient = color_blend(material->c,color_mul(material->a_color, material->a_ratio));
 	light_dot_normal = fmax(0.0, vec_dot(lightv, n));
 	if (light_dot_normal < 0.0 || is_in_shadow)
 	{
@@ -100,7 +100,7 @@ t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)
 	t_pnt		p;
 
 	
-	m = material(intsect->object->color, 0.9, data->ambient, 50.0, 0.9);
+	m = material(intsect->object->color, data->light->brightness, data->ambient, 50.0, 0.9);
 	p = ray_position(r, intsect->t);
 	p = pnt_add(p, tpl_multiply(intsect->normal, EPSILON));
 	bool shadow = is_shaded(p, data, intsect);

@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/10 16:53:50 by muribe-l         ###   ########.fr       */
+/*   Updated: 2025/02/11 10:53:36 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 # include <fcntl.h> // open
 # include <string.h> // strerror
 # include <pthread.h> // Threads
+# include <sys/sysinfo.h> //Cores
 
 # include "MLX42.h"
 # include "libft.h"
 
 /* PREPROCESSOR PARAMETERS                                                    */
 # define ASPECT_RATIO (16.0 / 9.0)
-# define IMAGE_WIDTH 480
+# define IMAGE_WIDTH 720
 # define FOCAL_LENGTH 1.0
 # define BPP sizeof(int32_t)
 

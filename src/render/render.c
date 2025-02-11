@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:32:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/10 16:36:02 by muribe-l         ###   ########.fr       */
+/*   Updated: 2025/02/11 10:50:22 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,34 +71,76 @@ static t_color	trace_ray(t_data *data, int i, int j)
 	return (color(0, 0, 0));
 }
 
+typedef struct {
+	t_data	*data;
+	int		thread_id;
+	int		start_line;
+	int		end_line;
+	int		n;
+	int		width;
+}	t_threadData;
+
+void *threadrender(void *d)
+{
+	t_color			pixel_color;
+	t_threadData	*t;
+
+	t = (t_threadData *)d;
+	for (size_t j = t->start_line; (int)j <= t->end_line; j++)
+	{
+		for (size_t i = 0; i < t->data->img_ptr->width; i++)
+		{
+			pixel_color = trace_ray(t->data, i, j);
+			write_pixel(pixel_color, t->data->img_ptr->pixels + t->n); 
+			t->n += 4;
+		}
+		if (t->thread_id == 0)
+			printfd(1, "\r%%%d", (int)j * 100 / (int)t->end_line);
+	}
+	free (t);
+	return (NULL);
+}
+
 static void	write_image(t_data *data)
 {
-	size_t				i;
-	size_t				j;
-	t_color			pixel_color;
-	static size_t	n = 0;
+	long			numThreads = sysconf(_SC_NPROCESSORS_ONLN);
+	pthread_t		threads[numThreads];
+	int baseLines = data->img_ptr->height / numThreads;
+	int extraLines = data->img_ptr->height % numThreads;
 
-	j = -1;
-	while (++j < data->img_ptr->height)
-	{
-		i = -1;
-		while (++i < data->img_ptr->width)
-		{
-			pixel_color = trace_ray(data, i, j);
-			write_pixel(pixel_color, data->img_ptr->pixels + n);
-			n += 4;
+	int start_line = 0;
+	for (int i = 0; i < numThreads; i++) {
+		int end_line = start_line + baseLines - 1;
+
+		if (extraLines > 0) {
+			end_line++;
+			extraLines--;
 		}
-		printfd(1, "\r%%%d", (int)j * 100 / (int)data->img_ptr->height);
+
+		t_threadData *t = malloc(sizeof(t_threadData));
+		t->data = data;
+		t->thread_id = i;
+		t->start_line = start_line;
+		t->end_line = end_line;
+		t->n = start_line * (data->img_ptr->width * 4);
+
+		pthread_create(&threads[i], NULL, threadrender, t);
+		start_line = end_line + 1;
+	}
+
+	for (int i = 0; i < numThreads; i++) {
+		pthread_join(threads[i], NULL);
 	}
 }
 
 /* static void	write_image(t_data *data)
 {
-	size_t				i;
-	size_t				j;
+	size_t			i;
+	size_t			j;
 	t_color			pixel_color;
-	static size_t	n = 0;
+	static size_t	n;
 
+	n = 0;
 	j = -1;
 	while (++j < data->img_ptr->height)
 	{
