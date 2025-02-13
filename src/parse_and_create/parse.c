@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:19:48 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/19 09:24:18 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:54:00 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,10 @@ void	parse(t_data *data, char *filename)
 	{
 		if (*line != '\n' && parse_line(data, line))
 		{
-			free(line); //limpiar contenidos
+			free(line);
 			exit(1);
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
 }
-

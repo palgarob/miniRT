@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_plane.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:28:58 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/05 16:58:00 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:52:37 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	create_plane(t_data *data, char **info_array)
 {
-	t_pnt	location;
-	t_object			*obj;
-	double	trans_mat[4][4];
-	double	rotat_mat[4][4];
+	t_pnt		location;
+	t_object	*obj;
+	double		trans_mat[4][4];
+	double		rotat_mat[4][4];
 
 	obj = (t_object *)malloc(sizeof(t_object));
 	if (!obj)
@@ -31,7 +31,6 @@ int	create_plane(t_data *data, char **info_array)
 	obj->orientation = vec_normalize(obj->orientation);
 	rotation(rotat_mat, &obj->orientation);
 	matrix_multiply(trans_mat, rotat_mat, obj->mat);
-	//matrix4_print(obj->mat);
 	ft_lstadd_back((t_list **)&data->objects, ft_lstnew(obj));
 	return (0);
 }

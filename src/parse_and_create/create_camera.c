@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:31:26 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/01 11:48:43 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:51:38 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	setup_frame(t_data *data, double fov)
 	data->camera->ipix_width = frame_width / IMAGE_WIDTH;
 	data->camera->ipix_height = frame_height / image_height;
 	data->camera->offset_pixel = pnt(
-		-frame_width / 2 + data->camera->ipix_width / 2,
-		frame_height / 2 - data->camera->ipix_height / 2,
-		FOCAL_LENGTH);
+			-frame_width / 2 + data->camera->ipix_width / 2,
+			frame_height / 2 - data->camera->ipix_height / 2,
+			FOCAL_LENGTH);
 }
 
 int	create_camera(t_data *data, char **line_split)

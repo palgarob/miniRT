@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_sphere.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:08:04 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/15 03:14:01 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:52:52 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	create_sphere(t_data *data, char **line_split)
 	t_pnt		location;
 	double		diameter;
 	t_object	*obj;
-	double	trans_mat[4][4];
-	double	scale_mat[4][4];
-	t_vec	scale_values;
+	double		trans_mat[4][4];
+	double		scale_mat[4][4];
+	t_vec		scale_values;
 
 	obj = (t_object *)malloc(sizeof(t_object));
 	if (!obj)

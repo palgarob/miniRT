@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_intersect_object.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 13:38:37 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 18:07:58 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:07:05 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static t_vec	normal_at(t_object *o, t_pnt world_point)
 	matrix4_transpose(inv);
 	world_normal = tpl_multiply_matrix(inv, object_normal);
 	world_normal.w = 0;
-	return(vec_normalize(world_normal));
+	return (vec_normalize(world_normal));
 }
 
-static bool	intersection_is_ahead(t_ray *new_ray, t_object *o, double t[2], t_intsect *x)
+static bool	intersinfront(t_ray *new_r, t_object *o, double t[2], t_intsect *x)
 {
 	x->object = o;
 	if (o->type == PLANE)
@@ -46,8 +46,8 @@ static bool	intersection_is_ahead(t_ray *new_ray, t_object *o, double t[2], t_in
 		if (t[0] > 0)
 		{
 			x->t = t[0];
-			x->normal = normal_at(o, ray_position(new_ray, x->t));
-			if (vec_dot(x->normal, new_ray->direction) > 0)
+			x->normal = normal_at(o, ray_position(new_r, x->t));
+			if (vec_dot(x->normal, new_r->direction) > 0)
 				x->normal = tpl_negate(x->normal);
 			return (true);
 		}
@@ -59,13 +59,13 @@ static bool	intersection_is_ahead(t_ray *new_ray, t_object *o, double t[2], t_in
 		if (t[0] > 0)
 		{
 			x->t = t[0];
-			x->normal = normal_at(o, ray_position(new_ray, x->t));
+			x->normal = normal_at(o, ray_position(new_r, x->t));
 			return (true);
 		}
 		else if (t[1] > 0)
 		{
 			x->t = t[1];
-			x->normal = tpl_negate(normal_at(o, ray_position(new_ray, x->t)));
+			x->normal = tpl_negate(normal_at(o, ray_position(new_r, x->t)));
 			return (true);
 		}
 		else
@@ -85,7 +85,7 @@ bool	ray_intersect_object(t_ray *r, t_object *o, t_intsect *x)
 		|| (o->type == PLANE && pl_is_intersected(&new_ray, t))
 		|| (o->type == CYLINDER && cy_is_intersected(&new_ray, t)))
 	{
-		return (intersection_is_ahead(r, o, t, x));
+		return (intersinfront(r, o, t, x));
 	}
 	else
 		return (false);

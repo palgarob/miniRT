@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:51:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/11 11:18:46 by muribe-l         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:01:53 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	intsect_is_found(t_data *data, t_ray *r, t_intsect *aux)
 	min.t = INFINITY;
 	aux->t = -1;
 	object_list = data->objects;
-	while(object_list)
+	while (object_list)
 	{
 		if (ray_intersect_object(r, object_list->content, aux))
 		{
@@ -52,11 +52,11 @@ t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n, bo
 
 	effective_color = color_blend(material->c, l->color);
 	lightv = vec_normalize(vec_from_to(p, l->location));
-	ambient = color_blend(material->c,color_mul(material->a_color, material->a_ratio));
+	ambient = color_blend(material->c, color_mul(material->a_color, material->a_ratio));
 	light_dot_normal = fmax(0.0, vec_dot(lightv, n));
 	if (light_dot_normal < 0.0 || is_in_shadow)
 	{
-		diffuse = color(0,0,0);
+		diffuse = color(0, 0, 0);
 		specular = color(0, 0, 0);
 	}
 	else
@@ -77,17 +77,18 @@ t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n, bo
 
 bool	is_shaded(t_pnt p, t_data *data, t_intsect *i)
 {
-	t_vec	v;
-	double	distance;
-	t_vec	direction;
-	t_ray	r;
+	t_vec		v;
+	double		distance;
+	t_vec		direction;
+	t_ray		r;
 	t_intsect	aux;
 
 	v = vec_from_to(p, data->light->location);
 	distance = vec_len(v);
 	direction = vec_normalize(v);
 	r = ray(p, direction);
-	if (intsect_is_found(data, &r, &aux) && aux.object != i->object && aux.t < distance)
+	if (intsect_is_found(data, &r, &aux)
+		&& aux.object != i->object && aux.t < distance)
 	{
 		return (true);
 	}
@@ -98,11 +99,14 @@ t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)
 {
 	t_material	m;
 	t_pnt		p;
+	bool		shadow;
 
-	
-	m = material(intsect->object->color, data->light->brightness, data->ambient, 50.0, 0.9);
+	m = material(intsect->object->color, data->light->brightness,
+		data->ambient, 50.0, 0.9);
 	p = ray_position(r, intsect->t);
 	p = pnt_add(p, tpl_multiply(intsect->normal, EPSILON));
-	bool shadow = is_shaded(p, data, intsect);
-	return (lighting(&m, p, data->light, vec_normalize(vec_from_to(p, data->camera->location)), intsect->normal, shadow));
+	shadow = is_shaded(p, data, intsect);
+	return (lighting(&m, p, data->light,
+			vec_normalize(vec_from_to(p, data->camera->location)),
+			intsect->normal, shadow));
 }

@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/11 10:53:36 by muribe-l         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:12:19 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 # include "libft.h"
 
 /* PREPROCESSOR PARAMETERS                                                    */
-# define ASPECT_RATIO (16.0 / 9.0)
-# define IMAGE_WIDTH 720
+# define ASPECT_RATIO 1.777777778
+# define IMAGE_WIDTH 1920
 # define FOCAL_LENGTH 1.0
-# define BPP sizeof(int32_t)
+# define BPP 4
 
 /* ERROR MESSAGES                                                             */
 # define BAD_OPEN "Error\nError when opening file\n"
@@ -46,13 +46,13 @@ typedef struct s_ray
 	t_vec	direction;
 }	t_ray;
 
-typedef struct s_object t_object;
+typedef struct s_object	t_object;
 typedef struct s_intersection
 {
 	t_object	*object;
-	double	t;
-	t_vec	normal;
-} t_intsect;
+	double		t;
+	t_vec		normal;
+}	t_intsect;
 
 t_ray	ray(t_pnt origin, t_vec direction);
 t_pnt	ray_position(t_ray *ray, double t);
@@ -63,7 +63,7 @@ bool	cy_is_intersected(t_ray *r, double t[2]);
 void	transform_ray(t_ray *ray, double mat[4][4], t_ray *new_ray);
 
 /* CREATE ELEMENTS                                                            */
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 typedef enum e_obj_type
 {
 	SPHERE,
@@ -139,6 +139,5 @@ typedef struct s_data
 
 void	parse(t_data *data, char *filename);
 void	free_data(t_data *data);
-
 
 #endif
