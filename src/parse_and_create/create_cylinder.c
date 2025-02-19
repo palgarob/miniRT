@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_cylinder.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:28:12 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 16:19:09 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:30:41 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

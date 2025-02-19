@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/13 18:12:19 by muribe-l         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:58:58 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 /* PREPROCESSOR PARAMETERS                                                    */
 # define ASPECT_RATIO 1.777777778
-# define IMAGE_WIDTH 1920
+# define IMAGE_WIDTH 1020
 # define FOCAL_LENGTH 1.0
 # define BPP 4
 

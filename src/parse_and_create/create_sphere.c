@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:08:04 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/13 17:52:52 by muribe-l         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:38:15 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,3 @@ int	create_sphere(t_data *data, char **line_split)
 	ft_lstadd_back((t_list **)&data->objects, ft_lstnew(obj));
 	return (0);
 }
-
-

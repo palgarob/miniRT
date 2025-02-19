@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:32:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/13 18:03:23 by muribe-l         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:57:26 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static t_color	trace_ray(t_data *data, int i, int j)
 	return (color(0, 0, 0));
 }
 
-/* typedef struct {
+typedef struct {
 	t_data	*data;
 	int		thread_id;
 	int		start_line;
@@ -132,9 +132,9 @@ static void	write_image(t_data *data)
 	for (int i = 0; i < numThreads; i++) {
 		pthread_join(threads[i], NULL);
 	}
-} */
+}
 
-static void	write_image(t_data *data)
+/* static void	write_image(t_data *data)
 {
 	size_t			i;
 	size_t			j;
@@ -154,7 +154,7 @@ static void	write_image(t_data *data)
 		}
 		printfd(1, "\r%%%d", (int)j * 100 / (int)data->img_ptr->height);
 	}
-}
+} */
 
 void	render(t_data *data)
 {
