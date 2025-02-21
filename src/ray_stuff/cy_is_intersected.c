@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:55:10 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 16:29:36 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:16:53 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	cy_is_intersected(t_ray *r, double t[2])
 	double	d;
 
 	a = pow(r->direction.x, 2) + pow(r->direction.y, 2);
-	if (fpn_compare(a, 0) == EQUAL)
+	if (fabs(a) < EPSILON)
 		return (false);
 	b = 2 * r->origin.x * r->direction.x + 2 * r->origin.y * r->direction.y;
 	c = pow(r->origin.x, 2) + pow(r->origin.y, 2) - 1;

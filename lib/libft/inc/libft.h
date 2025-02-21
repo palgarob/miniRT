@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 20:22:25 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/19 23:36:49 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:07:52 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,6 @@ typedef enum e_comp_result
 	A_GREAT_B
 }	t_comp;
 
-t_comp			fpn_compare(double a, double b);
 double			deg2rad(double deg);
 char		*get_next_line(int fd);
 

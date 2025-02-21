@@ -6,10 +6,11 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 21:44:16 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/21 21:03:49 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:24:01 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "libft.h"
 
 void	rotation(double mat[4][4], t_vec *v)
@@ -17,8 +18,8 @@ void	rotation(double mat[4][4], t_vec *v)
 	t_vec	aux;
 	t_vec	up;
 
-	if ((fpn_compare(v->x, 0) == EQUAL && fpn_compare(v->y, 1) == EQUAL && fpn_compare(v->z, 0) == EQUAL)
-	|| (fpn_compare(v->x, 0) == EQUAL && fpn_compare(v->y, -1) == EQUAL && fpn_compare(v->z, 0) == EQUAL))
+	if ((fabs(v->x - 0) < EPSILON && fabs(v->y - 1) < EPSILON && fabs(v->z - 0) < EPSILON)
+	|| (fabs(v->x - 0) < EPSILON && fabs(v->y + 1) < EPSILON && fabs(v->z - 0) < EPSILON))
 	{
 		up = vec(0, 0, -1);
 		aux = vec_normalize(vec_cross(up, *v));

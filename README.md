@@ -86,9 +86,7 @@ The orientation of the elements (camera as well as the objects), has been one of
 
 ### ✅ To-do list
 
-- Controlar los grados de apertura límites
 - Arreglar que puedan faltar luz, cámara y ambient
-- Controlar líneas vacías en el archivo
 - Comparar bien los fpn con epsilon
 - Argumento de los vectores de dirección revisar requisitos
 - Arreglar las sombras dentro de los objetos
