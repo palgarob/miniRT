@@ -90,7 +90,8 @@ The orientation of the elements (camera as well as the objects), has been one of
 - [x] Comparar bien los fpn con epsilon
 - [x] Argumento de los vectores de dirección revisar requisitos
 - [x] Arreglar las sombras dentro de los objetos
-- [x] Revisar el parseo, criterios de los parámetros
+- [x] Revisar el parseo, criterios de los parámetros.
+- [ ] Parece que la cámara al final no se orienta bien
 - [ ] For the time being, only `ambient` can be set from the executable arguments.
 
 ## 🤝 Acknowledgements
