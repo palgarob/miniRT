@@ -6,7 +6,7 @@
 #    By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 20:02:41 by pepaloma          #+#    #+#              #
-#    Updated: 2025/02/21 03:23:52 by pepaloma         ###   ########.fr        #
+#    Updated: 2025/02/21 04:04:25 by pepaloma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,16 +14,17 @@
 NAME	:= miniRT
 
 # Directories
-FT_DIR	:= libft
-MLX_DIR	:= MLX42
-SRC_DIR	:= source
-INC_DIR	:= include
-OBJ_DIR	:= build
-BIN_DIR	:= output
+LIB_DIR	:= lib
+FT_DIR	:= $(LIB_DIR)/libft
+MLX_DIR	:= $(LIB_DIR)/MLX42
+SRC_DIR	:= src
+INC_DIR	:= inc
+OBJ_DIR	:= obj
+BIN_DIR	:= bin
 
 # Compilation flas
 CFLAGS	:= -Wextra -Wall -Werror -g
-HEADERS	:= -I$(INC_DIR) -I$(MLX_DIR)/include/MLX42 -I$(FT_DIR)/include
+HEADERS	:= -I$(INC_DIR) -I$(MLX_DIR)/include/MLX42 -I$(FT_DIR)/$(INC_DIR)
 LDFLAGS	:= -L$(MLX_DIR)/build -L/opt/homebrew/opt/glfw/lib -L$(FT_DIR)/$(BIN_DIR)
 LDLIBS	:= -lmlx42 -lft -ldl -lglfw -pthread -lm
 
@@ -31,7 +32,7 @@ LDLIBS	:= -lmlx42 -lft -ldl -lglfw -pthread -lm
 SRC_FILES := $(shell find $(SRC_DIR) -type f -name '*.c')
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 MLX_LIB := $(MLX_DIR)/build/libmlx42.a
-FT_LIB := $(FT_DIR)/output/libft.a
+FT_LIB := $(FT_DIR)/$(BIN_DIR)/libft.a
 
 # Rules
 all: $(BIN_DIR)/$(NAME)
@@ -63,7 +64,7 @@ clean:
 	rm -rf $(MLX_DIR)/build
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(BIN_DIR)
 
 re: fclean all
 
