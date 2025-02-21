@@ -73,6 +73,8 @@ Once you manage to get the executable, you can choose one scene from the `scenes
 
 This project has been a real journey—I even had to restart it and rethink my approach halfway through. On the other hand, I ended up enjoying proving myself that I was capable of such a complex (for me at this moment) project.
 
+The orientation of the elements (camera as well as the objects), has been one of the biggest challenges. Depending on the way you implement the program, the orientation is computed in some way or another and it may affect the final result if the rest of the code is not coherent with this part. In fact, the problem with the cylinders' rotation was the reason the project had to be remade.
+
 ## 🏆 Acquired skills
 
 - Apart from the obvious **C**, I improved even more my skills in **make** and **git**.
@@ -84,13 +86,13 @@ This project has been a real journey—I even had to restart it and rethink my a
 
 ### ✅ To-do list
 
-- Poner todos los pixels a cero con ft_bzero antes de pasar la imagen
 - Controlar los grados de apertura límites
 - Arreglar que puedan faltar luz, cámara y ambient
 - Controlar líneas vacías en el archivo
 - Comparar bien los fpn con epsilon
 - Argumento de los vectores de dirección revisar requisitos
 - Arreglar las sombras dentro de los objetos
+- Revisar el parseo, criterios de los parámetros
 - For the time being, only `ambient` can be set from the executable arguments.
 
 ## 🤝 Acknowledgements

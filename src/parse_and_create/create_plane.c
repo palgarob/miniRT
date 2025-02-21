@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:28:58 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/05 16:58:00 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:02:27 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	create_plane(t_data *data, char **info_array)
 	t_object			*obj;
 	double	trans_mat[4][4];
 	double	rotat_mat[4][4];
+	double	aux[4][4];
 
 	obj = (t_object *)malloc(sizeof(t_object));
 	if (!obj)
@@ -29,7 +30,8 @@ int	create_plane(t_data *data, char **info_array)
 		return (free(obj), 1);
 	translation(trans_mat, &location);
 	obj->orientation = vec_normalize(obj->orientation);
-	rotation(rotat_mat, &obj->orientation);
+	rotation(aux, &obj->orientation);
+	matrix_inverse(aux, rotat_mat);
 	matrix_multiply(trans_mat, rotat_mat, obj->mat);
 	//matrix4_print(obj->mat);
 	ft_lstadd_back((t_list **)&data->objects, ft_lstnew(obj));

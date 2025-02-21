@@ -6,7 +6,7 @@
 #    By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/23 20:02:41 by pepaloma          #+#    #+#              #
-#    Updated: 2025/02/21 04:04:25 by pepaloma         ###   ########.fr        #
+#    Updated: 2025/02/21 19:00:23 by pepaloma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,18 +37,18 @@ FT_LIB := $(FT_DIR)/$(BIN_DIR)/libft.a
 # Rules
 all: $(BIN_DIR)/$(NAME)
 
-$(BIN_DIR)/$(NAME): $(OBJ_FILES) | $(FT_LIB) $(MLX_LIB) $(BIN_DIR)
+$(BIN_DIR)/$(NAME): $(OBJ_FILES) $(FT_LIB) $(MLX_LIB) | $(BIN_DIR)
 	$(CC) $(OBJ_FILES) $(LDFLAGS) $(LDLIBS) $(HEADERS) -o $(BIN_DIR)/$(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@mkdir -p $(dir $@)
+	mkdir -p $(dir $@)
 	$(CC) $(HEADERS) $(CFLAGS) -c $< -o $@
 
 $(BIN_DIR) :
 	mkdir -p $(BIN_DIR)
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)
 
 $(FT_LIB):
 	$(MAKE) -C $(FT_DIR)
