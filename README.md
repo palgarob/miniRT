@@ -91,7 +91,7 @@ The orientation of the elements (camera as well as the objects), has been one of
 - [x] Argumento de los vectores de dirección revisar requisitos
 - [x] Arreglar las sombras dentro de los objetos
 - [x] Revisar el parseo, criterios de los parámetros.
-- [ ] Parece que la cámara al final no se orienta bien
+- [x] Parece que la cámara al final no se orienta bien
 - [ ] For the time being, only `ambient` can be set from the executable arguments.
 - [ ] There could be a submodule for the libft. I can do this as soon as I finish [Libft-prime](https://github.com/palgarob/Libft-prime).
 - [ ] The part where the objects are created and the parsing is done are intertwined. It would be good praxis if it was divided.
