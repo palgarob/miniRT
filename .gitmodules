@@ -1,6 +1,4 @@
 [submodule "MLX42"]
 	path = MLX42
 	url = https://github.com/42-Fundacion-Telefonica/MLX42.git
-[submodule "libftl"]
-	path = libftl
-	url = git@github.com:palgarob/Libft-prime.git
+
