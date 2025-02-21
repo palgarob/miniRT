@@ -6,17 +6,13 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 13:58:46 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/21 01:00:25 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include <stdbool.h> // bool
-# include <math.h> // sqrt pow
-# include <stdlib.h> // free malloc exit
-# include <unistd.h> // STDERR_FILENO close read write
 # include <stdio.h> // printf perror
 # include <fcntl.h> // open
 # include <string.h> // strerror
@@ -36,6 +32,21 @@
 # define BAD_MLX_INIT "Error\nThe mlx_init returned NULL\n"
 # define BAD_ELEM_FORMAT "Error\nAn element of the scene doesn't have the \
 right format\n"
+
+/* COLOR                                                                      */
+typedef struct s_color
+{
+	double	r;
+	double	g;
+	double	b;
+}	t_color;
+
+t_color	color(double r, double g, double b);
+t_color	color_blend(t_color a, t_color b);
+t_color	color_mul(t_color c, double fpnd);
+t_color	color_add(t_color a, t_color b);
+t_color	color_sub(t_color a, t_color b);
+bool	is_rgb(t_color *dst, char *src);
 
 /* RAY                                                                        */
 typedef struct s_ray
