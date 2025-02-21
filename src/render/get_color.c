@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:51:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/21 23:32:52 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/21 23:35:38 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n, bo
 
 	effective_color = color_blend(material->c, color_mul(l->color, l->brightness));
 	lightv = vec_normalize(vec_from_to(p, l->location));
-	ambient = color_mul(material->a_color, material->a_ratio);
+	ambient = color_blend(effective_color, color_mul(material->a_color, material->a_ratio));
 	light_dot_normal = fmax(0.0, vec_dot(lightv, n));
 	if (light_dot_normal < 0.0 || is_in_shadow)
 	{
