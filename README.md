@@ -5,7 +5,7 @@
 
 # 🎨📒 miniRT
 
-![Cute balls](resources/cute.png)
+![Cute balls](https://github.com/palgarob/miniRT/blob/main/static/media/cute.png)
 ### Table of Contents
 
 - [🛫 Intro ](#-intro)
@@ -25,7 +25,7 @@
 of a scene to render a 3D-looking image. Using several principles of linear algebra and trigonometry,
 this method recreates the lighting of that scene, making it look like a realistic(ish) object.
 
-![Simple Sphere](resources/simple_sphere.png)
+![Simple Sphere](https://github.com/palgarob/miniRT/blob/main/static/media/simple_sphere.png)
 
 It gets its name from the concept of a ray, a tuple of a point in space and a vector, which represents the
 origin of a light ray and its orientation. Creating the algorithms that compute the way that a light ray bounces
@@ -43,7 +43,7 @@ in accordance with the 42 evaluation criteria.
 - This program has been tested on Linux and macOS.
 
 ## 🛠️ Tools used
-![Tools used](resources/tools.png)
+![Tools used](https://github.com/palgarob/miniRT/blob/main/static/media/tools.png)
 The [MiniLibX](https://github.com/42-Fundacion-Telefonica/MLX42.git) is a tiny graphics library that allows you to do the most basic things for rendering something on screens without any knowledge of X-Window and Cocoa.
 
 The headers used for the rest of the functions are:
