@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:08:04 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/15 03:14:01 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/21 22:16:19 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	create_sphere(t_data *data, char **line_split)
 		return (free(obj), 1);
 	if (!is_rgb(&obj->color, line_split[3]))
 		return (free(obj), 1);
+	location.w = 1;
 	translation(trans_mat, &location);
 	scale_values = vec(diameter / 2, diameter / 2, diameter / 2);
 	scaling(scale_mat, &scale_values);

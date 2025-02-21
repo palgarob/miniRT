@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 08:19:48 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/19 09:24:18 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/21 22:42:46 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ void	parse(t_data *data, char *filename)
 		}
 		free(line);
 		line = get_next_line(fd);
+	}
+	if (data->camera == NULL || data->light == NULL || data->ambient == NULL
+		|| data->objects == NULL)
+	{
+		free_data(data);
+		exit(1);
 	}
 }
 

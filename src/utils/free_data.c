@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_ambient.c                                   :+:      :+:    :+:   */
+/*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 02:29:56 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/21 22:33:22 by pepaloma         ###   ########.fr       */
+/*   Created: 2025/02/21 22:36:53 by pepaloma          #+#    #+#             */
+/*   Updated: 2025/02/21 22:48:18 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	create_ambient(t_data *data, char **line_split)
+void	free_data(t_data *data)
 {
-	data->ambient = (t_ambient *)malloc(sizeof(t_ambient));
-	if (
-		a2double(&data->ambient->ratio, line_split[1])
-		|| !is_rgb(&data->ambient->color, line_split[2])
-		|| data->ambient->ratio < 0 || data->ambient->ratio > 1
-	)
-		return (free(data->ambient), 1);
-	return (0);
+	if (data->ambient)
+		free(data->ambient);
+	if (data->camera)
+		free(data->camera);
+	if (data->light)
+		free(data->light);
+	if (data->objects)
+	{
+		ft_lstclear(&data->objects, free);
+	}
+		free(data->objects);
 }

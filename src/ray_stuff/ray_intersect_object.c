@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 13:38:37 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 18:07:58 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/21 22:58:03 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static bool	intersection_is_ahead(t_ray *new_ray, t_object *o, double t[2], t_in
 			x->normal = normal_at(o, ray_position(new_ray, x->t));
 			if (vec_dot(x->normal, new_ray->direction) > 0)
 				x->normal = tpl_negate(x->normal);
+			x->interior_hit = false;
 			return (true);
 		}
 		else
@@ -60,12 +61,14 @@ static bool	intersection_is_ahead(t_ray *new_ray, t_object *o, double t[2], t_in
 		{
 			x->t = t[0];
 			x->normal = normal_at(o, ray_position(new_ray, x->t));
+			x->interior_hit = false;
 			return (true);
 		}
 		else if (t[1] > 0)
 		{
 			x->t = t[1];
 			x->normal = tpl_negate(normal_at(o, ray_position(new_ray, x->t)));
+			x->interior_hit = true;
 			return (true);
 		}
 		else

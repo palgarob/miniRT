@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:28:12 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/21 20:54:42 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/21 23:17:31 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,18 @@ int	create_cylinder(t_data *data, char **line_split)
 	if (!obj)
 		return (1);
 	obj->type = CYLINDER;
-	if (!is_coord(&location, line_split[1]))
+	if (!is_coord(&location, line_split[1])
+		|| !is_coord(&obj->orientation, line_split[2])
+		|| a2double(&diameter, line_split[3])
+		|| a2double(&height, line_split[4])
+		|| !is_rgb(&obj->color, line_split[5])
+		|| obj->orientation.x < -1 || obj->orientation.x > 1
+		|| obj->orientation.y < -1 || obj->orientation.y > 1
+		|| obj->orientation.z < -1 || obj->orientation.z > 1)
+	{
+		free(obj);
 		return (1);
-	if (!is_coord(&obj->orientation, line_split[2]))
-		return (free(obj), 1);
-	if (a2double(&diameter, line_split[3]))
-		return (free(obj), 1);
-	if (a2double(&height, line_split[4]))
-		return (free(obj), 1);
-	if (!is_rgb(&obj->color, line_split[5]))
-		return (free(obj), 1);
+	}
 	location.w = 1;
 	translation(trans_mat, &location);
 	obj->orientation.w = 0;

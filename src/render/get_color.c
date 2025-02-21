@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:51:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 22:18:54 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/21 23:32:52 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,11 @@ bool	is_shaded(t_pnt p, t_data *data, t_intsect *i)
 	distance = vec_len(v);
 	direction = vec_normalize(v);
 	r = ray(p, direction);
-	if (intsect_is_found(data, &r, &aux) && aux.object != i->object && aux.t < distance)
+	if (!intsect_is_found(data, &r, &aux) || (aux.object == i->object && !aux.interior_hit) || aux.t > distance)
 	{
-		return (true);
+		return (false);
 	}
-	return (false);
+	return (true);
 }
 
 t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)

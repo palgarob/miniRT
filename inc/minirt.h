@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/21 01:00:25 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/21 22:56:28 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_intersection
 	t_object	*object;
 	double	t;
 	t_vec	normal;
+	bool	interior_hit;
 } t_intsect;
 
 t_ray	ray(t_pnt origin, t_vec direction);
