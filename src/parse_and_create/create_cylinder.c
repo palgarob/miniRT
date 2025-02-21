@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:28:12 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/07 16:19:09 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:54:42 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int	create_cylinder(t_data *data, char **line_split)
 		return (free(obj), 1);
 	if (!is_rgb(&obj->color, line_split[5]))
 		return (free(obj), 1);
+	location.w = 1;
 	translation(trans_mat, &location);
+	obj->orientation.w = 0;
 	obj->orientation = vec_normalize(obj->orientation);
 	rotation(aux, &obj->orientation);
 	matrix_inverse(aux, rotat_mat);
