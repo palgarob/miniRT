@@ -86,12 +86,12 @@ The orientation of the elements (camera as well as the objects), has been one of
 
 ### ✅ To-do list
 
-- Arreglar que puedan faltar luz, cámara y ambient
-- Comparar bien los fpn con epsilon
-- Argumento de los vectores de dirección revisar requisitos
-- Arreglar las sombras dentro de los objetos
-- Revisar el parseo, criterios de los parámetros
-- For the time being, only `ambient` can be set from the executable arguments.
+- [ ] Arreglar que puedan faltar luz, cámara y ambient
+- [x] Comparar bien los fpn con epsilon
+- [ ] Argumento de los vectores de dirección revisar requisitos
+- [ ] Arreglar las sombras dentro de los objetos
+- [ ] Revisar el parseo, criterios de los parámetros
+- [ ] For the time being, only `ambient` can be set from the executable arguments.
 
 ## 🤝 Acknowledgements
 
