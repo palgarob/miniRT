@@ -18,7 +18,6 @@
 - [🔧 Future improvement and/or next steps](#-future-improvement-andor-next-steps)
 - [🤝 Acknowledgements](#-acknowledgements)
 - [📚 References](#-references)
-- [✅ To-do list](#-to-do-list)
 
 ## 🛫 Intro
 
