@@ -71,9 +71,9 @@ Once you manage to get the executable, you can choose one scene from the `scenes
 
 ## 📖 Training report
 
-This project has been a real journey—I even had to restart it and rethink my approach halfway through. On the other hand, I ended up enjoying proving myself that I was capable of such a complex (for me at this moment) project.
+This project has been a real journey—I even had to restart it and rethink my approach halfway through. On the other hand, I ended up enjoying proving to myself that I was capable of such a complex (for me at this moment) project.
 
-The orientation of the elements (camera as well as the objects), has been one of the biggest challenges. Depending on the way you implement the program, the orientation is computed in some way or another and it may affect the final result if the rest of the code is not coherent with this part. In fact, the problem with the cylinders' rotation was the reason the project had to be remade.
+The orientation of the elements (camera as well as the objects), has been one of the biggest challenges. Depending on the way the program is implemented, the orientation is computed in some way or another and it may affect the final result if the rest of the code is not coherent with this part. In fact, the problem with the cylinders' rotation was the reason the project had to be remade.
 
 ## 🏆 Acquired skills
 
