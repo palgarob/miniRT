@@ -12,18 +12,32 @@
 
 #include "minirt.h"
 
-int	create_cylinder(t_data *data, char **line_split)
+static void	apply_attributes(t_data *data, t_pnt loc, t_vec	val, t_object *obj)
 {
-	t_pnt		location;
-	t_object	*obj;
 	double		trans_mat[4][4];
 	double		rotat_mat[4][4];
 	double		scale_mat[4][4];
 	double		aux[4][4];
+
+	loc.w = 1;
+	translation(trans_mat, &loc);
+	obj->orientation.w = 0;
+	obj->orientation = vec_normalize(obj->orientation);
+	rotation(aux, &obj->orientation);
+	matrix_inverse(aux, rotat_mat);
+	scaling(scale_mat, &val);
+	matrix_multiply(trans_mat, rotat_mat, aux);
+	matrix_multiply(aux, scale_mat, obj->mat);
+	ft_lstadd_back((t_list **)&data->objects, ft_lstnew(obj));
+}
+
+int	create_cylinder(t_data *data, char **line_split)
+{
+	t_pnt		location;
+	t_object	*obj;
 	t_vec		values;
 	double		diameter;
 	double		height;
-
 
 	obj = (t_object *)malloc(sizeof(t_object));
 	if (!obj)
@@ -41,16 +55,7 @@ int	create_cylinder(t_data *data, char **line_split)
 		free(obj);
 		return (1);
 	}
-	location.w = 1;
-	translation(trans_mat, &location);
-	obj->orientation.w = 0;
-	obj->orientation = vec_normalize(obj->orientation);
-	rotation(aux, &obj->orientation);
-	matrix_inverse(aux, rotat_mat);
 	values = vec(diameter / 2.0, diameter / 2.0, height);
-	scaling(scale_mat, &values);
-	matrix_multiply(trans_mat, rotat_mat, aux);
-	matrix_multiply(aux, scale_mat, obj->mat);
-	ft_lstadd_back((t_list **)&data->objects, ft_lstnew(obj));
+	apply_attributes(data, location, values, obj);
 	return (0);
 }

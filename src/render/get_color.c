@@ -21,7 +21,7 @@ static bool	intsect_is_found(t_data *data, t_ray *r, t_intsect *aux)
 	min.t = INFINITY;
 	aux->t = -1;
 	object_list = data->objects;
-	while(object_list)
+	while (object_list)
 	{
 		if (ray_intersect_object(r, object_list->content, aux))
 		{
@@ -77,20 +77,20 @@ t_color	lighting(t_material *material, t_pnt p, t_light *l, t_vec e, t_vec n, bo
 
 bool	is_shaded(t_pnt p, t_data *data, t_intsect *i)
 {
-	t_vec	v;
-	double	distance;
-	t_vec	direction;
-	t_ray	r;
+	t_vec		v;
+	double		distance;
+	t_vec		direction;
+	t_ray		r;
 	t_intsect	aux;
 
 	v = vec_from_to(p, data->light->location);
 	distance = vec_len(v);
 	direction = vec_normalize(v);
 	r = ray(p, direction);
-	if (!intsect_is_found(data, &r, &aux) || (aux.object == i->object && !aux.interior_hit) || aux.t > distance)
-	{
+	if (!intsect_is_found(data, &r, &aux)
+		|| (aux.object == i->object && !aux.interior_hit)
+		|| aux.t > distance)
 		return (false);
-	}
 	return (true);
 }
 
@@ -98,11 +98,18 @@ t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)
 {
 	t_material	m;
 	t_pnt		p;
+	bool		shadow;
 
-	
-	m = material(intsect->object->color, 0.9, data->ambient, 50.0, 0.9);
+	m.c = intsect->object->color;
+	m.a_color = data->ambient->color;
+	m.a_ratio = data->ambient->ratio;
+	m.specular = 0.9;
+	m.diffuse = 0.9;
+	m.shininess = 50.0;
 	p = ray_position(r, intsect->t);
 	p = pnt_add(p, tpl_multiply(intsect->normal, EPSILON));
-	bool shadow = is_shaded(p, data, intsect);
-	return (lighting(&m, p, data->light, vec_normalize(vec_from_to(p, data->camera->location)), intsect->normal, shadow));
+	shadow = is_shaded(p, data, intsect);
+	return (lighting(&m, p, data->light,
+			vec_normalize(vec_from_to(p, data->camera->location)),
+			intsect->normal, shadow));
 }

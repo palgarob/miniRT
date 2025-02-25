@@ -12,6 +12,19 @@
 
 #include "minirt.h"
 
+static bool	is_inside(t_ray *r, double t[2])
+{
+	if (ray_position(r, t[0]).z < 1 && ray_position(r, t[0]).z > 0)
+		return (true);
+	if (ray_position(r, t[1]).z < 1 && ray_position(r, t[1]).z > 0)
+	{
+		t[0] = -1;
+		return (true);
+	}
+	else
+		return (false);
+}
+
 bool	cy_is_intersected(t_ray *r, double t[2])
 {
 	double	a;
@@ -35,13 +48,5 @@ bool	cy_is_intersected(t_ray *r, double t[2])
 		t[1] = t[0];
 		t[0] = a;
 	}
-	if (ray_position(r, t[0]).z < 1 && ray_position(r, t[0]).z > 0)
-		return (true);
-	if (ray_position(r, t[1]).z < 1 && ray_position(r, t[1]).z > 0)
-	{
-		t[0] = -1;
-		return (true);
-	}
-	else
-		return (false);
+	return (is_inside(r, t));
 }

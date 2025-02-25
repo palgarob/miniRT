@@ -35,7 +35,7 @@ static void	check_parameters(int argc, char **argv)
 
 static void	setup_mlx(t_data *data)
 {
-	double image_height;
+	double	image_height;
 
 	image_height = IMAGE_WIDTH / ASPECT_RATIO;
 	data->mlx_ptr = mlx_init(IMAGE_WIDTH, image_height, "miniRT", false);
@@ -50,7 +50,7 @@ static void	setup_mlx(t_data *data)
 	mlx_loop_hook(data->mlx_ptr, ft_hook, data->mlx_ptr);
 }
 
-int	main(int __attribute__((__unused__)) argc, char __attribute__((__unused__)) **argv)
+int	main(int argc, char **argv)
 {
 	t_data		data;
 

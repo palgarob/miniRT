@@ -14,8 +14,6 @@
 
 bool	pl_is_intersected(t_ray *r, double t[2])
 {
-	//print_tpl(r->origin);
-	//printf("%f ", r->direction.z);
 	if (fabs(r->direction.z) < EPSILON)
 		return (false);
 	t[0] = -r->origin.z / r->direction.z;

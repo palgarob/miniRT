@@ -56,7 +56,7 @@ void	parse(t_data *data, char *filename)
 	{
 		if (*line != '\n' && parse_line(data, line))
 		{
-			free(line); //limpiar contenidos
+			free(line);
 			exit(1);
 		}
 		free(line);
@@ -64,9 +64,5 @@ void	parse(t_data *data, char *filename)
 	}
 	if (data->camera == NULL || data->light == NULL || data->ambient == NULL
 		|| data->objects == NULL)
-	{
 		free_data(data);
-		exit(1);
-	}
 }
-

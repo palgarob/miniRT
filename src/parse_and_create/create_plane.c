@@ -14,11 +14,11 @@
 
 int	create_plane(t_data *data, char **info_array)
 {
-	t_pnt	location;
-	t_object			*obj;
-	double	trans_mat[4][4];
-	double	rotat_mat[4][4];
-	double	aux[4][4];
+	t_pnt		location;
+	t_object	*obj;
+	double		trans_mat[4][4];
+	double		rotat_mat[4][4];
+	double		aux[4][4];
 
 	obj = (t_object *)malloc(sizeof(t_object));
 	if (!obj)

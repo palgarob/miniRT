@@ -24,5 +24,6 @@ void	free_data(t_data *data)
 	{
 		ft_lstclear(&data->objects, free);
 	}
-		free(data->objects);
+	free(data->objects);
+	exit(1);
 }

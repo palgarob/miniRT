@@ -28,9 +28,9 @@ static void	setup_frame(t_data *data, double fov)
 	data->camera->ipix_width = frame_width / IMAGE_WIDTH;
 	data->camera->ipix_height = frame_height / image_height;
 	data->camera->offset_pixel = pnt(
-		-frame_width / 2 + data->camera->ipix_width / 2,
-		frame_height / 2 - data->camera->ipix_height / 2,
-		FOCAL_LENGTH);
+			-frame_width / 2 + data->camera->ipix_width / 2,
+			frame_height / 2 - data->camera->ipix_height / 2,
+			FOCAL_LENGTH);
 }
 
 int	create_camera(t_data *data, char **line_split)

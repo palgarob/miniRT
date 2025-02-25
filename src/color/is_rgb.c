@@ -12,12 +12,15 @@
 
 #include "minirt.h"
 
-int good_format(char **split)
+int	good_format(char **split)
 {
-	int i;
-	int n;
+	int	i;
+	int	n;
 
-	if (splitlen(split) != 3 || !is_double(split[0]) || !is_double(split[1]) || !is_double(split[2]))
+	if (splitlen(split) != 3
+		|| !is_double(split[0])
+		|| !is_double(split[1])
+		|| !is_double(split[2]))
 		return (0);
 	i = -1;
 	while (++i < 3)

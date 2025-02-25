@@ -128,7 +128,6 @@ int		create_plane(t_data *data, char **line_split);
 int		create_light(t_data *data, char **line_split);
 int		create_ambient(t_data *data, char **line_split);
 int		create_camera(t_data *data, char **line_split);
-t_material	material(t_color c, double diffuse, t_ambient *ambient, double shininess, double specular);
 
 /* RENDER                                                                     */
 void	render(t_data *data);
