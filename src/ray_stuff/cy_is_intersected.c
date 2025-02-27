@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 17:55:10 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/21 21:16:53 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/27 10:46:18 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static bool	is_inside(t_ray *r, double t[2])
 {
-	if (ray_position(r, t[0]).z < 1 && ray_position(r, t[0]).z > 0)
+	if (t[0] > 0 && ray_position(r, t[0]).z < 1 && ray_position(r, t[0]).z > 0)
 		return (true);
-	if (ray_position(r, t[1]).z < 1 && ray_position(r, t[1]).z > 0)
+	if (t[1] > 0 && ray_position(r, t[1]).z < 1 && ray_position(r, t[1]).z > 0)
 	{
 		t[0] = -1;
 		return (true);
