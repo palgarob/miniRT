@@ -13,39 +13,50 @@
 #include <math.h>
 #include "libft.h"
 
-void	rotation(double mat[4][4], t_vec *v)
+static void	if_true(double mat[4][4], t_vec *v)
 {
 	t_vec	aux;
 	t_vec	up;
 
-	if ((fabs(v->x - 0) < EPSILON && fabs(v->y - 1) < EPSILON && fabs(v->z - 0) < EPSILON)
-	|| (fabs(v->x - 0) < EPSILON && fabs(v->y + 1) < EPSILON && fabs(v->z - 0) < EPSILON))
-	{
-		up = vec(0, 0, -1);
-		aux = vec_normalize(vec_cross(up, *v));
-		mat[0][0] = aux.x;
-		mat[0][1] = aux.y;
-		mat[0][2] = aux.z;
-		mat[0][3] = 0;
-		mat[1][0] = 0;
-		mat[1][1] = 0;
-		mat[1][2] = -1;
-		mat[1][3] = 0;
-	}
+	up = vec(0, 0, -1);
+	aux = vec_normalize(vec_cross(up, *v));
+	mat[0][0] = aux.x;
+	mat[0][1] = aux.y;
+	mat[0][2] = aux.z;
+	mat[0][3] = 0;
+	mat[1][0] = 0;
+	mat[1][1] = 0;
+	mat[1][2] = -1;
+	mat[1][3] = 0;
+}
+
+static void	if_false(double mat[4][4], t_vec *v)
+{
+	t_vec	aux;
+	t_vec	up;
+
+	up = vec(0, 1, 0);
+	aux = vec_normalize(vec_cross(up, *v));
+	mat[0][0] = aux.x;
+	mat[0][1] = aux.y;
+	mat[0][2] = aux.z;
+	mat[0][3] = 0;
+	aux = vec_normalize(vec_cross(*v, aux));
+	mat[1][0] = aux.x;
+	mat[1][1] = aux.y;
+	mat[1][2] = aux.z;
+	mat[1][3] = 0;
+}
+
+void	rotation(double mat[4][4], t_vec *v)
+{
+	if ((fabs(v->x - 0) < EPSILON && fabs(v->y - 1)
+			< EPSILON && fabs(v->z - 0) < EPSILON)
+		|| (fabs(v->x - 0) < EPSILON && fabs(v->y + 1)
+			< EPSILON && fabs(v->z - 0) < EPSILON))
+		if_true(mat, v);
 	else
-	{
-		up = vec(0, 1, 0);
-		aux = vec_normalize(vec_cross(up, *v));
-		mat[0][0] = aux.x;
-		mat[0][1] = aux.y;
-		mat[0][2] = aux.z;
-		mat[0][3] = 0;
-		aux = vec_normalize(vec_cross(*v, aux));
-		mat[1][0] = aux.x;
-		mat[1][1] = aux.y;
-		mat[1][2] = aux.z;
-		mat[1][3] = 0;
-	}
+		if_false(mat, v);
 	mat[2][0] = v->x;
 	mat[2][1] = v->y;
 	mat[2][2] = v->z;

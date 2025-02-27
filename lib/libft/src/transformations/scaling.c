@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void		scaling(double mat[4][4], t_vec *values)
+void	scaling(double mat[4][4], t_vec *values)
 {
 	mat[0][0] = values->x;
 	mat[0][1] = 0;
