@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 20:22:25 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/21 21:07:52 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 08:15:21 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,18 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-t_list		*ft_lstnew(void *content);
-void		ft_lstadd_front(t_list **lst, t_list *new);
-int			ft_lstsize(t_list *lst);
-t_list		*ft_lstlast(t_list *lst);
-void		ft_lstadd_back(t_list **lst, t_list *new);
-void		ft_lstdelone(t_list *lst, void (*del)(void *));
-void		ft_lstclear(t_list **lst, void (*del)(void *));
-void		ft_lstiter(t_list *lst, void (*f)(void *));
-t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-t_list		*ft_lst2ndlast(t_list *lst);
-t_list		*ft_lstcpy(t_list *lst, void (*del)(void *));
+t_list			*ft_lstnew(void *content);
+void			ft_lstadd_front(t_list **lst, t_list *new);
+int				ft_lstsize(t_list *lst);
+t_list			*ft_lstlast(t_list *lst);
+void			ft_lstadd_back(t_list **lst, t_list *new);
+void			ft_lstdelone(t_list *lst, void (*del)(void *));
+void			ft_lstclear(t_list **lst, void (*del)(void *));
+void			ft_lstiter(t_list *lst, void (*f)(void *));
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
+					void (*del)(void *));
+t_list			*ft_lst2ndlast(t_list *lst);
+t_list			*ft_lstcpy(t_list *lst, void (*del)(void *));
 
 /* TUPLES                                                                     */
 struct s_tpl
@@ -69,8 +70,8 @@ bool			tpl_equal(struct s_tpl a, struct s_tpl b);
 struct s_tpl	tpl_negate(struct s_tpl tpl);
 struct s_tpl	tpl_add(struct s_tpl a, struct s_tpl b);
 struct s_tpl	tpl_sub(struct s_tpl a, struct s_tpl b);
-struct s_tpl	tpl_multiply(struct s_tpl, double scalar);
-struct s_tpl	tpl_divide(struct s_tpl, double scalar);
+struct s_tpl	tpl_multiply(struct s_tpl tuple, double scalar);
+struct s_tpl	tpl_divide(struct s_tpl tuple, double scalar);
 struct s_tpl	tpl(double x, double y, double z, double w);
 struct s_tpl	tpl_multiply_matrix(double mat[4][4], struct s_tpl tpl);
 void			print_tpl(struct s_tpl t);
@@ -97,11 +98,13 @@ int				ft_memcmp(const void *s1, const void *s2, size_t n);
 
 /* STRING                                                                     */
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-char			*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char			*ft_strnstr(const char *haystack, const char *needle,
+					size_t len);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strtrim(char *s1, char const *set);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-int				ft_strins(char **str_ptr, int snip_l, int snip_r, char *str_insert);
+int				ft_strins(char **str_ptr, int snip_l, int snip_r,
+					char *str_insert);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strdup(const char *s1);
 void			ft_striteri(char *s, void (*f)(unsigned int, char*));
@@ -141,46 +144,49 @@ int				splitadd(char *new_string, char ***split_ptr);
 char			**splitdup(char **src);
 
 /* POINTS AND VECTORS                                                         */
-typedef struct	s_tpl t_pnt, t_vec;
-t_pnt	pnt(double x, double y, double z);
-t_pnt	pnt_add(t_pnt point, t_vec vector);
-t_pnt	pnt_sub(t_pnt point, t_vec vector);
-t_vec	vec(double x, double y, double z);
-t_vec	vec_add(t_vec a, t_vec b);
-t_vec	vec_sub(t_vec a, t_vec b);
-t_vec	vec_from_to(t_pnt from, t_pnt to);
-double	vec_len(t_vec vector);
-t_vec	vec_normalize(t_vec vector);
-double	vec_dot(t_vec a, t_vec b);
-t_vec	vec_cross(t_vec a, t_vec b);
+typedef struct s_tpl t_pnt,	t_vec;
+t_pnt			pnt(double x, double y, double z);
+t_pnt			pnt_add(t_pnt point, t_vec vector);
+t_pnt			pnt_sub(t_pnt point, t_vec vector);
+t_vec			vec(double x, double y, double z);
+t_vec			vec_add(t_vec a, t_vec b);
+t_vec			vec_sub(t_vec a, t_vec b);
+t_vec			vec_from_to(t_pnt from, t_pnt to);
+double			vec_len(t_vec vector);
+t_vec			vec_normalize(t_vec vector);
+double			vec_dot(t_vec a, t_vec b);
+t_vec			vec_cross(t_vec a, t_vec b);
 
 /* MATRIX                                                                     */
-bool	matrix_is_equal(double a[4][4], double b[4][4], size_t size);
-void	matrix_multiply(double a[4][4], double b[4][4], double result[4][4]);
-void	matrix4_transpose(double mat[4][4]);
-void	matrix_cpy(double src[4][4], double cpy[4][4]);
-double	matrix2_det(double mat2[2][2]);
-void	submatrix4(double mat4[4][4], double mat3[3][3], int row, int column);
-void	submatrix3(double mat3[3][3], double mat2[2][2], int row, int column);
-double	matrix3_minor(double mat3[3][3], int row, int column);
-double	matrix4_minor(double mat4[4][4], int row, int column);
-double	matrix3_cofactor(double mat3[3][3], int row, int column);
-double	matrix4_cofactor(double mat4[4][4], int row, int column);
-double	matrix3_det(double mat3[3][3]);
-double	matrix4_det(double mat4[4][4]);
-bool	matrix_inverse(double mat4[4][4], double inv[4][4]);
-void	matrix4_print(double mat4[4][4]);
-void	matrix_get_identity(double mat[4][4]);
+bool			matrix_is_equal(double a[4][4], double b[4][4], size_t size);
+void			matrix_multiply(double a[4][4], double b[4][4],
+					double result[4][4]);
+void			matrix4_transpose(double mat[4][4]);
+void			matrix_cpy(double src[4][4], double cpy[4][4]);
+double			matrix2_det(double mat2[2][2]);
+void			submatrix4(double mat4[4][4], double mat3[3][3],
+					int row, int column);
+void			submatrix3(double mat3[3][3], double mat2[2][2],
+					int row, int column);
+double			matrix3_minor(double mat3[3][3], int row, int column);
+double			matrix4_minor(double mat4[4][4], int row, int column);
+double			matrix3_cofactor(double mat3[3][3], int row, int column);
+double			matrix4_cofactor(double mat4[4][4], int row, int column);
+double			matrix3_det(double mat3[3][3]);
+double			matrix4_det(double mat4[4][4]);
+bool			matrix_inverse(double mat4[4][4], double inv[4][4]);
+void			matrix4_print(double mat4[4][4]);
+void			matrix_get_identity(double mat[4][4]);
 
 /* TRANSFORMATIONS                                                            */
-void	translation(double mat[4][4], t_vec *v);
-void	scaling(double mat[4][4], t_vec *values);
-void	rotation_x(double mat[4][4], double degrees);
-void	rotation_y(double mat[4][4], double degrees);
-void	rotation_z(double mat[4][4], double degrees);
-t_pnt	transform(double mat[4][4], t_pnt point);
-t_pnt	transform_inv(double mat[4][4], t_pnt point);
-void	rotation(double mat[4][4], t_vec *v);
+void			translation(double mat[4][4], t_vec *v);
+void			scaling(double mat[4][4], t_vec *values);
+void			rotation_x(double mat[4][4], double degrees);
+void			rotation_y(double mat[4][4], double degrees);
+void			rotation_z(double mat[4][4], double degrees);
+t_pnt			transform(double mat[4][4], t_pnt point);
+t_pnt			transform_inv(double mat[4][4], t_pnt point);
+void			rotation(double mat[4][4], t_vec *v);
 
 /* UTILS                                                                      */
 typedef enum e_comp_result
@@ -190,7 +196,7 @@ typedef enum e_comp_result
 	A_GREAT_B
 }	t_comp;
 
-double	deg2rad(double deg);
-char	*get_next_line(int fd);
+double			deg2rad(double deg);
+char			*get_next_line(int fd);
 
 #endif

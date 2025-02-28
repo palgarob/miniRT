@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/21 22:56:28 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 08:05:21 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@
 # include "libft.h"
 
 /* PREPROCESSOR PARAMETERS                                                    */
-# define ASPECT_RATIO (16.0 / 9.0)
+# define ASPECT_RATIO 1.7777777
 # define IMAGE_WIDTH 480
 # define FOCAL_LENGTH 1.0
-# define BPP sizeof(int32_t)
 
 /* ERROR MESSAGES                                                             */
 # define BAD_OPEN "Error\nError when opening file\n"
@@ -55,14 +54,14 @@ typedef struct s_ray
 	t_vec	direction;
 }	t_ray;
 
-typedef struct s_object t_object;
+typedef struct s_object	t_object;
 typedef struct s_intersection
 {
 	t_object	*object;
-	double	t;
-	t_vec	normal;
-	bool	interior_hit;
-} t_intsect;
+	double		t;
+	t_vec		normal;
+	bool		interior_hit;
+}	t_intsect;
 
 t_ray	ray(t_pnt origin, t_vec direction);
 t_pnt	ray_position(t_ray *ray, double t);
@@ -73,7 +72,7 @@ bool	cy_is_intersected(t_ray *r, double t[2]);
 void	transform_ray(t_ray *ray, double mat[4][4], t_ray *new_ray);
 
 /* CREATE ELEMENTS                                                            */
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 typedef enum e_obj_type
 {
 	SPHERE,
@@ -148,6 +147,5 @@ typedef struct s_data
 
 void	parse(t_data *data, char *filename);
 void	free_data(t_data *data);
-
 
 #endif
