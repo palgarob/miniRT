@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:51:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/28 17:05:34 by pedropalomare    ###   ########.fr       */
+/*   Updated: 2025/02/28 18:13:08 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)
 {
 	t_lvars		l;
 	t_material	m;
-	bool		shadow;
 
 	m.c = intsect->object->color;
 	m.a_color = data->ambient->color;
@@ -114,7 +113,6 @@ t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)
 	m.shininess = 50.0;
 	l.p = ray_position(r, intsect->t);
 	l.p = pnt_add(l.p, tpl_multiply(intsect->normal, EPSILON));
-	shadow = is_shaded(l.p, data, intsect);
 	l.e = vec_normalize(vec_from_to(l.p, data->camera->location));
 	l.intsect = intsect;
 	return (lighting(data, &m, &l));
