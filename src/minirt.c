@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:19:28 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/21 22:52:26 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 18:22:52 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,5 @@ int	main(int argc, char **argv)
 	parse(&data, argv[1]);
 	setup_mlx(&data);
 	render(&data);
+	free_data(&data);
 }
