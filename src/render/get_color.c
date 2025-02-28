@@ -66,12 +66,7 @@ static t_color	diff_spec_calc(t_data *data, t_material *mat, t_lvars *lv)
 	double	reflect_dot_eye;
 	double	factor;
 
-	if (lv->light_dn < 0.0 || is_shaded(lv->p, data, lv->intsect))
-	{
-		diffuse = color(0, 0, 0);
-		specular = color(0, 0, 0);
-	}
-	else
+	if (lv->light_dn > 0.0 && !is_shaded(lv->p, data, lv->intsect))
 	{
 		diffuse = color_mul(lv->effec_color, mat->diffuse * lv->light_dn);
 		reflectv = reflect(lv->intsect->normal, tpl_negate(lv->lightv));
@@ -83,6 +78,11 @@ static t_color	diff_spec_calc(t_data *data, t_material *mat, t_lvars *lv)
 			factor = pow(reflect_dot_eye, mat->shininess);
 			specular = color_mul(data->light->color, factor * mat->specular);
 		}
+	}
+	else
+	{
+		diffuse = color(0, 0, 0);
+		specular = color(0, 0, 0);
 	}
 	return (color_add(diffuse, specular));
 }

@@ -64,7 +64,7 @@ typedef struct s_tpl
 	double	y;
 	double	z;
 	double	w;
-}	t_pnt, t_vec;
+}	t_pnt,	t_vec;
 
 bool			tpl_equal(struct s_tpl a, struct s_tpl b);
 struct s_tpl	tpl_negate(struct s_tpl tpl);

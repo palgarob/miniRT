@@ -22,7 +22,7 @@
 
 /* PREPROCESSOR PARAMETERS                                                    */
 # define ASPECT_RATIO 1.7777777
-# define IMAGE_WIDTH 1440
+# define IMAGE_WIDTH 400
 # define FOCAL_LENGTH 1.0
 
 /* ERROR MESSAGES                                                             */

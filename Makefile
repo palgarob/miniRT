@@ -23,7 +23,7 @@ OBJ_DIR	:= obj
 BIN_DIR	:= bin
 
 # Compilation flas
-CFLAGS	:= -Wextra -Wall -Werror -g
+CFLAGS	:= -Wextra -Wall -Werror
 HEADERS	:= -I$(INC_DIR) -I$(MLX_DIR)/include/MLX42 -I$(FT_DIR)/$(INC_DIR)
 LDFLAGS	:= -L$(MLX_DIR)/build -L/opt/homebrew/opt/glfw/lib -L$(FT_DIR)/$(BIN_DIR)
 LDLIBS	:= -lmlx42 -lft -ldl -lglfw -pthread -lm
