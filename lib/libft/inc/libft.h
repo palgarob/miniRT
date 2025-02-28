@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 20:22:25 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/28 18:56:46 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 19:04:51 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ t_list			*ft_lst2ndlast(t_list *lst);
 t_list			*ft_lstcpy(t_list *lst, void (*del)(void *));
 
 /* TUPLES                                                                     */
-struct s_tpl
+typedef struct s_tpl
 {
 	double	x;
 	double	y;
 	double	z;
 	double	w;
-};
+}	t_pnt, t_vec;
 
 bool			tpl_equal(struct s_tpl a, struct s_tpl b);
 struct s_tpl	tpl_negate(struct s_tpl tpl);
@@ -83,7 +83,7 @@ int				ft_isascii(int c);
 int				ft_isdigit(int c);
 int				ft_isprint(int c);
 bool			is_coord(struct s_tpl *dst, char *src);
-bool				is_normalized_vec(t_vec v);
+bool			is_normalized_vec(t_vec v);
 bool			is_number(char *str);
 bool			is_double(const char *str);
 
@@ -144,7 +144,6 @@ int				splitadd(char *new_string, char ***split_ptr);
 char			**splitdup(char **src);
 
 /* POINTS AND VECTORS                                                         */
-typedef struct s_tpl t_pnt,	t_vec;
 t_pnt			pnt(double x, double y, double z);
 t_pnt			pnt_add(t_pnt point, t_vec vector);
 t_pnt			pnt_sub(t_pnt point, t_vec vector);

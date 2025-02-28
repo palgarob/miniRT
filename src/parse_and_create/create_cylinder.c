@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:28:12 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/28 18:59:30 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 19:05:53 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	create_cylinder(t_data *data, char **line_split)
 		|| a2double(&diameter, line_split[3])
 		|| a2double(&height, line_split[4])
 		|| !is_rgb(&obj->color, line_split[5])
-		|| !is_normalized_vec(&obj->orientation))
+		|| !is_normalized_vec(obj->orientation))
 	{
 		free(obj);
 		return (1);
