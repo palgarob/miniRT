@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   is_coord.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:56:18 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/14 10:29:04 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 11:19:21 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int good_format(char **split)
+static int	good_format(char **split)
 {
-	int i;
+	int	i;
 
 	if (splitlen(split) != 3)
 		return (0);
@@ -27,7 +27,7 @@ static int good_format(char **split)
 
 bool	is_coord(t_vec *dst, char *src)
 {
-	char **split;
+	char	**split;
 
 	split = splitstr(src, ',');
 	if (!split)

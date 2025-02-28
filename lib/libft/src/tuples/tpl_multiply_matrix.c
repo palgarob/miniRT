@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tpl_multiply_matrix.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 00:18:02 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/14 21:24:15 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 11:25:22 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 struct s_tpl	tpl_multiply_matrix(double mat[4][4], struct s_tpl tuple)
 {
-	struct s_tpl result;
+	struct s_tpl	result;
 
 	result.x = vec_dot(tuple, tpl(mat[0][0], mat[0][1], mat[0][2], mat[0][3]));
 	result.y = vec_dot(tuple, tpl(mat[1][0], mat[1][1], mat[1][2], mat[1][3]));

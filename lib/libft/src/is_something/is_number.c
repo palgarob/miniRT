@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_number.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:53:59 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/11/29 09:42:08 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 11:21:59 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	is_number(char *str)
 {
 	str += count_spaces(str);
 	return (
-		ft_isdigit(*str) ||
-		((*str == '+' || *str == '-') && ft_isdigit(*(str + 1)))
+		ft_isdigit(*str)
+		|| ((*str == '+' || *str == '-') && ft_isdigit(*(str + 1)))
 	);
 }
