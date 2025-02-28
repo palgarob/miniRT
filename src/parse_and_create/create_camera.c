@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:31:26 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/28 18:37:30 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 19:00:28 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ int	create_camera(t_data *data, char **line_split)
 		|| !is_coord(&orientation, line_split[2])
 		|| a2double(&fov, line_split[3])
 		|| fov < 0 || fov > 180
-		|| orientation.x < -1 || orientation.x > 1
-		|| orientation.y < -1 || orientation.y > 1
-		|| orientation.z < -1 || orientation.z > 1
+		|| !is_normalized_vec(orientation)
 	)
 		return (free(data->camera), 1);
 	data->camera->location.w = 1;

@@ -3,28 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   is_normalized_vec.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:57:05 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/28 11:20:23 by muribe-l         ###   ########.fr       */
+/*   Updated: 2025/02/28 18:56:39 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	is_normalized_vec(char *vec)
+bool	is_normalized_vec(t_vec v)
 {
-	int		i;
-	char	**split;
-
-	split = splitstr(vec, ',');
-	i = -1;
-	while (split[++i])
-	{
-		if (!is_double(split[i])
-			|| to_double(split[i]) < -1.0
-			|| to_double(split[i]) > 1.0)
-			return (splitfree(split), 0);
-	}
-	return (splitfree(split), 1);
+	if (v.x < -1 || v.x > 1
+		|| v.y < -1 || v.y > 1
+		|| v.z < -1 || v.z > 1)
+		return (false);
+	return (true);
 }

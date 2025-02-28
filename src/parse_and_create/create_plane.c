@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:28:58 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/21 23:17:42 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 18:59:50 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int	create_plane(t_data *data, char **info_array)
 	if (!is_coord(&location, info_array[1])
 		|| !is_coord(&obj->orientation, info_array[2])
 		|| !is_rgb(&obj->color, info_array[3])
-		|| obj->orientation.x < -1 || obj->orientation.x > 1
-		|| obj->orientation.y < -1 || obj->orientation.y > 1
-		|| obj->orientation.z < -1 || obj->orientation.z > 1)
+		|| !is_normalized_vec(obj->orientation))
 		return (free(obj), 1);
 	translation(trans_mat, &location);
 	obj->orientation = vec_normalize(obj->orientation);
