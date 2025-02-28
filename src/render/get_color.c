@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:51:27 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/21 23:35:38 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:10:36 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ bool	is_shaded(t_pnt p, t_data *data, t_intsect *i)
 	r = ray(p, direction);
 	if (!intsect_is_found(data, &r, &aux)
 		|| (aux.object == i->object && !aux.interior_hit)
+		|| fabs(aux.t - distance) < EPSILON
 		|| aux.t > distance)
 		return (false);
 	return (true);
@@ -103,9 +104,9 @@ t_color	get_color(t_data *data, t_ray *r, t_intsect *intsect)
 	m.c = intsect->object->color;
 	m.a_color = data->ambient->color;
 	m.a_ratio = data->ambient->ratio;
-	m.specular = 0.9;
+	m.specular = 0.5;
 	m.diffuse = 0.9;
-	m.shininess = 50.0;
+	m.shininess = 100.0;
 	p = ray_position(r, intsect->t);
 	p = pnt_add(p, tpl_multiply(intsect->normal, EPSILON));
 	shadow = is_shaded(p, data, intsect);

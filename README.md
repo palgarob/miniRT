@@ -5,7 +5,7 @@
 
 # 🎨📒 miniRT
 
-![Cute balls](https://github.com/palgarob/miniRT/blob/main/img/cute.png)
+![demonstration.rt](https://github.com/palgarob/miniRT/blob/main/img/demonstration.png)
 ### Table of Contents
 
 - [🛫 Intro ](#-intro)
@@ -36,6 +36,8 @@ different parameters may be used to recreate even more characteristics for the p
 
 - As for us, we have chosen to use the [Phong reflection model](https://en.wikipedia.org/wiki/Phong_reflection_model),
 which lets the user change values like `diffuse`, `ambient`, `brightness`, `shininess` and `specular`.
+
+- Images will always have a ≈16/9 resolution.
 
 - The code follows the [42 Norm](https://github.com/42School/norminette/blob/master/pdf/en.norm.pdf) standard
 in accordance with the 42 evaluation criteria.
@@ -93,8 +95,10 @@ The orientation of the elements (camera as well as the objects), has been one of
 - [x] Revisar el parseo, criterios de los parámetros.
 - [x] Parece que la cámara al final no se orienta bien
 - [ ] For the time being, only `ambient` can be set from the executable arguments.
+	- [ ] Other things to be able to change on execution time could be the resolution of the image.
 - [ ] There could be a submodule for the libft. I can do this as soon as I finish [Libft-prime](https://github.com/palgarob/Libft-prime).
 - [ ] The part where the objects are created and the parsing is done are intertwined. It would be good praxis if it was divided.
+- 
 
 ## 🤝 Acknowledgements
 

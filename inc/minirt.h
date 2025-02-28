@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/28 10:18:08 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:40:24 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 /* PREPROCESSOR PARAMETERS                                                    */
 # define ASPECT_RATIO 1.7777777
-# define IMAGE_WIDTH 960
+# define IMAGE_WIDTH 1440
 # define FOCAL_LENGTH 1.0
 
 /* ERROR MESSAGES                                                             */
