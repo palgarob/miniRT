@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/28 15:40:24 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 17:06:13 by pedropalomare    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,17 @@ typedef struct s_data
 	t_ambient	*ambient;
 	t_light		*light;
 }	t_data;
+
+/* LIGHTING FUNCTION VARIABLES                                                */
+typedef struct s_lvars
+{
+	t_intsect	*intsect;
+	t_vec		e;
+	t_pnt		p;
+	double		light_dn;
+	t_color		effec_color;
+	t_vec		lightv;
+}	t_lvars;
 
 void	parse(t_data *data, char *filename);
 void	free_data(t_data *data);

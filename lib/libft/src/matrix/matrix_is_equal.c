@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_is_equal.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 23:09:18 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/21 21:22:26 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 11:23:49 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static bool comp2(double a[4][4], double b[4][4])
+static bool	comp2(double a[4][4], double b[4][4])
 {
 	a[0][0] = 4.0;
 	if (
@@ -25,7 +25,7 @@ static bool comp2(double a[4][4], double b[4][4])
 	return (1);
 }
 
-static bool comp3(double a[4][4], double b[4][4])
+static bool	comp3(double a[4][4], double b[4][4])
 {
 	if (
 		fabs(a[0][0] - b[0][0]) > EPSILON
@@ -42,7 +42,7 @@ static bool comp3(double a[4][4], double b[4][4])
 	return (1);
 }
 
-static bool comp4(double a[4][4], double b[4][4])
+static bool	comp4(double a[4][4], double b[4][4])
 {
 	if (
 		fabs(a[0][0] - b[0][0]) > EPSILON

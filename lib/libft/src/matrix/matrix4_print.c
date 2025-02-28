@@ -3,28 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   matrix4_print.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 11:17:56 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/12/24 13:33:13 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/02/28 11:23:20 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
 void	matrix4_print(double mat4[4][4])
 {
-	int i = 0;
+	int	i;
+	int	j;
+
+	i = 0;
 	while (i < 4)
 	{
-		printf("| ");
-		int j = 0;
+		printfd(1, "| ");
+		j = 0;
 		while (j < 4)
 		{
-			printf("%g\t", mat4[i][j]);
+			printfd(1, "%g\t", mat4[i][j]);
 			j++;
 		}
-		printf("|\n");
+		printfd(1, "|\n");
 		i++;
 	}
 }
