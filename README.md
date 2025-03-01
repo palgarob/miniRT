@@ -37,6 +37,8 @@ different parameters may be used to recreate even more characteristics for the p
 - As for us, we have chosen to use the [Phong reflection model](https://en.wikipedia.org/wiki/Phong_reflection_model),
 which lets the user change values like `diffuse`, `ambient`, `brightness`, `shininess` and `specular`.
 
+- The cylinders that are generated do not have lids. This aspect is left undefined in the subject, so it is really up to the user's choice.
+
 - Images will always have a ≈16/9 resolution.
 
 - The code follows the [42 Norm](https://github.com/42School/norminette/blob/master/pdf/en.norm.pdf) standard
