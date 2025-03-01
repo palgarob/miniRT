@@ -115,5 +115,7 @@ This is a shared project! Working with my partner [MarkelUribe](https://github.c
 | Book          | The Ray Tracing Challenge                                            | [Read here](http://raytracerchallenge.com/) |
 | Web Page      | scratchpixel                                                         | [Visit here](https://raytracing.github.io/books/RayTracingInOneWeekend.html) |
 
+![epic](https://github.com/palgarob/miniRT/blob/main/img/epic.png)
+
 ### 🎉 Thanks!
 Don't hesitate to contact me. You have the info in [my profile](https://github.com/palgarob)
