@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 02:31:26 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/01 09:41:39 by muribe-l         ###   ########.fr       */
+/*   Updated: 2025/03/01 11:57:43 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	create_camera(t_data *data, char **line_split)
 		|| fov < 0 || fov > 180
 		|| !is_normalized_vec(orientation)
 	)
-		return (printf("tronco %s\n", line_split[2]), free(data->camera), 1);
+		return (free(data->camera), 1);
 	data->camera->location.w = 1;
 	translation(trans_mat, &data->camera->location);
 	orientation = vec_normalize(orientation);
