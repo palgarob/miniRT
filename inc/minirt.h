@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/03/01 09:54:16 by muribe-l         ###   ########.fr       */
+/*   Updated: 2025/03/01 12:09:15 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 /* PREPROCESSOR PARAMETERS                                                    */
 # define ASPECT_RATIO 1.7777777
-# define IMAGE_WIDTH 1020
+# define IMAGE_WIDTH 1902
 # define FOCAL_LENGTH 1.0
 
 /* ERROR MESSAGES                                                             */
