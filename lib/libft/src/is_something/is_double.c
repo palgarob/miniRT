@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_double.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:07:16 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/01/13 23:45:26 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/01 11:39:40 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,20 @@
 static bool	check_loop(const char *str)
 {
 	int	i;
+	int	dots;
 
 	i = -1;
+	dots = 0;
 	while (str[++i])
+	{
+		if (str[i] == '.')
+			dots++;
 		if (!ft_isdigit(str[i]) && str[i] != '.' && str[i] != '\n'
 			&& !(i == 0 && (str[i] == '+' || str[i] == '-')))
 			return (false);
+	}
+	if (dots > 1)
+		return (false);	
 	return (true);
 }
 

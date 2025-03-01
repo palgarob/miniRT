@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 20:22:25 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/28 19:04:51 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/01 09:56:41 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_tpl
 	double	y;
 	double	z;
 	double	w;
-}	t_pnt,	t_vec;
+} t_pnt,	t_vec;
 
 bool			tpl_equal(struct s_tpl a, struct s_tpl b);
 struct s_tpl	tpl_negate(struct s_tpl tpl);

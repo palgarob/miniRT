@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:53:59 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/28 11:21:59 by muribe-l         ###   ########.fr       */
+/*   Updated: 2025/03/01 11:32:02 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,14 @@ static size_t	count_spaces(char *s)
 
 bool	is_number(char *str)
 {
+	int	i;
+
 	str += count_spaces(str);
-	return (
-		ft_isdigit(*str)
-		|| ((*str == '+' || *str == '-') && ft_isdigit(*(str + 1)))
-	);
+	if (*str == '-' || *str == '+')
+		str++;
+	i = -1;
+	while (str[++i])
+		if (!ft_isdigit(str[i]) && str[i] != '\n')
+			return (false);
+	return (true);
 }

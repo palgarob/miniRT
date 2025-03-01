@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_rgb.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:54:52 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/19 23:37:42 by pepaloma         ###   ########.fr       */
+/*   Updated: 2025/03/01 11:32:31 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	good_format(char **split)
 	int	n;
 
 	if (splitlen(split) != 3
-		|| !is_double(split[0])
-		|| !is_double(split[1])
-		|| !is_double(split[2]))
+		|| !is_number(split[0])
+		|| !is_number(split[1])
+		|| !is_number(split[2]))
 		return (0);
 	i = -1;
 	while (++i < 3)

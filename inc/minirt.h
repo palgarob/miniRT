@@ -6,7 +6,7 @@
 /*   By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:07:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2025/02/28 17:06:13 by pedropalomare    ###   ########.fr       */
+/*   Updated: 2025/03/01 09:54:16 by muribe-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 /* PREPROCESSOR PARAMETERS                                                    */
 # define ASPECT_RATIO 1.7777777
-# define IMAGE_WIDTH 400
+# define IMAGE_WIDTH 1020
 # define FOCAL_LENGTH 1.0
 
 /* ERROR MESSAGES                                                             */

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+         #
+#    By: muribe-l <muribe-l@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/22 17:14:39 by pepaloma          #+#    #+#              #
-#    Updated: 2025/02/21 18:22:45 by pepaloma         ###   ########.fr        #
+#    Updated: 2025/03/01 09:43:50 by muribe-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
