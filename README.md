@@ -35,9 +35,9 @@ different parameters may be used to recreate even more characteristics for the p
 ## ✨ Characteristics
 
 - As for us, we have chosen to use the [Phong reflection model](https://en.wikipedia.org/wiki/Phong_reflection_model),
-which lets the user change values like `diffuse`, `ambient`, `brightness`, `shininess` and `specular`.
+which lets the developer change values like `diffuse`, `ambient`, `brightness`, `shininess` and `specular`.
 
-- The cylinders that are generated do not have lids. This aspect is left undefined in the subject, so it is really up to the user's choice.
+- The cylinders that are generated do not have lids. This aspect is left undefined in the subject, so it is really up to the developer's choice.
 
 - Images will always have a ≈16/9 resolution.
 
@@ -72,6 +72,7 @@ Once you manage to get the executable, you can choose one scene from the `scenes
 ## 🎨 Bonus
 
 - The light has the additional parameter `color`.
+- The objects have specular lighting, following the Phon reflection model.
 
 ## 📖 Training report
 
