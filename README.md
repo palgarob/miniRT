@@ -101,6 +101,7 @@ The orientation of the elements (camera as well as the objects), has been one of
 	- [ ] Other things to be able to change on execution time could be the resolution of the image.
 - [ ] There could be a submodule for the libft. I can do this as soon as I finish [Libft-prime](https://github.com/palgarob/Libft-prime).
 - [ ] The part where the objects are created and the parsing is done are intertwined. It would be good praxis if it was divided.
+- [ ] It should be more efficient to just calculate an inverse matrix for each of the transformation of the objects instead of calculating it each time (thanks to [Aritz](https://github.com/aolabarr))
 
 ## 🤝 Acknowledgements
 
